@@ -49,38 +49,46 @@ component {
 			echo( "DROP TABLE IF EXISTS `roles`" );
 		}
 		query {
-			echo( "CREATE TABLE `roles` (
+			echo(
+				"CREATE TABLE `roles` (
 			  `roleID` INT(11),
 			  `role` VARCHAR(100) DEFAULT NULL,
 			  PRIMARY KEY (`roleID`)
-			)" );
+			)"
+			);
 		}
 		query {
-			echo( "
+			echo(
+				"
 			INSERT INTO `roles` (`roleID`, `role`)
 				VALUES
 					(13,'Administrator'),
 					(23,'Moderator'),
 					(33,'Anonymous')
-			" );
+			"
+			);
 		}
 
 		query {
-			echo( "CREATE TABLE `users` (
+			echo(
+				"CREATE TABLE `users` (
 		`user_id` VARCHAR(50) NOT NULL,
 		`firstName` VARCHAR(50) NOT NULL,
 		`FKRoleID` INT(11) DEFAULT NULL,
 		PRIMARY KEY (`user_id`),
 		KEY `FKRoleID` (`FKRoleID`),
 		CONSTRAINT `users_ibfk_1` FOREIGN KEY (`FKRoleID`) REFERENCES `roles` (`roleID`) ON DELETE CASCADE ON UPDATE CASCADE
-		)" );
+		)"
+			);
 		}
 		query {
-			echo( "
+			echo(
+				"
 				INSERT INTO `users` (`user_id`, `firstName`, `FKRoleID`)
 					VALUES
 						('4028818e2fb6c893012fe637c5db00a7','lucee',23)
-				" );
+				"
+			);
 		}
 	}
 

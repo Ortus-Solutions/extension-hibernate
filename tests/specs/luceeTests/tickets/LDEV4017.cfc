@@ -18,7 +18,9 @@ component
 						template: "#variables.uri#/LDEV4017.cfm",
 						forms   : { uuid : createUUID(), dbfile : variables.dbfile }
 					);
-					expect( trim( result.filecontent ) ).toBe( "person.hasthoughts: true & lazy-loaded works outside of transcation" );
+					expect( trim( result.filecontent ) ).toBe(
+						"person.hasthoughts: true & lazy-loaded works outside of transcation"
+					);
 				}
 			);
 		} );
