@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ortus.extension.orm.util.CommonUtil;
+import ortus.extension.orm.util.ExceptionUtil;
 import ortus.extension.orm.util.HibernateUtil;
 
 import lucee.commons.io.res.Resource;
@@ -21,6 +22,8 @@ import lucee.runtime.PageSource;
 import lucee.runtime.config.Config;
 import lucee.runtime.exp.PageException;
 import lucee.runtime.listener.ApplicationContext;
+import lucee.runtime.type.Array;
+import lucee.runtime.type.Iterator;
 import lucee.runtime.util.TemplateUtil;
 
 /**
@@ -116,6 +119,41 @@ public class EntityFinder {
             ac.setComponentMappings(existing);
         }
     }
+
+    /**
+     * WIP method to recurse the cfcLocation setting path and retrieve a List of directories we will want to search later for ORM entities. Helps speed up the actual ORM entity search done by this very EntityFinder.
+     * @param config
+     * @param ac
+     * @param pathToSearch
+     * @param onlyDir
+     * @return
+     */
+	public java.util.List<Resource> findCFCDirectories(Config config, ApplicationContext ac, Object pathToSearch, boolean onlyDir) {
+        java.util.List<Resource> list = new ArrayList<Resource>();
+		if (!CommonUtil.isArray(pathToSearch)) {
+			String directoryList = CommonUtil.toString(pathToSearch, null);
+			if (directoryList != null && !directoryList.isEmpty()) {
+				pathToSearch = CommonUtil.toStringArray(directoryList, ",");
+			}
+		}
+
+		if (CommonUtil.isArray(pathToSearch)) {
+			Array arr = CommonUtil.toArray(pathToSearch, null);
+			Iterator<Object> it = arr.valueIterator();
+			while (it.hasNext()) {
+				try {
+					String path = CommonUtil.toString(it.next(), null);
+					if (path == null) continue;
+					Resource res = this.resourceUtil.toResourceExisting(config, ac, path, onlyDir);
+					if (res != null) list.add(res);
+				}
+				catch (Throwable t) {
+					ExceptionUtil.rethrowIfNecessary(t);
+				}
+			}
+		}
+        return list;
+	}
 
     /**
      * Load persistent entities from the given cfclocation Mapping directory

@@ -896,10 +896,20 @@ public class CommonUtil {
         return op().equalsComplexEL(left, right, false, true);
     }
 
+    /**
+     * Get a PageContext object that is local (but shared across) to this thread or page request.
+     * 
+     * @return Lucee's PageContext.
+     */
     public static PageContext pc() {
         return CFMLEngineFactory.getInstance().getThreadPageContext();
     }
 
+    /**
+     * Get a lucee Config object for this page request or thread scope.
+     * 
+     * @return Lucee's Config object.
+     */
     public static Config config() {
         return pc().getConfig();
     }
