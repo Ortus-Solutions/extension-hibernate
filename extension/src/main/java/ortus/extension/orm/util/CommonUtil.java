@@ -58,11 +58,13 @@ import lucee.runtime.util.Operation;
 import lucee.runtime.op.Castable;
 import lucee.runtime.type.ObjectWrap;
 
+import ortus.extension.orm.runtime.type.KeyImpl;
+
 public class CommonUtil {
 
-    public static final Key ENTITY_NAME = CommonUtil.createKey( "entityname" );
-    public static final Key FIELDTYPE = CommonUtil.createKey( "fieldtype" );
-    public static final Key INIT = CommonUtil.createKey( "init" );
+    public static final Key ENTITY_NAME = new KeyImpl( "entityname" );
+    public static final Key FIELDTYPE = new KeyImpl( "fieldtype" );
+    public static final Key INIT = new KeyImpl( "init" );
     private static final short INSPECT_UNDEFINED = ( short ) 4; /* ConfigImpl.INSPECT_UNDEFINED */
     private static Charset charset;
 

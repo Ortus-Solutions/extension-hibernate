@@ -18,6 +18,7 @@
  **/
 package ortus.extension.orm.functions;
 
+import ortus.extension.orm.runtime.type.KeyImpl;
 import ortus.extension.orm.util.CommonUtil;
 import ortus.extension.orm.util.ExceptionUtil;
 import ortus.extension.orm.util.ORMUtil;
@@ -75,7 +76,7 @@ public class ORMExecuteQuery extends BIF {
         ORMSession session = ORMUtil.getSession( pc );
         String dsn = null;
         if ( queryOptions != null )
-            dsn = CommonUtil.toString( queryOptions.get( CommonUtil.createKey( "datasource" ), null ), null );
+            dsn = CommonUtil.toString( queryOptions.get( new KeyImpl( "datasource" ), null ), null );
         if ( Util.isEmpty( dsn, true ) )
             dsn = ORMUtil.getDefaultDataSource( pc ).getName();
 

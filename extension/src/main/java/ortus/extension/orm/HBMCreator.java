@@ -22,6 +22,7 @@ import lucee.runtime.exp.PageException;
 import lucee.runtime.type.Collection;
 import lucee.runtime.type.Collection.Key;
 
+import ortus.extension.orm.runtime.type.KeyImpl;
 import ortus.extension.orm.util.CommonUtil;
 import ortus.extension.orm.util.ExceptionUtil;
 import ortus.extension.orm.util.HibernateUtil;
@@ -66,17 +67,17 @@ public class HBMCreator {
     public static final String HIBERNATE_3_DOCTYPE_DEFINITION = "<!DOCTYPE hibernate-mapping PUBLIC \"" + HIBERNATE_3_PUBLIC_ID
             + "\" \"" + HIBERNATE_3_SYSTEM_ID + "\">";
 
-    private static final Collection.Key PROPERTY = CommonUtil.createKey( "property" );
-    private static final Collection.Key LINK_TABLE = CommonUtil.createKey( "linktable" );
-    private static final Collection.Key CFC = CommonUtil.createKey( "cfc" );
-    private static final Collection.Key GENERATOR = CommonUtil.createKey( "generator" );
-    private static final Collection.Key PARAMS = CommonUtil.createKey( "params" );
-    private static final Collection.Key SEQUENCE = CommonUtil.createKey( "sequence" );
-    private static final Collection.Key UNIQUE_KEY_NAME = CommonUtil.createKey( "uniqueKeyName" );
-    private static final Collection.Key GENERATED = CommonUtil.createKey( "generated" );
-    private static final Collection.Key FIELDTYPE = CommonUtil.createKey( "fieldtype" );
-    private static final Collection.Key KEY = CommonUtil.createKey( "key" );
-    private static final Collection.Key TYPE = CommonUtil.createKey( "type" );
+    private static final Collection.Key PROPERTY = new KeyImpl( "property" );
+    private static final Collection.Key LINK_TABLE = new KeyImpl( "linktable" );
+    private static final Collection.Key CFC = new KeyImpl( "cfc" );
+    private static final Collection.Key GENERATOR = new KeyImpl( "generator" );
+    private static final Collection.Key PARAMS = new KeyImpl( "params" );
+    private static final Collection.Key SEQUENCE = new KeyImpl( "sequence" );
+    private static final Collection.Key UNIQUE_KEY_NAME = new KeyImpl( "uniqueKeyName" );
+    private static final Collection.Key GENERATED = new KeyImpl( "generated" );
+    private static final Collection.Key FIELDTYPE = new KeyImpl( "fieldtype" );
+    private static final Collection.Key KEY = new KeyImpl( "key" );
+    private static final Collection.Key TYPE = new KeyImpl( "type" );
 
     /**
      * Generate an XML node tree defining a Hibernate mapping for the given Component
@@ -312,7 +313,7 @@ public class HBMCreator {
                     list  = ( List<Property> ) sct.get( table, null );
                     if ( list == null ) {
                         list = new ArrayList<>();
-                        sct.setEL( CommonUtil.createKey( table ), list );
+                        sct.setEL( new KeyImpl( table ), list );
                     }
                     list.add( prop );
                     continue;
@@ -848,7 +849,7 @@ public class HBMCreator {
 
     private static ColumnInfo getColumnInfo( Struct columnsInfo, String tableName, String columnName, ColumnInfo defaultValue ) {
         if ( columnsInfo != null ) {
-            ColumnInfo info = ( ColumnInfo ) columnsInfo.get( CommonUtil.createKey( columnName ), null );
+            ColumnInfo info = ( ColumnInfo ) columnsInfo.get( new KeyImpl( columnName ), null );
             if ( info == null )
                 return defaultValue;
             return info;
@@ -2017,7 +2018,7 @@ public class HBMCreator {
 
     private static String toString( Component cfc, Property prop, Struct sct, String key, boolean throwErrorWhenNotExist,
             SessionFactoryData data ) throws PageException {
-        return toString( cfc, prop, sct, CommonUtil.createKey( key ), throwErrorWhenNotExist, data );
+        return toString( cfc, prop, sct, new KeyImpl( key ), throwErrorWhenNotExist, data );
     }
 
     private static String toString( Component cfc, Property prop, Struct sct, Collection.Key key, boolean throwErrorWhenNotExist,
@@ -2059,7 +2060,7 @@ public class HBMCreator {
     }
 
     private static Boolean toBoolean( Component cfc, Struct sct, String key, SessionFactoryData data ) throws PageException {
-        Object value = sct.get( CommonUtil.createKey( key ), null );
+        Object value = sct.get( new KeyImpl( key ), null );
         if ( value == null )
             return null;
 
@@ -2073,7 +2074,7 @@ public class HBMCreator {
     }
 
     private static Integer toInteger( Component cfc, Struct sct, String key, SessionFactoryData data ) throws PageException {
-        Object value = sct.get( CommonUtil.createKey( key ), null );
+        Object value = sct.get( new KeyImpl( key ), null );
         if ( value == null )
             return null;
 

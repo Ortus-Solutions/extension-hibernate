@@ -42,6 +42,7 @@ import org.hibernate.integrator.spi.Integrator;
 import org.hibernate.persister.entity.EntityPersister;
 import org.hibernate.service.spi.SessionFactoryServiceRegistry;
 
+import ortus.extension.orm.runtime.type.KeyImpl;
 import ortus.extension.orm.HibernateCaster;
 import ortus.extension.orm.util.CommonUtil;
 
@@ -74,20 +75,20 @@ public class EventListenerIntegrator
      */
     private Component globalEventListener;
 
-    public static final Key ON_EVICT = CommonUtil.createKey( "onEvict" );
-    public static final Key ON_DIRTY_CHECK = CommonUtil.createKey( "onDirtyCheck" );
-    public static final Key ON_DELETE = CommonUtil.createKey( "onDelete" );
-    public static final Key ON_CLEAR = CommonUtil.createKey( "onClear" );
-    public static final Key ON_AUTO_FLUSH = CommonUtil.createKey( "onAutoFlush" );
-    public static final Key ON_FLUSH = CommonUtil.createKey( "onFlush" );
-    public static final Key PRE_INSERT = CommonUtil.createKey( "preInsert" );
-    public static final Key PRE_UPDATE = CommonUtil.createKey( "preUpdate" );
-    public static final Key POST_LOAD = CommonUtil.createKey( "postLoad" );
-    public static final Key PRE_LOAD = CommonUtil.createKey( "preLoad" );
-    public static final Key POST_DELETE = CommonUtil.createKey( "postDelete" );
-    public static final Key PRE_DELETE = CommonUtil.createKey( "preDelete" );
-    public static final Key POST_UPDATE = CommonUtil.createKey( "postUpdate" );
-    public static final Key POST_INSERT = CommonUtil.createKey( "postInsert" );
+    public static final Key ON_EVICT = new KeyImpl( "onEvict" );
+    public static final Key ON_DIRTY_CHECK = new KeyImpl( "onDirtyCheck" );
+    public static final Key ON_DELETE = new KeyImpl( "onDelete" );
+    public static final Key ON_CLEAR = new KeyImpl( "onClear" );
+    public static final Key ON_AUTO_FLUSH = new KeyImpl( "onAutoFlush" );
+    public static final Key ON_FLUSH = new KeyImpl( "onFlush" );
+    public static final Key PRE_INSERT = new KeyImpl( "preInsert" );
+    public static final Key PRE_UPDATE = new KeyImpl( "preUpdate" );
+    public static final Key POST_LOAD = new KeyImpl( "postLoad" );
+    public static final Key PRE_LOAD = new KeyImpl( "preLoad" );
+    public static final Key POST_DELETE = new KeyImpl( "postDelete" );
+    public static final Key PRE_DELETE = new KeyImpl( "preDelete" );
+    public static final Key POST_UPDATE = new KeyImpl( "postUpdate" );
+    public static final Key POST_INSERT = new KeyImpl( "postInsert" );
 
     @Override
     public void integrate( Metadata metadata, SessionFactoryImplementor sessionFactory,
@@ -356,7 +357,7 @@ public class EventListenerIntegrator
 
         if ( values != null && properties != null && values.length == properties.length ) {
             for ( int i = 0; i < values.length; i++ ) {
-                entityState.setEL( CommonUtil.createKey( properties[ i ] ), values[ i ] );
+                entityState.setEL( new KeyImpl( properties[ i ] ), values[ i ] );
             }
         }
         return entityState;

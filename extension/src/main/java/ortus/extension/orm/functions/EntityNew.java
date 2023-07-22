@@ -18,6 +18,7 @@
  **/
 package ortus.extension.orm.functions;
 
+import ortus.extension.orm.runtime.type.KeyImpl;
 import ortus.extension.orm.util.CommonUtil;
 import ortus.extension.orm.util.ORMUtil;
 
@@ -63,16 +64,16 @@ public class EntityNew extends BIF {
             return;
 
         // argumentCollection
-        if ( properties.size() == 1 && properties.containsKey( CommonUtil.createKey( "argumentCollection" ) )
-                && !c.containsKey( CommonUtil.createKey( "setArgumentCollection" ) ) ) {
-            properties = CommonUtil.toStruct( properties.get( CommonUtil.createKey( "argumentCollection" ) ) );
+        if ( properties.size() == 1 && properties.containsKey( new KeyImpl( "argumentCollection" ) )
+                && !c.containsKey( new KeyImpl( "setArgumentCollection" ) ) ) {
+            properties = CommonUtil.toStruct( properties.get( new KeyImpl( "argumentCollection" ) ) );
         }
 
         Iterator<Entry<Key, Object>> it = properties.entryIterator();
         Entry<Key, Object> e;
         while ( it.hasNext() ) {
             e = it.next();
-            Key funcName = CommonUtil.createKey( "set" + e.getKey().getString() );
+            Key funcName = new KeyImpl( "set" + e.getKey().getString() );
             if ( ignoreNotExisting ) {
                 if ( c.get( funcName, null ) instanceof UDF )
                     c.call( pc, funcName, new Object[] { e.getValue() } );

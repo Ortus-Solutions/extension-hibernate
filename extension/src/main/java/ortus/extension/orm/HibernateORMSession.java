@@ -26,6 +26,8 @@ import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.query.Query;
 import org.hibernate.query.internal.ParameterMetadataImpl;
 import org.hibernate.type.Type;
+
+import ortus.extension.orm.runtime.type.KeyImpl;
 import ortus.extension.orm.util.CommonUtil;
 import ortus.extension.orm.util.ExceptionUtil;
 import ortus.extension.orm.util.HibernateUtil;
@@ -59,12 +61,12 @@ public class HibernateORMSession implements ORMSession {
      */
     private static final class QUERYOPTS {
 
-        public static final Key MAXRESULTS = CommonUtil.createKey( "maxresults" );
-        public static final Key OFFSET = CommonUtil.createKey( "offset" );
-        public static final Key READONLY = CommonUtil.createKey( "readonly" );
-        public static final Key TIMEOUT = CommonUtil.createKey( "timeout" );
-        public static final Key IGNORECASE = CommonUtil.createKey( "ignorecase" );
-        public static final Key CACHEABLE = CommonUtil.createKey( "cacheable" );
+        public static final Key MAXRESULTS = new KeyImpl( "maxresults" );
+        public static final Key OFFSET = new KeyImpl( "offset" );
+        public static final Key READONLY = new KeyImpl( "readonly" );
+        public static final Key TIMEOUT = new KeyImpl( "timeout" );
+        public static final Key IGNORECASE = new KeyImpl( "ignorecase" );
+        public static final Key CACHEABLE = new KeyImpl( "cacheable" );
     }
 
     public class SessionAndConn {
@@ -866,7 +868,7 @@ public class HibernateORMSession implements ORMSession {
 
             Criteria criteria = sess.createCriteria( name );
             if ( !Util.isEmpty( idName ) ) {
-                Object idValue = scope.get( CommonUtil.createKey( idName ), null );
+                Object idValue = scope.get( new KeyImpl( idName ), null );
                 if ( idValue != null ) {
                     criteria.add( Restrictions.eq( idName, HibernateCaster.toSQL( idType, idValue, null ) ) );
                 }

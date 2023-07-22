@@ -17,6 +17,8 @@ import org.hibernate.tuple.Instantiator;
 import org.hibernate.tuple.entity.AbstractEntityTuplizer;
 import org.hibernate.tuple.entity.EntityMetamodel;
 import org.hibernate.type.Type;
+
+import ortus.extension.orm.runtime.type.KeyImpl;
 import ortus.extension.orm.HBMCreator;
 import ortus.extension.orm.HibernateCaster;
 import ortus.extension.orm.tuplizer.accessors.CFCGetter;
@@ -63,7 +65,7 @@ public class AbstractEntityTuplizerImpl extends AbstractEntityTuplizer {
             for ( int i = 0; i < props.length; i++ ) {
                 p     = props[ i ];
                 name  = p.getName();
-                value = scope.get( CommonUtil.createKey( name ), null );
+                value = scope.get( new KeyImpl( name ), null );
                 String type = p.getType();
                 Object o = p.getMetaData();
                 Struct meta = o instanceof Struct ? ( Struct ) o : null;

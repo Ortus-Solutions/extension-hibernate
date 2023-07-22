@@ -10,6 +10,8 @@ import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.property.access.spi.Getter;
 import org.hibernate.type.Type;
+
+import ortus.extension.orm.runtime.type.KeyImpl;
 import ortus.extension.orm.HibernateCaster;
 import ortus.extension.orm.HibernatePageException;
 import ortus.extension.orm.util.CommonUtil;
@@ -39,7 +41,7 @@ public class CFCGetter implements Getter {
      *                   Name of the Hibernate entity to retrieve the value from
      */
     public CFCGetter( String key, Type type, String entityName ) {
-        this.key        = CommonUtil.createKey( key );
+        this.key        = new KeyImpl( key );
         this.type       = type;
         this.entityName = entityName;
     }

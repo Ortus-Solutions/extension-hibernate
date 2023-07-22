@@ -13,6 +13,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.type.ComponentType;
 import org.hibernate.type.Type;
+
+import ortus.extension.orm.runtime.type.KeyImpl;
 import ortus.extension.orm.ColumnInfo;
 import ortus.extension.orm.HibernateCaster;
 import ortus.extension.orm.HibernateORMEngine;
@@ -206,7 +208,7 @@ public class HibernateUtil {
             // get all columns
             ResultSet res = md.getColumns( dbName, null, tableName, null );
             while ( res.next() ) {
-                name = CommonUtil.createKey( res.getString( "COLUMN_NAME" ) );
+                name = new KeyImpl( res.getString( "COLUMN_NAME" ) );
                 properties.setEL( name, CommonUtil.createProperty( name.getString(), res.getString( "TYPE_NAME" ) ) );
             }
 
@@ -214,7 +216,7 @@ public class HibernateUtil {
             res = md.getPrimaryKeys( null, null, tableName );
             Property p;
             while ( res.next() ) {
-                name = CommonUtil.createKey( res.getString( "COLUMN_NAME" ) );
+                name = new KeyImpl( res.getString( "COLUMN_NAME" ) );
                 p    = ( Property ) properties.get( name, null );
                 if ( p != null )
                     p.getDynamicAttributes().setEL( CommonUtil.FIELDTYPE, "id" );
@@ -354,7 +356,7 @@ public class HibernateUtil {
                 name     = columns.getString( "COLUMN_NAME" );
 
                 nullable = columns.getObject( "IS_NULLABLE" );
-                rows.setEL( CommonUtil.createKey( name ),
+                rows.setEL( new KeyImpl( name ),
                         new ColumnInfo( name, columns.getInt( "DATA_TYPE" ), columns.getString( "TYPE_NAME" ),
                                 columns.getInt( "COLUMN_SIZE" ), CommonUtil.toBooleanValue( nullable ) ) );
             }

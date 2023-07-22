@@ -2,6 +2,7 @@ package ortus.extension.orm.util;
 
 import java.lang.reflect.Method;
 
+import ortus.extension.orm.runtime.type.KeyImpl;
 import ortus.extension.orm.SessionFactoryData;
 
 import lucee.loader.engine.CFMLEngineFactory;
@@ -94,7 +95,7 @@ public class ExceptionUtil {
     }
 
     private static void setAddional( PageException pe, SessionFactoryData data ) {
-        setAdditional( pe, CommonUtil.createKey( "Entities" ),
+        setAdditional( pe, new KeyImpl( "Entities" ),
                 CFMLEngineFactory.getInstance().getListUtil().toListEL( data.getEntityNames(), ", " ) );
         setAddional( pe, data.getDataSources() );
     }
@@ -107,7 +108,7 @@ public class ExceptionUtil {
                     sb.append( ", " );
                 sb.append( sources[ i ].getName() );
             }
-            setAdditional( pe, CommonUtil.createKey( "_Datasource" ), sb.toString() );
+            setAdditional( pe, new KeyImpl( "_Datasource" ), sb.toString() );
         }
     }
 
@@ -159,17 +160,17 @@ public class ExceptionUtil {
             Throwable cause = he.getCause();
             if ( cause != null ) {
                 pe = CommonUtil.caster().toPageException( cause );
-                setAdditional( pe, CommonUtil.createKey( "hibernate exception" ), t );
+                setAdditional( pe, new KeyImpl( "hibernate exception" ), t );
             }
         }
         if ( t instanceof JDBCException ) {
             JDBCException je = ( JDBCException ) t;
-            setAdditional( pe, CommonUtil.createKey( "sql" ), je.getSQL() );
+            setAdditional( pe, new KeyImpl( "sql" ), je.getSQL() );
         }
         if ( t instanceof ConstraintViolationException ) {
             ConstraintViolationException cve = ( ConstraintViolationException ) t;
             if ( !Util.isEmpty( cve.getConstraintName() ) ) {
-                setAdditional( pe, CommonUtil.createKey( "constraint name" ), cve.getConstraintName() );
+                setAdditional( pe, new KeyImpl( "constraint name" ), cve.getConstraintName() );
             }
         }
         return pe;

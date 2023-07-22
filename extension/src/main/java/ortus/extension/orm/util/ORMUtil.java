@@ -31,10 +31,12 @@ import lucee.runtime.type.Collection.Key;
 import lucee.runtime.type.Struct;
 import lucee.loader.util.Util;
 
+import ortus.extension.orm.runtime.type.KeyImpl;
+
 public class ORMUtil {
 
-    public static final Key PROPS_FIELDTYPE = CommonUtil.createKey( "fieldtype" );
-    public static final Key PROPS_DATASOURCE = CommonUtil.createKey( "datasource" );
+    public static final Key PROPS_FIELDTYPE = new KeyImpl( "fieldtype" );
+    public static final Key PROPS_DATASOURCE = new KeyImpl( "datasource" );
 
     public static final String DELIMITER = new String( "." );
 
@@ -118,7 +120,7 @@ public class ORMUtil {
         for ( int i = 0; i < props.length; i++ ) {
             if ( !props[ i ].getName().equalsIgnoreCase( name ) )
                 continue;
-            return cfc.getComponentScope().get( CommonUtil.createKey( name ), null );
+            return cfc.getComponentScope().get( new KeyImpl( name ), null );
         }
         return defaultValue;
     }
@@ -161,7 +163,7 @@ public class ORMUtil {
             if ( index == -1 )
                 return null;
 
-            params.setEL( CommonUtil.createKey( deleteQuotes( pair.substring( 0, index ).trim() ).trim() ),
+            params.setEL( new KeyImpl( deleteQuotes( pair.substring( 0, index ).trim() ).trim() ),
                     deleteQuotes( pair.substring( index + 1 ).trim() ) );
         }
 

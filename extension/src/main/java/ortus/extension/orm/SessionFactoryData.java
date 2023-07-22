@@ -12,6 +12,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.SessionFactory;
 import org.hibernate.engine.query.spi.QueryPlanCache;
 import org.hibernate.internal.SessionFactoryImpl;
+
+import ortus.extension.orm.runtime.type.KeyImpl;
 import ortus.extension.orm.event.EventListenerIntegrator;
 import ortus.extension.orm.jdbc.DataSourceConfig;
 import ortus.extension.orm.naming.CFCNamingStrategy;
@@ -345,7 +347,7 @@ public class SessionFactoryData {
      * @throws PageException
      */
     public Struct getTableInfo( DatasourceConnection dc, String tableName ) throws PageException {
-        Collection.Key keyTableName = CommonUtil.createKey( tableName );
+        Collection.Key keyTableName = new KeyImpl( tableName );
         Struct columnsInfo = ( Struct ) tableInfo.get( keyTableName, null );
         if ( columnsInfo != null )
             return columnsInfo;

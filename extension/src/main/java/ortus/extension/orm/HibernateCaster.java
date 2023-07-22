@@ -12,6 +12,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.collection.spi.PersistentCollection;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.type.Type;
+
+import ortus.extension.orm.runtime.type.KeyImpl;
 import ortus.extension.orm.util.CommonUtil;
 import ortus.extension.orm.util.ExceptionUtil;
 import ortus.extension.orm.util.HibernateUtil;
@@ -472,9 +474,9 @@ public class HibernateCaster {
      */
     public static Object toHibernateValue( Component entity, Property property ) throws PageException {
         PageContext pc = CFMLEngineFactory.getInstance().getThreadPageContext();
-        Object value = entity.getComponentScope().get( CommonUtil.createKey( property.getName() ), property.getDefault() );
+        Object value = entity.getComponentScope().get( new KeyImpl( property.getName() ), property.getDefault() );
         Struct meta = ( Struct ) property.getMetaData();
-        String ormType = CommonUtil.toString( meta.get( CommonUtil.createKey( "ormtype" ), "" ) );
+        String ormType = CommonUtil.toString( meta.get( new KeyImpl( "ormtype" ), "" ) );
         String fieldType = ormType != "" ? ormType : property.getType();
         return toHibernateValue( pc, value, fieldType );
     }
@@ -677,7 +679,7 @@ public class HibernateCaster {
         Object value;
         Array arr;
         for ( int i = 0; i < properties.length; i++ ) {
-            value = scope.get( CommonUtil.createKey( properties[ i ].getName() ), null );
+            value = scope.get( new KeyImpl( properties[ i ].getName() ), null );
             if ( value instanceof Component ) {
                 qry = inheritance( pc, session, qry, cfc, ( Component ) value, entityName );
             } else if ( CommonUtil.isArray( value ) ) {

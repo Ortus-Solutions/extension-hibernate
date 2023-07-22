@@ -6,6 +6,8 @@ import lucee.runtime.Component;
 import lucee.runtime.exp.PageException;
 import lucee.runtime.orm.naming.NamingStrategy;
 import lucee.runtime.type.UDF;
+
+import ortus.extension.orm.runtime.type.KeyImpl;
 import ortus.extension.orm.util.CommonUtil;
 
 public class CFCNamingStrategy implements NamingStrategy {
@@ -31,7 +33,7 @@ public class CFCNamingStrategy implements NamingStrategy {
     }
 
     private String call( String functionName, String name ) {
-        Object res = cfc.get( CommonUtil.createKey( functionName ), null );
+        Object res = cfc.get( new KeyImpl( functionName ), null );
         if ( ! ( res instanceof UDF ) )
             return name;
         CFMLEngine engine = CFMLEngineFactory.getInstance();

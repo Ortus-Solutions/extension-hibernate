@@ -6,6 +6,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionFactoryImplementor;
 import org.hibernate.property.access.spi.Setter;
 import org.hibernate.type.Type;
+
+import ortus.extension.orm.runtime.type.KeyImpl;
 import ortus.extension.orm.HibernatePageException;
 import ortus.extension.orm.util.CommonUtil;
 
@@ -30,7 +32,7 @@ public final class CFCSetter implements Setter {
      *                   String name of the Hibernate entity this property is defined on
      */
     public CFCSetter( String key, Type type, String entityName ) {
-        this.key        = CommonUtil.createKey( key );
+        this.key        = new KeyImpl( key );
         this.type       = type;
         this.entityName = entityName;
     }
