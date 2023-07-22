@@ -7,6 +7,8 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.SQLException;
@@ -16,7 +18,6 @@ import java.util.Properties;
 import org.hibernate.MappingException;
 import org.hibernate.boot.registry.BootstrapServiceRegistry;
 import org.hibernate.boot.registry.BootstrapServiceRegistryBuilder;
-import org.hibernate.cache.ehcache.internal.EhcacheRegionFactory;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
@@ -161,12 +162,21 @@ public class ConfigurationBuilder {
             String cacheProvider = ormConf.getCacheProvider();
 
             if ( cacheProvider != null ) {
-                if ( cacheProvider.equalsIgnoreCase( "ehcache" ) ) {
-                    File cacheConfig = buildEHCacheConfig();
-                    configuration.setProperty( AvailableSettings.CACHE_PROVIDER_CONFIG, cacheConfig.getAbsolutePath() );
-                }
+                /**
+                <!-- https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#caching-config -->
+                <property name="hibernate.cache.use_second_level_cache">true</property>
+                <property name="hibernate.cache.region.factory_class">jcache</property>
+                <property name="hibernate.javax.cache.provider">org.ehcache.jsr107.EhcacheCachingProvider</property>
+                <!-- placed on the classpath (note: "classpath:ehcache.xml" does not work! -->
+                <property name="hibernate.javax.cache.uri">ehcache.xml</property>
+                 */
 
-                addProperty( AvailableSettings.CACHE_REGION_FACTORY, getCacheRegionFactory( cacheProvider ) );
+                configuration.setProperty( AvailableSettings.CACHE_REGION_FACTORY, "jcache" );
+                File cacheConfig = buildCacheConfig();
+                String configURI = "file:///" + cacheConfig;
+                configuration.setProperty( "hibernate.javax.cache.uri", cacheConfig.getAbsolutePath() )
+                        .setProperty("hibernate.javax.cache.provider", getCacheRegionFactory(cacheProvider))
+                        .setProperty("hibernate.javax.cache.uri", configURI);
             }
 
             configuration.setProperty( AvailableSettings.USE_QUERY_CACHE, "true" );
@@ -175,7 +185,7 @@ public class ConfigurationBuilder {
         return configuration;
     }
 
-    private Class<?> getCacheRegionFactory( String cacheProvider ) throws PageException {
+    private String getCacheRegionFactory( String cacheProvider ) throws PageException {
         String unsupportedCacheProvider = "Unsupported ORM configuration: cache provider " + cacheProvider
                 + " is no longer supported in Hibernate 4+.";
         switch ( cacheProvider.toLowerCase() ) {
@@ -191,13 +201,20 @@ public class ConfigurationBuilder {
                 // https://mvnrepository.com/artifact/org.infinispan/infinispan-hibernate-cache-spi
             case "ehcache" :
             default :
-                return EhcacheRegionFactory.class;
+                return "org.ehcache.jsr107.EhcacheCachingProvider";
         }
     }
 
-    private File buildEHCacheConfig() throws IOException, PageException {
+    /**
+     * Generate a Jcache-compatible cache config xml file
+     * 
+     * @return a File object pointing to the (temporary file) location.
+     * @throws IOException
+     * @throws PageException
+     */
+    private File buildCacheConfig() throws IOException, PageException {
         File cacheConfig = File.createTempFile( "ehcache", ".xml" );
-        String xml = getCacheConfig( ormConf.getCacheConfig(), applicationName );
+        String xml = getCacheConfig( ormConf.getCacheConfig() );
         copyToTempFile( cacheConfig, xml );
         return cacheConfig;
     }
@@ -206,17 +223,16 @@ public class ConfigurationBuilder {
      * Get an XML string containing EITHER the existing config XML OR the default ehcache config XML.
      * 
      * @param cc      A Resource containing the configured path of the preconfigured EHCache config XML file
-     * @param varName
      * 
      * @return The XML string to use for ehCache configuration. May return the default - {@see getDefaultEHCacheConfig(String cacheName)}
      * 
      * @throws IOException
      * @throws PageException
      */
-    private String getCacheConfig( Resource cc, String varName ) throws IOException, PageException {
+    private String getCacheConfig( Resource cc ) throws IOException, PageException {
         String xml;
         if ( cc == null || !cc.isFile() ) {
-            xml = getDefaultEHCacheConfig( varName );
+            xml = getDefaultCacheConfig( applicationName );
         }
         // we need to change or set the name
         else {
@@ -300,26 +316,18 @@ public class ConfigurationBuilder {
     }
 
     /**
-     * Generate an XML-format ehcache config file for the given cache name.
+     * Read the default jCache config file from the .jar resources directory.
      *
      * @param cacheName
      *                  Name of the cache
      *
      * @return XML string with formatting and line breaks
      */
-    private String getDefaultEHCacheConfig( String cacheName ) {
-        return new StringBuilder().append( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" ).append( "<ehcache" )
-                .append( "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" )
-                .append( "    xsi:noNamespaceSchemaLocation=\"ehcache.xsd\"" )
-                .append( "    updateCheck=\"true\" name=\"" + cacheName + "\">" )
-                .append( "    <diskStore path=\"java.io.tmpdir\"/>" ).append( "    <defaultCache" )
-                .append( "            maxElementsInMemory=\"10000\"" ).append( "            eternal=\"false\"" )
-                .append( "            timeToIdleSeconds=\"120\"" ).append( "            timeToLiveSeconds=\"120\"" )
-                .append( "            diskSpoolBufferSizeMB=\"30\"" ).append( "            clearOnFlush=\"true\"" )
-                .append( "            maxElementsOnDisk=\"10000000\"" )
-                .append( "            diskExpiryThreadIntervalSeconds=\"120\"" )
-                .append( "            memoryStoreEvictionPolicy=\"LRU\">" )
-                .append( "        <persistence strategy=\"localTempSwap\"/>" ).append( "    </defaultCache>" )
-                .append( "</ehcache>" ).toString();
+    private String getDefaultCacheConfig( String cacheName ) throws IOException {
+        return Files.readString(
+            Paths.get(
+                getClass().getClassLoader().getResource("default-jcache.xml").getPath()
+            )
+        );
     }
 }

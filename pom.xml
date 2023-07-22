@@ -314,18 +314,22 @@ lucee-core-version: ${minLuceeVersion}
          <version>5.6.15.Final</version>
       </dependency> -->
 
-      <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-ehcache -->
+      <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-jcache -->
       <dependency>
          <groupId>org.hibernate</groupId>
-         <artifactId>hibernate-ehcache</artifactId>
+         <artifactId>hibernate-jcache</artifactId>
          <version>5.6.15.Final</version>
+      </dependency>
 
-         <!--
-         https://maven.apache.org/guides/introduction/introduction-to-optional-and-excludes-dependencies.html#how-to-use-dependency-exclusions -->
+      <!-- https://mvnrepository.com/artifact/org.ehcache/ehcache -->
+      <dependency>
+         <groupId>org.ehcache</groupId>
+         <artifactId>ehcache</artifactId>
+         <version>3.10.8</version>
          <exclusions>
             <exclusion>
                <groupId>org.glassfish.jaxb</groupId>
-               <artifactId>txw2</artifactId>
+               <artifactId>jaxb-runtime</artifactId>
             </exclusion>
             <exclusion>
                <groupId>net.sf.ehcache</groupId>

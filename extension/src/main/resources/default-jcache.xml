@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Much thanks to: https://www.ehcache.org/documentation/3.0/107.html
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.ehcache.org/v3"
+        xmlns:jsr107="http://www.ehcache.org/v3/jsr107"
+        xsi:schemaLocation="
+            http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd
+            http://www.ehcache.org/v3/jsr107 http://www.ehcache.org/schema/ehcache-107-ext-3.0.xsd">
+
+    <service>
+        <jsr107:defaults default-template="default" />
+    </service>
+
+    <cache-template name="default">
+        <expiry>
+            <ttl unit="minutes">2</ttl>
+        </expiry>
+        <heap unit="entries">10000</heap>
+    </cache-template>
+
+    <!--
+        May need to create an initial cache, even though we've defined a default cache template:
+        <cache alias="org.ajames.hibernateormnative.Person" uses-template="simple"/>
+    -->
+
+</config>

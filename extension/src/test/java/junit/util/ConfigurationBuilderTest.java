@@ -20,13 +20,13 @@ import lucee.runtime.exp.PageException;
 import lucee.runtime.orm.ORMConfiguration;
 import lucee.runtime.db.DataSource;
 
-@Disabled
 public class ConfigurationBuilderTest {
     @Test
     public void canInitialize() {
         new ConfigurationBuilder();
     }
 
+    @Disabled( "")
     @Test
     public void canBuildConfiguration() throws SQLException, IOException, PageException {
         ConfigurationBuilder builder = new ConfigurationBuilder();
