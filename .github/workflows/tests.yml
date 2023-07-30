@@ -23,7 +23,7 @@ jobs:
       matrix:
         # We can run tests against any Lucee version, but we can only compile against Lucee releases available on mvnrepository.com.
         lucee_version: [ "5" ]
-        java_version: [ "8", "11", "17" ]
+        java_version: [ "11", "17" ]
         experimental: [ false ]
         include:
           - lucee_version: "6-snapshot"
