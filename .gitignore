@@ -28,3 +28,9 @@ db
 
 # Secrets
 .env
+
+# Build Outputs
+bin/**
+.gradle
+gradle-appsetting
+build/
