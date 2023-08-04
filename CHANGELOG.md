@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## ⚠ BREAKING CHANGE:
+
+As Hibernate 6.x now requires a Java 11 JRE, so do we. *Java 11 is now required to use the ORM extension.*
+
+### ♻️ Changed
+
+* Internal/development logging library, Logback, upgraded to 1.4.8.
+
 ## [6.2.0] - 2023-08-03
 
 ### ♻️ Changed
