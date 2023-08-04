@@ -148,20 +148,34 @@ component extends="testbox.system.BaseSpec" {
 			 * @TODO: Implement these (list from https://cfdocs.org/cfproperty):
 			 * @TODO: Identify any missing types from the above list, based on HibernateCaster.java.
 			 */
-			xdescribe( "+character", () => {} );
-			xdescribe( "+char", () => {} );
-			xdescribe( "+short", () => {} );
-			xdescribe( "+long", () => {} );
-			xdescribe( "+big_decimal", () => {} );
-			xdescribe( "+float", () => {} );
-			xdescribe( "+double", () => {} );
-			xdescribe( "+yes_no", () => {} );
-			xdescribe( "+true_false", () => {} );
-			xdescribe( "+text", () => {} );
-			xdescribe( "+binary", () => {} );
-			xdescribe( "+serializable", () => {} );
-			xdescribe( "+blob", () => {} );
-			xdescribe( "+clob", () => {} );
+			xdescribe( "+character", () => {
+			} );
+			xdescribe( "+char", () => {
+			} );
+			xdescribe( "+short", () => {
+			} );
+			xdescribe( "+long", () => {
+			} );
+			xdescribe( "+big_decimal", () => {
+			} );
+			xdescribe( "+float", () => {
+			} );
+			xdescribe( "+double", () => {
+			} );
+			xdescribe( "+yes_no", () => {
+			} );
+			xdescribe( "+true_false", () => {
+			} );
+			xdescribe( "+text", () => {
+			} );
+			xdescribe( "+binary", () => {
+			} );
+			xdescribe( "+serializable", () => {
+			} );
+			xdescribe( "+blob", () => {
+			} );
+			xdescribe( "+clob", () => {
+			} );
 		} );
 
 		describe( "insert/update constraints", () => {
