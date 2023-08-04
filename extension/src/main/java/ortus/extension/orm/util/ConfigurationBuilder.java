@@ -16,7 +16,8 @@ import java.util.Properties;
 import org.hibernate.MappingException;
 import org.hibernate.boot.registry.BootstrapServiceRegistry;
 import org.hibernate.boot.registry.BootstrapServiceRegistryBuilder;
-import org.hibernate.cache.ehcache.internal.EhcacheRegionFactory;
+// @TODO: Switch to jCache
+// import org.hibernate.cache.ehcache.internal.EhcacheRegionFactory;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
@@ -204,6 +205,7 @@ public class ConfigurationBuilder {
 
     /**
      * Get an XML string containing EITHER the existing config XML OR the default ehcache config XML.
+     * @TODO: Switch to jCache!
      * 
      * @param cc      A Resource containing the configured path of the preconfigured EHCache config XML file
      * @param varName
@@ -301,6 +303,8 @@ public class ConfigurationBuilder {
 
     /**
      * Generate an XML-format ehcache config file for the given cache name.
+     * 
+     * @TODO: Switch to jCache!
      *
      * @param cacheName
      *                  Name of the cache

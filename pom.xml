@@ -301,12 +301,13 @@ lucee-core-version: ${minLuceeVersion}
          <scope>provided</scope>
       </dependency>
 
-      <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+      <!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core -->
       <dependency>
-         <groupId>org.hibernate</groupId>
+         <groupId>org.hibernate.orm</groupId>
          <artifactId>hibernate-core</artifactId>
-         <version>5.6.15.Final</version>
+         <version>6.2.7.Final</version>
       </dependency>
+
       <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-jcache -->
       <!-- <dependency>
          <groupId>org.hibernate</groupId>
@@ -315,20 +316,18 @@ lucee-core-version: ${minLuceeVersion}
       </dependency> -->
 
       <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-ehcache -->
-      <dependency>
+      <!-- <dependency>
          <groupId>org.hibernate</groupId>
          <artifactId>hibernate-ehcache</artifactId>
          <version>5.6.15.Final</version>
 
-         <!--
-         https://maven.apache.org/guides/introduction/introduction-to-optional-and-excludes-dependencies.html#how-to-use-dependency-exclusions -->
          <exclusions>
             <exclusion>
                <groupId>org.glassfish.jaxb</groupId>
                <artifactId>txw2</artifactId>
             </exclusion>
          </exclusions>
-      </dependency>
+      </dependency> -->
 
       <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
       <dependency>

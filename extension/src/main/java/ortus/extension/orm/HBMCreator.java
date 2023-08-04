@@ -35,6 +35,8 @@ import lucee.commons.io.res.Resource;
  *
  * This will be deprecated in the future due to Hibernate itself deprecating the use of hbm.xml mappings in v6.x. See
  * https://docs.jboss.org/hibernate/orm/6.0/migration-guide/migration-guide.html#_deprecation_of_hbm_xml_mappings
+ * 
+ * @TODO: Rewrite to use JPA schema: https://hibernate.org/xsd/orm/mapping/mapping-3.1.0.xsd, https://docs.jboss.org/hibernate/stable/core/javadocs/index.html
  */
 public class HBMCreator {
 

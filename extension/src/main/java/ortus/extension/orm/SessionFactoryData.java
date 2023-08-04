@@ -10,8 +10,8 @@ import java.util.Map;
 
 import org.hibernate.cfg.Configuration;
 import org.hibernate.SessionFactory;
-import org.hibernate.engine.query.spi.QueryPlanCache;
-import org.hibernate.internal.SessionFactoryImpl;
+// import org.hibernate.engine.query.spi.QueryPlanCache;
+// import org.hibernate.internal.SessionFactoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,7 +56,7 @@ public class SessionFactoryData {
     private final Map<Key, Map<String, CFCInfo>> cfcs = new HashMap<>();
     private final Map<Key, DataSourceConfig> configurations = new HashMap<>();
     private final Map<Key, SessionFactory> factories = new HashMap<>();
-    private final Map<Key, QueryPlanCache> queryPlanCaches = new HashMap<>();
+    // private final Map<Key, QueryPlanCache> queryPlanCaches = new HashMap<>();
 
     private final ORMConfiguration ormConf;
     private NamingStrategy namingStrategy;
@@ -83,14 +83,17 @@ public class SessionFactoryData {
         return engine;
     }
 
-    public QueryPlanCache getQueryPlanCache( Key datasSourceName ) {
-        QueryPlanCache qpc = queryPlanCaches.get( datasSourceName );
-        if ( qpc == null ) {
-            qpc = ( ( SessionFactoryImpl ) this.getFactory( datasSourceName ) ).getQueryPlanCache();
-            queryPlanCaches.put( datasSourceName, qpc );
-        }
-        return qpc;
-    }
+    /**
+     * @TODO: Convert to jCache!
+     */
+    // public QueryPlanCache getQueryPlanCache( Key datasSourceName ) {
+    //     QueryPlanCache qpc = queryPlanCaches.get( datasSourceName );
+    //     if ( qpc == null ) {
+    //         qpc = ( ( SessionFactoryImpl ) this.getFactory( datasSourceName ) ).getQueryPlanCache();
+    //         queryPlanCaches.put( datasSourceName, qpc );
+    //     }
+    //     return qpc;
+    // }
 
     /**
      * Retrieve the configured naming strategy. Will introspect and check this.ormConf property to determine the naming

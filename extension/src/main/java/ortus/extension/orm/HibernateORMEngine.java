@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.hibernate.EntityMode;
+// import org.hibernate.metamodel.RepresentationMode;
 import org.hibernate.tuple.entity.EntityTuplizerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -239,9 +239,9 @@ public class HibernateORMEngine implements ORMEngine {
                 throw ExceptionUtil.toPageException( ex );
             }
 
-            EntityTuplizerFactory tuplizerFactory = data.getConfiguration( datasourceName ).config.getEntityTuplizerFactory();
-            tuplizerFactory.registerDefaultTuplizerClass( EntityMode.MAP, AbstractEntityTuplizerImpl.class );
-            tuplizerFactory.registerDefaultTuplizerClass( EntityMode.POJO, AbstractEntityTuplizerImpl.class );
+            // EntityTuplizerFactory tuplizerFactory = data.getConfiguration( datasourceName ).config.getEntityTuplizerFactory();
+            // tuplizerFactory.registerDefaultTuplizerClass( RepresentationMode.MAP, AbstractEntityTuplizerImpl.class );
+            // tuplizerFactory.registerDefaultTuplizerClass( RepresentationMode.POJO, AbstractEntityTuplizerImpl.class );
 
             data.buildSessionFactory( datasourceName );
         }
