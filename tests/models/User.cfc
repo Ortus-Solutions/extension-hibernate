@@ -23,4 +23,5 @@ component persistent="true" cacheUse="read-write" {
 	function preUpdate(){
 		setDateUpdated( now() );
 	}
+
 }
