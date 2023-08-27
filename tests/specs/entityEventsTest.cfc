@@ -11,7 +11,7 @@ component extends="testbox.system.BaseSpec" {
 					ormFlush();
 					expect( newCar.getInserted() ).toBeTrue( "preInsert should update 'inserted' boolean" );
 					var theID = newCar.getId();
-	
+
 					ormClearSession();
 					var persistedCar = entityLoadByPK( "Auto", theID );
 					expect( persistedCar.getInserted() ).toBeTrue( "persisted value should be true" );
@@ -28,11 +28,11 @@ component extends="testbox.system.BaseSpec" {
 					ormFlush();
 					expect( theUser.getDateCreated() ).notToBeNull( "preInsert should update created date" );
 					var theID = theUser.getId();
-	
+
 					entityReload( theUser );
 					expect( theUser.getDateCreated() ).notToBeNull( "persisted value should be todays date" );
-				});
-			});
+				} );
+			} );
 			describe( "preUpdate", () => {
 				it( "runs preUpdate on ORMFlush to change and persist entity state", () => {
 					var newCar = entityNew( "Auto", { id : createUUID(), make : "Audi" } );
@@ -63,18 +63,18 @@ component extends="testbox.system.BaseSpec" {
 					entityReload( theUser );
 					expect( theUser.getDateUpdated() ).toBeNull();
 					theUser.setName( "Julian Halliwell" );
-					
+
 					entitySave( theUser );
 					ormFlush();
 					entityReload( theUser );
 
 					expect( theUser.getDateUpdated() ).notToBeNull( "preUpdate should update created date" );
 					var theID = theUser.getId();
-	
+
 					entityReload( theUser );
 					expect( theUser.getDateUpdated() ).notToBeNull( "persisted value should be todays date" );
-				});
-			});
+				} );
+			} );
 		} );
 	}
 
