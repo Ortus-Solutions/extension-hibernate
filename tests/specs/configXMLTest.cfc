@@ -44,7 +44,7 @@ component extends="testbox.system.BaseSpec" {
 
 			/**
 			 * We ensure invalid XML files do not throw, for backwards compatibility.
-			 * 
+			 *
 			 * TODO: Next major bump should flip this to a .toThrow() test.
 			 */
 			it( "DOES NOT throw on invalid XML", () => {
@@ -59,7 +59,8 @@ component extends="testbox.system.BaseSpec" {
 				fileWrite( "/tests/resources/hibernate.cfg.xml", xml );
 
 				ormGetSession();
-				var theTest = () => {};
+				var theTest = () => {
+				};
 
 				expect( () => {
 					_internalRequest(
