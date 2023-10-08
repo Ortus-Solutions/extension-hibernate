@@ -49,7 +49,7 @@ component {
 	this.mappings[ "luceeTestRoot" ] = this.mappings[ "testsRoot" ] & "/specs/luceeTests";
 	server.helpers                   = new tests.specs.luceeTests.TestHelper();
 	request.webAdminPassword         = "commandbox";
-	application.ormEventLog = [];
+	application.ormEventLog          = [];
 
 	public boolean function onApplicationStart(){
 		application.ormEventLog = [];
