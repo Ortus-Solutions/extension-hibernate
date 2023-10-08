@@ -30,6 +30,10 @@
             <outputDirectory>/flds</outputDirectory>
         </file>
         <file>
+            <source>${project.basedir}/extension/src/main/cfml/ormTags.tld</source>
+            <outputDirectory>/tlds</outputDirectory>
+        </file>
+        <file>
             <source>${project.build.directory}/${project.artifactId}-${project.version}.jar</source>
             <outputDirectory>/jars</outputDirectory>
         </file>

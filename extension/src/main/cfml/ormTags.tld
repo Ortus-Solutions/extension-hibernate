@@ -1,0 +1,65 @@
+<!DOCTYPE taglib PUBLIC "-//Railo//DTD CFML Tag Library 1.0//EN"
+	"dtd/web-cfmtaglibrary_1_0.dtd">
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<short-name>Hibernate-extension</short-name>
+	<uri>https://github.com/ortus-solutions/extension-hibernate</uri>
+	<display-name>Hibernate</display-name>
+	<description>
+		Functions to interact with Hibernate
+	</description>
+	<name-space>cf</name-space>
+	<name-space-separator></name-space-separator>
+	<el>
+		<el-class>lucee.transformer.cfml.expression.CFMLExprTransformer</el-class>
+	</el>
+
+	<!-- Transaction -->
+	<tag>
+		<name>Transaction</name>
+		<tag-class bundle-name="orm-extension">ortus.extension.orm.tags.Transaction</tag-class>
+		<att-class>lucee.transformer.cfml.attributes.impl.Transaction</att-class>
+		<allow-removing-literal>yes</allow-removing-literal>
+		<body-content>must</body-content>
+		<body-rtexprvalue>false</body-rtexprvalue>
+		<handle-exception>true</handle-exception>
+		<script>
+			<type>multiple</type>
+			<rtexprvalue>true</rtexprvalue>
+		</script>
+		<description>Groups multiple queries into a single unit. The cftransaction
+  tag provides commit and rollback processing.</description>
+		<attribute-type>fixed</attribute-type>
+		<attribute>
+			<type>string</type>
+			<name>action</name>
+			<values>begin,commit,setsavepoint,rollback</values>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+			- begin: The start of the block of code to execute.
+			- commit: Commits a pending transaction.
+			- rollback: Rolls back a pending transaction.
+			- setsavepoint: Saves a specific state within a transaction
+			</description>
+		</attribute>
+		<attribute>
+			<type>string</type>
+			<name>isolation</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>ODBC lock type.</description>
+		</attribute>
+		<attribute>
+			<type>string</type>
+			<name>savepoint</name>
+			<required>false</required>
+			<status>hidden</status>
+			<rtexprvalue>true</rtexprvalue>
+			<description>optional savepoint name, used with action "setsavepoint" and "rollback".</description>
+		</attribute>
+	</tag>
+
+
+
+</taglib>
