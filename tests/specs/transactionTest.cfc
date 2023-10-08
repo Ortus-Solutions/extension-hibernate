@@ -201,7 +201,37 @@ component extends="testbox.system.BaseSpec" {
 					expect( false ).toBeTrue();
 				} );
 			} );
-		} )
+
+			describe( "return statement inside transaction", () => {
+				it( "should still commit the transaction", () => {
+					function createUser(){
+						transaction{
+							var data = queryExecute( "SHOW TABLES", {}, { datasource : "mysql" } );
+							var id = createUUID();
+							var theUser = entityNew( "User", {
+								id : createUUID(),
+								name : "Julian",
+								username: "jwell",
+								password: "CF4Life"
+							} );
+							entitySave( theUser );
+							return theUser.getId();
+						}
+					}
+					var newUserID = createUser();
+					// var user = entityLoad()
+					// expect(
+					// 	queryExecute( "SELECT 1 FROM `User` WHERE id=:id", { id : newUserID } ).recordCount
+					// ).toBe( 1 );
+					// expect( () => {
+						transaction{
+							var data = queryExecute( "SHOW TABLES", {}, { datasource : "mysql" } );
+						};
+						writeDump( data );
+					// }).notToThrow();
+				});
+			});
+		} );
 	}
 
 }
