@@ -296,7 +296,7 @@ lucee-core-version: ${minLuceeVersion}
       <dependency>
          <groupId>org.lucee</groupId>
          <artifactId>lucee</artifactId>
-         <version>5.4.1.8</version>
+         <version>5.4.3.15</version>
          <!-- https://www.baeldung.com/maven-dependency-scopes#2-provided -->
          <scope>provided</scope>
       </dependency>
