@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ⚠ BREAKING CHANGES
 
 * As Hibernate 6.x now requires a Java 11 JRE, so do we. *Java 11 is now required to use the ORM extension.*
+* `ORMGetSession()` will now throw a `FunctionException` if too many arguments are passed.
 * `ORMGetSessionFactory()` will now throw a `FunctionException` if too many arguments are passed.
 
 ### ♻️ Changed

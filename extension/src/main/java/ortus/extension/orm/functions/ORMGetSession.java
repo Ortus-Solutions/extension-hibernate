@@ -27,7 +27,7 @@ import lucee.runtime.ext.function.BIF;
 
 public class ORMGetSession extends BIF {
     private static final int MIN_ARGUMENTS = 0;
-    private static final int MAX_ARGUMENTS = 0;
+    private static final int MAX_ARGUMENTS = 1;
 
     private static final long serialVersionUID = 349899413869883140L;
 
@@ -42,8 +42,13 @@ public class ORMGetSession extends BIF {
 
     @Override
     public Object invoke( PageContext pc, Object[] args ) throws PageException {
+        CFMLEngine engine = CFMLEngineFactory.getInstance();
+
         if ( args.length == 0 )
             return call( pc );
-        return call( pc, CommonUtil.toString( args[ 0 ] ) );
+        if ( args.length == 1 )
+            return call( pc, CommonUtil.toString( args[ 0 ] ) );
+
+        throw engine.getExceptionUtil().createFunctionException( pc, "ORMGetSession", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
     }
 }
