@@ -24,6 +24,8 @@ import ortus.extension.orm.util.ORMUtil;
 import lucee.runtime.PageContext;
 import lucee.runtime.exp.PageException;
 import lucee.runtime.ext.function.BIF;
+import lucee.loader.engine.CFMLEngineFactory;
+import lucee.loader.engine.CFMLEngine;
 
 public class ORMGetSessionFactory extends BIF {
     private static final int MIN_ARGUMENTS = 0;
