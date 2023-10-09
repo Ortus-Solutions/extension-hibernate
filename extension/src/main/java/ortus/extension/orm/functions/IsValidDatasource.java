@@ -11,6 +11,8 @@ import lucee.runtime.db.DataSourceManager;
 import lucee.runtime.db.DatasourceConnection;
 
 public class IsValidDatasource extends BIF {
+    private static final int MIN_ARGUMENTS = 1;
+    private static final int MAX_ARGUMENTS = 1;
 
     public static Boolean call( PageContext pc, String name ) throws PageException {
         DataSource d = pc.getDataSource( name );
@@ -33,6 +35,6 @@ public class IsValidDatasource extends BIF {
         if ( args.length == 1 )
             return call( pc, cast.toString( args[ 0 ] ) );
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "isValidDatasource", 1, 1, args.length );
+        throw engine.getExceptionUtil().createFunctionException( pc, "isValidDatasource", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
     }
 }

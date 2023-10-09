@@ -33,6 +33,8 @@ import lucee.loader.engine.CFMLEngine;
  * CFML built-in function to evict a collection from the first-level cache (the persistence context).
  */
 public class ORMEvictCollection extends BIF {
+    private static final int MIN_ARGUMENTS = 2;
+    private static final int MAX_ARGUMENTS = 3;
 
     public static String call( PageContext pc, String entityName, String collectionName ) throws PageException {
         return call( pc, entityName, collectionName, null );
@@ -58,6 +60,6 @@ public class ORMEvictCollection extends BIF {
         if ( args.length == 3 )
             return call( pc, cast.toString( args[ 0 ] ), cast.toString( args[ 1 ] ), cast.toString( args[ 2 ] ) );
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "ORMEvictCollection", 2, 3, args.length );
+        throw engine.getExceptionUtil().createFunctionException( pc, "ORMEvictCollection", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
     }
 }

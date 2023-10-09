@@ -957,7 +957,7 @@ public class HibernateORMSession implements ORMSession {
                 if ( cacheable != null )
                     criteria.setCacheable( cacheable.booleanValue() );
 
-                // MUST cacheName ?
+                // @TODO: cacheName ?
 
                 // maxResults
                 int timeout = CommonUtil.toIntValue( options.get( QUERYOPTS.TIMEOUT, null ), -1 );

@@ -31,6 +31,8 @@ import lucee.loader.engine.CFMLEngine;
  * Merge a detached or transient entity into the Hibernate session.
  */
 public class EntityMerge extends BIF {
+    private static final int MIN_ARGUMENTS = 1;
+    private static final int MAX_ARGUMENTS = 1;
 
     public static Object call( PageContext pc, Object obj ) throws PageException {
         ORMSession session = ORMUtil.getSession( pc );
@@ -44,6 +46,6 @@ public class EntityMerge extends BIF {
         if ( args.length == 1 )
             return call( pc, args[ 0 ] );
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "EntityMerge", 1, 1, args.length );
+        throw engine.getExceptionUtil().createFunctionException( pc, "EntityMerge", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
     }
 }

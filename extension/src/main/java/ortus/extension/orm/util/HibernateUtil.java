@@ -4,10 +4,12 @@ import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.HibernateException;
 import org.hibernate.metadata.ClassMetadata;
@@ -152,6 +154,14 @@ public class HibernateUtil {
         }
     }
 
+    /**
+     * Validate a column name exists in the given hibernate metadata object.
+     * 
+     * @param metaData Class-specific metadata. This must change to use Hibernate's `MappingMetamodel` object
+     * @param name Column name to look for
+     * @return Currently void, but in the future this method will return a boolean and move exception generation to {@link ExceptionUtil}.
+     * @throws PageException
+     */
     public static String validateColumnName( ClassMetadata metaData, String name ) throws PageException {
         String res = validateColumnName( metaData, name, null );
         if ( res != null )
@@ -164,33 +174,34 @@ public class HibernateUtil {
 
     }
 
+    /**
+     * Validate a column name exists in the given hibernate metadata object. If not found, will return default value
+     * 
+     * @param metaData Class-specific metadata. This must change to use Hibernate's `MappingMetamodel` object
+     * @param name Column name to look for
+     * @defaultValue Default to return if column not found.
+     * @return The default value if column name not found.
+     * @throws PageException
+     */
     public static String validateColumnName( ClassMetadata metaData, String name, String defaultValue ) {
         Type type = metaData.getIdentifierType();
         // composite id
         if ( type.isComponentType() ) {
-            String res = _validateColumnName( ( ( ComponentType ) type ).getPropertyNames(), name );
-            if ( res != null )
-                return res;
+            Optional<String> match = findMatchingFieldname( ( ( ComponentType ) type ).getPropertyNames(), name );
+            if ( match.isPresent() )
+                return match.get();
         }
         // regular id
         String id = metaData.getIdentifierPropertyName();
         if ( id != null && name.equalsIgnoreCase( id ) )
             return metaData.getIdentifierPropertyName();
 
-        String res = _validateColumnName( metaData.getPropertyNames(), name );
-        if ( res != null )
-            return res;
-        return defaultValue;
+        Optional<String> match = findMatchingFieldname( metaData.getPropertyNames(), name );
+        return match.orElseGet(()-> defaultValue );
     }
 
-    private static String _validateColumnName( String[] names, String name ) {
-        if ( names == null )
-            return null;
-        for ( int i = 0; i < names.length; i++ ) {
-            if ( names[ i ].equalsIgnoreCase( name ) )
-                return names[ i ];
-        }
-        return null;
+    private static Optional<String> findMatchingFieldname( String[] names, String name ) {
+        return Arrays.stream( names ).filter( name::equalsIgnoreCase ).findFirst();
     }
 
     //
@@ -219,7 +230,7 @@ public class HibernateUtil {
                     p.getDynamicAttributes().setEL( CommonUtil.FIELDTYPE, "id" );
             }
 
-            // MUST foreign-key relation
+            // @TODO: foreign-key relation
 
         } catch ( Throwable t ) {
             if ( t instanceof ThreadDeath )

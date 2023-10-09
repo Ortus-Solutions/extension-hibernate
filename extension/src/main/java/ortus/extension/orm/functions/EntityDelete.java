@@ -31,6 +31,8 @@ import lucee.loader.engine.CFMLEngine;
  * Delete an entity or array of entities with this CFML built-in function.
  */
 public class EntityDelete extends BIF {
+    private static final int MIN_ARGUMENTS = 1;
+    private static final int MAX_ARGUMENTS = 1;
 
     public static String call( PageContext pc, Object obj ) throws PageException {
         ORMSession session = ORMUtil.getSession( pc );
@@ -45,6 +47,6 @@ public class EntityDelete extends BIF {
         if ( args.length == 1 )
             return call( pc, args[ 0 ] );
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "EntityDelete", 1, 1, args.length );
+        throw engine.getExceptionUtil().createFunctionException( pc, "EntityDelete", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
     }
 }

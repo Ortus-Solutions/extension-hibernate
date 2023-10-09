@@ -31,6 +31,8 @@ import lucee.loader.engine.CFMLEngine;
  * CFML built-in function to evict queries from the named query cache.
  */
 public class ORMEvictQueries extends BIF {
+    private static final int MIN_ARGUMENTS = 0;
+    private static final int MAX_ARGUMENTS = 2;
 
     public static String call( PageContext pc ) throws PageException {
         return call( pc, null, null );
@@ -57,6 +59,6 @@ public class ORMEvictQueries extends BIF {
         if ( args.length == 2 )
             return call( pc, cast.toString( args[ 0 ] ), cast.toString( args[ 1 ] ) );
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "ORMEvictQueries", 0, 2, args.length );
+        throw engine.getExceptionUtil().createFunctionException( pc, "ORMEvictQueries", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
     }
 }

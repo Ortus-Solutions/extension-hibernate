@@ -14,6 +14,42 @@ As Hibernate 6.x now requires a Java 11 JRE, so do we. *Java 11 is now required 
 ### ♻️ Changed
 
 * Internal/development logging library, Logback, upgraded to 1.4.8.
+### ⭐ Added
+
+New `ORMQueryExecute()` alias for the `ORMExecuteQuery`. This new alias will behave identically to the `ORMExecuteQuery()` method, but is named consistently with the `queryExecute()` method.
+
+### 🐛 Fixed
+
+Fixes custom configuration support via `this.ormSettings.ormConfig`.
+
+## [6.3.2] - 2023-09-29
+
+### 🐛 Fixed
+
+Fixed pre-event listeners to include parent component properties when checking for entity mutations to persist back to the event entity state. This resolves issues with changes made in `preInsert()`/`preUpdate()` not persisting if the changes are made on a persistent property from a parent component. Resolves [OOE-14](https://ortussolutions.atlassian.net/browse/OOE-14).
+
+## [6.3.1] - 2023-09-26
+
+### 🐛 Fixed
+
+Refactored nullability checks to occur _after_ pre-event listener methods fire. Resolves [OOE-12](https://ortussolutions.atlassian.net/browse/OOE-12)
+
+### ⭐ Added
+
+Added context to the error message in `CFCGetter`, which handles retrieving entity values from Hibernate code. This improves odd error messages in some edge cases with the Hibernate tuplizer.
+
+## [6.3.0] - 2023-08-18
+
+### 🔐 Security
+
+Switched the [EHCache](https://mvnrepository.com/artifact/net.sf.ehcache/ehcache/2.10.6) library to use [net.sf.ehcache.internal:ehcache-core](https://mvnrepository.com/artifact/net.sf.ehcache.internal/ehcache-core/2.10.9.2).
+
+-   Upgrades EHCache version from `2.10.6` to `2.10.9.2`.
+-   Drops an embedded `rest-management-private-classpath` directory
+-   Drops a number of (unused) vulnerable jackson and jetty libraries such as jackson-core.
+-   As an added bonus, this reduces the final `.lex` extension file size by over 6 MB. 🎉
+
+**Note:** While it is not 100% clear, [some of these CVEs may have been false positives](https://github.com/jeremylong/DependencyCheck/issues/517).
 
 ## [6.2.0] - 2023-08-03
 
@@ -21,12 +57,12 @@ As Hibernate 6.x now requires a Java 11 JRE, so do we. *Java 11 is now required 
 
 #### Hibernate Upgraded from 5.4 to 5.6
 
-This brings the Hibernate dependencies up to date (released Feb. 2023), and should not change any CFML-facing features for *most* users. (See [CLOB columns in Postgres81](#clob-columns-in-postgres81))
+This brings the Hibernate dependencies up to date (released Feb. 2023), and should not change any CFML-facing features for _most_ users. (See [CLOB columns in Postgres81](#clob-columns-in-postgres81))
 
 See the migration guides for more info:
 
-* [Hibernate 5.4 -> 5.4 migration guide](https://github.com/hibernate/hibernate-orm/blob/5.5/migration-guide.adoc)
-* [Hibernate 5.5 -> 5.6 migration guide](https://github.com/hibernate/hibernate-orm/blob/5.6/migration-guide.adoc)
+-   [Hibernate 5.4 -> 5.4 migration guide](https://github.com/hibernate/hibernate-orm/blob/5.5/migration-guide.adoc)
+-   [Hibernate 5.5 -> 5.6 migration guide](https://github.com/hibernate/hibernate-orm/blob/5.6/migration-guide.adoc)
 
 #### CLOB columns in Postgres81
 
@@ -38,8 +74,8 @@ The default `ehcache.xml` for EHCache changed to include [`clearOnFlush="true"`]
 
 ### 🐛 Fixed
 
-* Fixes handling of `"timezone"`-typed column values. Previously, fields defined with `ormtype="timezone"` would neither use the `default` value nor allow new values to be set. [OOE-10](https://ortussolutions.atlassian.net/browse/OOE-10)
-* Fixes entity state changes in `preInsert()`/`preUpdate()` listeners for properties with no `default` defined. [OOE-9](https://ortussolutions.atlassian.net/browse/OOE-9)
+-   Fixes handling of `"timezone"`-typed column values. Previously, fields defined with `ormtype="timezone"` would neither use the `default` value nor allow new values to be set. [OOE-10](https://ortussolutions.atlassian.net/browse/OOE-10)
+-   Fixes entity state changes in `preInsert()`/`preUpdate()` listeners for properties with no `default` defined. [OOE-9](https://ortussolutions.atlassian.net/browse/OOE-9)
 
 ## [6.1.0] - 2023-07-14
 
@@ -178,9 +214,14 @@ See [OOE-3](https://ortussolutions.atlassian.net/browse/OOE-3).
 -   Better build/test documentation
 -   Improved maintenance and build docs
 
-[6.0.0]: https://github.com/Ortus-Solutions/extension-hibernate/compare/b86f26e383ead941d18791e2e008cb62b2598cdc...v6.0.0
+[Unreleased]: https://github.com/Ortus-Solutions/extension-hibernate/compare/6.3.2...HEAD
 
-[Unreleased]: https://github.com/Ortus-Solutions/extension-hibernate/compare/v6.1.0...HEAD
+[6.3.2]: https://github.com/Ortus-Solutions/extension-hibernate/compare/v6.3.1...6.3.2
 
-[6.1.0]: https://github.com/Ortus-Solutions/extension-hibernate/compare/v6.1.0...v6.2.0
-[6.1.0]: https://github.com/Ortus-Solutions/extension-hibernate/compare/2c540a96f2a87145fda2f651a000f041b166b543...v6.1.0
+[6.3.1]: https://github.com/Ortus-Solutions/extension-hibernate/compare/v6.3.0...v6.3.1
+
+[6.3.0]: https://github.com/Ortus-Solutions/extension-hibernate/compare/v6.2.0...v6.3.0
+
+[6.2.0]: https://github.com/Ortus-Solutions/extension-hibernate/compare/v6.1.0...v6.2.0
+
+[6.1.0]: https://github.com/Ortus-Solutions/extension-hibernate/compare/v6.0.0...v6.1.0

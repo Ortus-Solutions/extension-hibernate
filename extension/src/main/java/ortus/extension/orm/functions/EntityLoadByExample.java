@@ -32,6 +32,8 @@ import lucee.loader.engine.CFMLEngine;
  * Built-in CFML method to load entity which matches the sample entity.
  */
 public class EntityLoadByExample extends BIF {
+    private static final int MIN_ARGUMENTS = 2;
+    private static final int MAX_ARGUMENTS = 3;
 
     public static Object call( PageContext pc, Object sampleEntity ) throws PageException {
         return call( pc, sampleEntity, false );
@@ -54,6 +56,6 @@ public class EntityLoadByExample extends BIF {
         if ( args.length == 1 )
             return call( pc, args[ 0 ] );
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "EntityLoadByExample", 2, 3, args.length );
+        throw engine.getExceptionUtil().createFunctionException( pc, "EntityLoadByExample", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
     }
 }

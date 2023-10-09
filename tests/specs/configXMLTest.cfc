@@ -4,7 +4,7 @@ component extends="testbox.system.BaseSpec" {
 		/**
 		 * TODO: Get these tests to pass!
 		 */
-		xdescribe( "ormConfig.xml", () => {
+		describe( "ormConfig.xml", () => {
 			beforeEach( () => {
 				var result            = _internalRequest( "/tests/testApp/index.cfm?reinitApp=true" );
 				variables.ormSettings = {
@@ -19,7 +19,8 @@ component extends="testbox.system.BaseSpec" {
     ""http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"">
 <hibernate-configuration>
     <session-factory>
-    <property name=""hibernate.session_factory_name"">OrtusForTheWin</property>
+		<property name=""hibernate.session_factory_name"">OrtusForTheWin</property>
+		<property name=""hibernate.globally_quoted_identifiers"">true</property>
     </session-factory>
 </hibernate-configuration>";
 				fileWrite( "/tests/resources/hibernate.cfg.xml", xml );
@@ -28,8 +29,8 @@ component extends="testbox.system.BaseSpec" {
 					ormReload();
 					ormGetSession();
 					var factoryName = ormGetSessionFactory().getSessionFactoryOptions().getSessionFactoryName();
-					if ( factoryName != "" ) {
-						throw( "expected #factoryName# to be 'bla-bla.test'" );
+					if ( factoryName != "OrtusForTheWin" ) {
+						throw( "expected factoryName '#factoryName#' to be 'bla-bla.test'" );
 					}
 				};
 				var result = _internalRequest(
@@ -42,9 +43,11 @@ component extends="testbox.system.BaseSpec" {
 			} );
 
 			/**
-			 * TODO: Enable test in 7.0
+			 * We ensure invalid XML files do not throw, for backwards compatibility.
+			 * 
+			 * TODO: Next major bump should flip this to a .toThrow() test.
 			 */
-			xit( "throws on invalid XML", () => {
+			it( "DOES NOT throw on invalid XML", () => {
 				var xml = "
 <?xml version = ""1.0"" encoding = ""utf-8""?>
 <!DOCTYPE hibernate-configuration SYSTEM 
@@ -56,23 +59,18 @@ component extends="testbox.system.BaseSpec" {
 				fileWrite( "/tests/resources/hibernate.cfg.xml", xml );
 
 				ormGetSession();
-				writeDump( ormGetSessionFactory().getSessionFactoryOptions() );
-				var theTest = () => {
-					var factoryName = ormGetSessionFactory().getSessionFactoryOptions().getSessionFactoryName();
-					if ( factoryName != "" ) {
-						throw( "expected #factoryName# to be 'bla-bla.test'" );
-					}
-				};
-				// expect( () => {
-				_internalRequest(
-					template: "/tests/testApp/index.cfm",
-					url     : { "ormReload" : true },
-					forms   : {
-						ormSettings : serializeJSON( variables.ormSettings ),
-						closure     : serialize( theTest )
-					}
-				);
-				// } ).toThrow();
+				var theTest = () => {};
+
+				expect( () => {
+					_internalRequest(
+						template: "/tests/testApp/index.cfm",
+						url     : { "ormReload" : true },
+						forms   : {
+							ormSettings : serializeJSON( variables.ormSettings ),
+							closure     : serialize( theTest )
+						}
+					);
+				} ).notToThrow();
 			} );
 		} )
 	}

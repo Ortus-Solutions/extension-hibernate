@@ -15,6 +15,8 @@ import lucee.loader.engine.CFMLEngine;
  * Built-in CFML method to load entity by primary key.
  */
 public class EntityLoadByPK extends BIF {
+    private static final int MIN_ARGUMENTS = 2;
+    private static final int MAX_ARGUMENTS = 2;
 
     public static Object call( PageContext pc, String name, Object oID ) throws PageException {
         ORMSession session = ORMUtil.getSession( pc );
@@ -35,6 +37,6 @@ public class EntityLoadByPK extends BIF {
         if ( args.length == 2 )
             return call( pc, cast.toString( args[ 0 ] ), args[ 1 ] );
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "EntityLoadByPK", 2, 2, args.length );
+        throw engine.getExceptionUtil().createFunctionException( pc, "EntityLoadByPK", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
     }
 }

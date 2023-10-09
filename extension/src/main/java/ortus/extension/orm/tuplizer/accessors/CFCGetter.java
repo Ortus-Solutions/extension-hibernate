@@ -44,14 +44,17 @@ public class CFCGetter implements Getter {
             Object rtn = cfc.getComponentScope().get( key, null );
             return HibernateCaster.toSQL( type, rtn, null );
         } catch ( PageException pe ) {
-            throw new HibernatePageException( pe );
+            throw new HibernatePageException(
+                String.format( "Unable to cast to SQL type for property [%s] on CFC [%s]: %s", this.key.getString(), trg.getClass().getName(), pe.getMessage() ),
+                 pe
+            );
         }
     }
 
     @Override
     @SuppressWarnings("rawtypes")
     public Object getForInsert( Object trg, Map map, SharedSessionContractImplementor ssci ) {
-        return get( trg );// MUST better solution? this is from MapGetter
+        return get( trg );// @TODO: better solution? this is from MapGetter
     }
 
     @Override
@@ -66,13 +69,13 @@ public class CFCGetter implements Getter {
 
     @Override
     public String getMethodName() {
-        return null;// MUST macht es sinn den namen zurueck zu geben?
+        return null;// @TODO: macht es sinn den namen zurueck zu geben?
     }
 
     @Override
     @SuppressWarnings("rawtypes")
     public Class getReturnType() {
-        return Object.class;// MUST more concrete?
+        return Object.class;// @TODO: more concrete?
     }
 
 }

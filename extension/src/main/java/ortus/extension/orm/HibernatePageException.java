@@ -22,13 +22,24 @@ public class HibernatePageException extends HibernateException implements IPageE
     private PageException pe;
 
     /**
-     * constructor of the class
+     * Create a new HibernatePageException from the given PageException.
      *
      * @param pe
      *           page exception to hold
      */
     public HibernatePageException( PageException pe ) {
         super( pe.getMessage() );
+        this.pe = pe;
+    }
+
+    /**
+     * Create a new HibernatePageException with a custom message.
+     *
+     * @param pe
+     *           page exception to hold
+     */
+    public HibernatePageException( String message, PageException pe ) {
+        super( message );
         this.pe = pe;
     }
 

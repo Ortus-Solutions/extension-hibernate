@@ -21,13 +21,13 @@ EntityDelete(entity)</description>
 			<name>name</name>
 			<type>object</type>
 			<required>Yes</required>
-		<description>Name of the entity being deleted.</description>
-    </argument>
+			<description>Name of the entity being deleted.</description>
+		</argument>
 		<return>
 			<type>void</type>
 		</return>
 	</function>
-	
+
 	<!-- EntityLoad -->
 	<function>
 		<name>entityLoad</name>
@@ -39,22 +39,22 @@ EntityLoad(entityName, filterCriteria, sortOrder [, options])</description>
 			<name>name</name>
 			<type>string</type>
 			<required>Yes</required>
-		<description>Name of the entity to be loaded.</description>
-    </argument>
+			<description>Name of the entity to be loaded.</description>
+		</argument>
 		<argument>
 			<name>idOrFilter</name>
 			<alias>id,filter</alias>
 			<type>any</type>
 			<required>no</required>
-		<description>The primary key value of the entity that must be loaded or Key-value pair (Struct) of property names and values. 
+			<description>The primary key value of the entity that must be loaded or Key-value pair (Struct) of property names and values. 
 		If there are more than one key-value pair, then the AND operator is used.If specified, loads and returns an array of entities of the specified entity name that matches the filterCriteria.</description>
-    </argument>
+		</argument>
 		<argument>
 			<name>uniqueOrOrder</name>
 			<alias>unique,order</alias>
 			<type>any</type>
 			<required>no</required>
-		<description>when the second argument is an id then this argument defines the boolean "unique" otherwise it defines the order.
+			<description>when the second argument is an id then this argument defines the boolean "unique" otherwise it defines the order.
 		
 - unique:
 If unique is set to true, then the entity is returned.
@@ -64,13 +64,13 @@ If you set unique=true and multiple records are returned, then an exception occu
 - order:
 String used to specify the sortOrder of the entities that are returned.If specified, loads and returns an array of entities that satisfy the filterCriteria sorted as specified by the sortOrder.
 		
-		</description>
-    </argument>
+			</description>
+		</argument>
 		<argument>
 			<name>options</name>
 			<type>any</type>
 			<required>no</required>
-		<description>
+			<description>
 The following options to customize the output (only used when second argument is "id"):
 - ignoreCase: Ignores the case of sort order when set to true. Use only if you specify the sortOrder parameter.
 - offset: Specifies the position from which to retrieve the objects.
@@ -78,13 +78,13 @@ The following options to customize the output (only used when second argument is
 - cacheable: Whether the result has to be cached in the secondary cache. Default is false.
 - cacheName: Name of the cache in secondary cache.
 - timeout: Specifies the timeout value (in seconds) for the query.
-		</description>
-    </argument>
+			</description>
+		</argument>
 		<return>
 			<type>any</type>
 		</return>
 	</function>
-	
+
 	<!-- EntityLoadByPK -->
 	<function>
 		<name>EntityLoadByPK</name>
@@ -94,27 +94,27 @@ The following options to customize the output (only used when second argument is
 			<name>name</name>
 			<type>string</type>
 			<required>Yes</required>
-		<description>Name of the entity to be loaded.</description>
-    </argument>
+			<description>Name of the entity to be loaded.</description>
+		</argument>
 		<argument>
 			<name>id</name>
 			<type>any</type>
 			<required>yes</required>
-		<description>The primary key value of the entity that must be loaded</description>
-    </argument>
+			<description>The primary key value of the entity that must be loaded</description>
+		</argument>
 		<argument>
 			<name>unique</name>
 			<type>boolean</type>
 			<required>no</required>
-		<description>If unique is set to true, then the entity is returned.
+			<description>If unique is set to true, then the entity is returned.
 If you are sure that only one record exists that matches this filtercriteria, then you can specify unique=true, so that a single entity is returned instead of an array.
 If you set unique=true and multiple records are returned, then an exception occurs.</description>
-    </argument>
+		</argument>
 		<return>
 			<type>any</type>
 		</return>
 	</function>
-	
+
 	<!-- EntityLoadByExample -->
 	<function>
 		<name>EntityLoadByExample</name>
@@ -125,21 +125,21 @@ entityLoadByExample(sampleEntity,[unique])</description>
 			<name>sampleEntity</name>
 			<type>object</type>
 			<required>yes</required>
-		<description>Name of the sample entity that is used to match and filter similar entities to load.</description>
-    </argument>
+			<description>Name of the sample entity that is used to match and filter similar entities to load.</description>
+		</argument>
 		<argument>
 			<name>unique</name>
 			<type>boolean</type>
 			<required>no</required>
-		<description>If unique is set to true, then the entity is returned.
+			<description>If unique is set to true, then the entity is returned.
 If you are sure that only one record exists that matches this filtercriteria, then you can specify unique=true, so that a single entity is returned instead of an array.
 If you set unique=true and multiple records are returned, then an exception occurs.</description>
-    </argument>
+		</argument>
 		<return>
 			<type>any</type>
 		</return>
 	</function>
-	
+
 	<!-- EntityMerge -->
 	<function>
 		<name>EntityMerge</name>
@@ -149,13 +149,13 @@ If you set unique=true and multiple records are returned, then an exception occu
 			<name>entity</name>
 			<type>any</type>
 			<required>yes</required>
-		<description>The entity that must be attached to the ORM session.</description>
-    </argument>
+			<description>The entity that must be attached to the ORM session.</description>
+		</argument>
 		<return>
 			<type>any</type>
 		</return>
 	</function>
-	
+
 	<!-- EntityNew -->
 	<function>
 		<name>EntityNew</name>
@@ -166,18 +166,18 @@ If you set unique=true and multiple records are returned, then an exception occu
 			<type>string</type>
 			<required>yes</required>
 			<description>Name of the instance being created.</description>
-    	</argument>
+		</argument>
 		<argument>
 			<name>properties</name>
 			<type>struct</type>
 			<required>no</required>
 			<description>a struct containing data to populate the entity properties.</description>
-    	</argument>
+		</argument>
 		<return>
 			<type>any</type>
 		</return>
 	</function>
-	
+
 	<!-- EntityNameArray -->
 	<function>
 		<name>EntityNameArray</name>
@@ -187,7 +187,7 @@ If you set unique=true and multiple records are returned, then an exception occu
 			<type>array</type>
 		</return>
 	</function>
-	
+
 	<!-- EntityNameList -->
 	<function>
 		<name>EntityNameList</name>
@@ -197,13 +197,13 @@ If you set unique=true and multiple records are returned, then an exception occu
 			<name>delimiter</name>
 			<type>string</type>
 			<required>no</required>
-		<description>delimiter used for the list</description>
-    </argument>
+			<description>delimiter used for the list</description>
+		</argument>
 		<return>
 			<type>string</type>
 		</return>
 	</function>
-	
+
 	<!-- EntityReload -->
 	<function>
 		<name>EntityReload</name>
@@ -213,13 +213,13 @@ If you set unique=true and multiple records are returned, then an exception occu
 			<name>entity</name>
 			<type>object</type>
 			<required>yes</required>
-		<description>name of the entity</description>
-    </argument>
+			<description>name of the entity</description>
+		</argument>
 		<return>
 			<type>void</type>
 		</return>
 	</function>
-	
+
 	<!-- EntitySave -->
 	<function>
 		<name>EntitySave</name>
@@ -230,19 +230,19 @@ EntitySave(entity, [forceInsert])</description>
 			<name>entity</name>
 			<type>object</type>
 			<required>yes</required>
-		<description>Name of the entity that must be saved in the database.</description>
-    </argument>
+			<description>Name of the entity that must be saved in the database.</description>
+		</argument>
 		<argument>
 			<name>forceInsert</name>
 			<type>boolean</type>
 			<required>no</required>
-		<description>If true, then Lucee always tries to insert the entity as a new record.</description>
-    </argument>
+			<description>If true, then Lucee always tries to insert the entity as a new record.</description>
+		</argument>
 		<return>
 			<type>void</type>
 		</return>
 	</function>
-	
+
 	<!-- EntityToQuery -->
 	<function>
 		<name>EntityToQuery</name>
@@ -252,14 +252,14 @@ EntitySave(entity, [forceInsert])</description>
 			<name>entity</name>
 			<type>object</type>
 			<required>yes</required>
-		<description>entity or array of entities</description>
-    </argument>
+			<description>entity or array of entities</description>
+		</argument>
 		<argument>
 			<name>name</name>
 			<type>string</type>
 			<required>no</required>
-		<description>name of the entities</description>
-    </argument>
+			<description>name of the entities</description>
+		</argument>
 		<return>
 			<type>query</type>
 		</return>
@@ -290,28 +290,64 @@ EntitySave(entity, [forceInsert])</description>
 			<name>hql</name>
 			<type>string</type>
 			<required>yes</required>
-		<description></description>
-    </argument>
+			<description></description>
+		</argument>
 		<argument>
 			<name>paramsOrUnique</name>
 			<alias>params</alias>
 			<type>any</type>
 			<required>no</required>
-		<description></description>
-    </argument>
+			<description></description>
+		</argument>
 		<argument>
 			<name>uniqueOrQueryOptions</name>
 			<alias>unique</alias>
 			<type>any</type>
 			<required>no</required>
-		<description></description>
-    </argument>
+			<description></description>
+		</argument>
 		<argument>
 			<name>queryOptions</name>
 			<type>any</type>
 			<required>no</required>
-		<description></description>
-    </argument>
+			<description></description>
+		</argument>
+		<return>
+			<type>any</type>
+		</return>
+	</function>
+
+	<!-- ORMQueryExecute -->
+	<function>
+		<name>ORMQueryExecute</name>
+		<class bundle-name="orm-extension">ortus.extension.orm.functions.ORMExecuteQuery</class>
+		<description>Modern alias to ORMExecuteQuery(). Run an HQL query on the default ORM datasource.</description>
+		<argument>
+			<name>hql</name>
+			<type>string</type>
+			<required>yes</required>
+			<description></description>
+		</argument>
+		<argument>
+			<name>paramsOrUnique</name>
+			<alias>params</alias>
+			<type>any</type>
+			<required>no</required>
+			<description></description>
+		</argument>
+		<argument>
+			<name>uniqueOrQueryOptions</name>
+			<alias>unique</alias>
+			<type>any</type>
+			<required>no</required>
+			<description></description>
+		</argument>
+		<argument>
+			<name>queryOptions</name>
+			<type>any</type>
+			<required>no</required>
+			<description></description>
+		</argument>
 		<return>
 			<type>any</type>
 		</return>
@@ -361,26 +397,26 @@ EntitySave(entity, [forceInsert])</description>
 		<class bundle-name="orm-extension">ortus.extension.orm.functions.ORMEvictCollection</class>
 		<description>This will remove all the entries with the specified relation/collection name in the specified component. 
 ormEvictCollection(componentName,relationName,[id])</description>
-		
+
 		<argument>
 			<name>entityName</name>
 			<type>String</type>
 			<required>yes</required>
-		<description></description>
-    </argument>
+			<description></description>
+		</argument>
 		<argument>
 			<name>collectionName</name>
 			<type>String</type>
 			<required>yes</required>
-		<description></description>
-    </argument>
+			<description></description>
+		</argument>
 		<argument>
 			<name>primaryKey</name>
 			<type>String</type>
 			<required>no</required>
-		<description></description>
-    </argument>
-		
+			<description></description>
+		</argument>
+
 		<return>
 			<type>void</type>
 		</return>
@@ -391,20 +427,20 @@ ormEvictCollection(componentName,relationName,[id])</description>
 		<class bundle-name="orm-extension">ortus.extension.orm.functions.ORMEvictEntity</class>
 		<description>This will remove all the entries for the specified component name from the entity cache.
 ormEvictEntity(componentName,[id])</description>
-		
+
 		<argument>
 			<name>entityName</name>
 			<type>String</type>
 			<required>yes</required>
-		<description></description>
-    </argument>
+			<description></description>
+		</argument>
 		<argument>
 			<name>primaryKey</name>
 			<type>String</type>
 			<required>no</required>
-		<description></description>
-    </argument>
-		
+			<description></description>
+		</argument>
+
 		<return>
 			<type>void</type>
 		</return>
@@ -422,8 +458,8 @@ ormEvictQueries([cacheName])</description>
 			<type>String</type>
 			<required>no</required>
 			<description></description>
-    	</argument>
-    	<argument>
+		</argument>
+		<argument>
 			<name>datasource</name>
 			<type>string</type>
 			<required>no</required>
@@ -487,5 +523,5 @@ ormEvictQueries([cacheName])</description>
 			<type>void</type>
 		</return>
 	</function>
-	
+
 </func-lib>

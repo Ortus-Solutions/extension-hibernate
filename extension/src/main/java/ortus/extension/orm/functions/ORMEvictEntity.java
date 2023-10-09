@@ -33,6 +33,8 @@ import lucee.loader.engine.CFMLEngine;
  * CFML built-in function to evict an entity from the current ORM session.
  */
 public class ORMEvictEntity extends BIF {
+    private static final int MIN_ARGUMENTS = 1;
+    private static final int MAX_ARGUMENTS = 2;
 
     public static String call( PageContext pc, String entityName ) throws PageException {
         return call( pc, entityName, null );
@@ -57,6 +59,6 @@ public class ORMEvictEntity extends BIF {
         if ( args.length == 2 )
             return call( pc, cast.toString( args[ 0 ] ), cast.toString( args[ 1 ] ) );
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "ORMEvictEntity", 1, 2, args.length );
+        throw engine.getExceptionUtil().createFunctionException( pc, "ORMEvictEntity", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
     }
 }

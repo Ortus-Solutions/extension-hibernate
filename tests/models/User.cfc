@@ -6,12 +6,13 @@ component persistent="true" cacheUse="read-write" {
 		fieldtype="id"
 		ormtype  ="string";
 	property name="name"     type="string";
-	property name="username" type="string";
-	property name="password" type="string";
+	property name="username" type="string" notnull="true";
+	property name="password" type="string" notnull="true";
 	property
 		name     ="createdOn"
 		ormtype  ="datetime"
 		dbdefault="2016-10-10";
+
 	property name="dateCreated" ormType="timestamp";
 	property name="dateUpdated" ormType="timestamp";
 
@@ -19,8 +20,14 @@ component persistent="true" cacheUse="read-write" {
 
 	function preInsert(){
 		setDateCreated( now() );
+		if ( isNull( getPassword() ) ){
+			setPassword( createUUID() );
+		}
 	}
 	function preUpdate(){
 		setDateUpdated( now() );
+		if ( isNull( getPassword() ) ){
+			setPassword( createUUID() );
+		}
 	}
 }

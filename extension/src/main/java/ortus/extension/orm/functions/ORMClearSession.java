@@ -32,6 +32,8 @@ import lucee.loader.engine.CFMLEngine;
  * CFML built-in function to clear the ORM session.
  */
 public class ORMClearSession extends BIF {
+    private static final int MIN_ARGUMENTS = 0;
+    private static final int MAX_ARGUMENTS = 1;
 
     public static String call( PageContext pc ) throws PageException {
         return call( pc, null );
@@ -55,6 +57,6 @@ public class ORMClearSession extends BIF {
         if ( args.length == 1 )
             return call( pc, cast.toString( args[ 0 ] ) );
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "ORMClearSession", 0, 1, args.length );
+        throw engine.getExceptionUtil().createFunctionException( pc, "ORMClearSession", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
     }
 }

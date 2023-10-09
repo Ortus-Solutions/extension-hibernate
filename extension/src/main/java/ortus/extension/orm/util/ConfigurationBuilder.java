@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Properties;
 
 import org.hibernate.MappingException;
+import org.hibernate.HibernateException;
 import org.hibernate.boot.registry.BootstrapServiceRegistry;
 import org.hibernate.boot.registry.BootstrapServiceRegistryBuilder;
 import org.hibernate.cache.ehcache.internal.EhcacheRegionFactory;
@@ -124,6 +125,12 @@ public class ConfigurationBuilder {
                         datasourceCreds.get( "PASSWORD" ) ) );
             }
 
+            /**
+             * Disable Hibernate's nullability check which prevents the onPreInsert() from firing...
+             * then manually run a nullability check from the event handler.
+             */
+            configuration.setProperty( AvailableSettings.CHECK_NULLABILITY, "false" );
+
             addProperty( AvailableSettings.CONNECTION_PROVIDER, this.connectionProvider );
         }
 
@@ -131,16 +138,20 @@ public class ConfigurationBuilder {
         Resource conf = ormConf.getOrmConfig();
         if ( conf != null ) {
             try {
-                Document doc = CommonUtil.toDocument( conf, null );
-                configuration.configure( doc );
-            } catch ( Exception e ) {
+                configuration.configure( (File) conf );
+            } catch ( HibernateException e ) {
                 log.log( Log.LEVEL_ERROR, "hibernate", e );
-
+                /**
+                 * @TODO: Next major bump, enable this throw
+                 * 
+                 * String configError = String.format( "Failure loading custom Hibernate config file: '%s'", conf.getName() );
+                 * throw new RuntimeException( configError, e );
+                 */
             }
         }
 
         try {
-            configuration.addInputStream( new ByteArrayInputStream( xmlMappings.getBytes( "UTF-8" ) ) );
+            configuration.addInputStream( new ByteArrayInputStream( xmlMappings.getBytes( StandardCharsets.UTF_8 ) ) );
         } catch ( MappingException me ) {
             throw ExceptionUtil.createException( data, null, me );
         }

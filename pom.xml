@@ -327,7 +327,17 @@ lucee-core-version: ${minLuceeVersion}
                <groupId>org.glassfish.jaxb</groupId>
                <artifactId>txw2</artifactId>
             </exclusion>
+            <exclusion>
+               <groupId>net.sf.ehcache</groupId>
+               <artifactId>ehcache</artifactId>
+            </exclusion>
          </exclusions>
+      </dependency>
+
+      <dependency>
+         <groupId>net.sf.ehcache.internal</groupId>
+         <artifactId>ehcache-core</artifactId>
+         <version>2.10.9.2</version>
       </dependency>
 
       <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
@@ -348,6 +358,10 @@ lucee-core-version: ${minLuceeVersion}
 
 
    <repositories>
+      <repository>
+         <id>terracotta</id>
+         <url>https://repo.terracotta.org/maven2/</url>
+      </repository>
       <repository>
          <id>maven</id>
          <url>https://repo1.maven.org/maven2/</url>

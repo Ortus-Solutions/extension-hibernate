@@ -17,8 +17,9 @@ import org.hibernate.tuple.Instantiator;
 import org.hibernate.tuple.entity.AbstractEntityTuplizer;
 import org.hibernate.tuple.entity.EntityMetamodel;
 import org.hibernate.type.Type;
-import ortus.extension.orm.HBMCreator;
+
 import ortus.extension.orm.HibernateCaster;
+import ortus.extension.orm.mapping.HBMCreator;
 import ortus.extension.orm.tuplizer.accessors.CFCGetter;
 import ortus.extension.orm.tuplizer.accessors.CFCSetter;
 import ortus.extension.orm.tuplizer.proxy.CFCHibernateProxyFactory;

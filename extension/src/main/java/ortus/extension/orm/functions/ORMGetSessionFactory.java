@@ -26,6 +26,8 @@ import lucee.runtime.exp.PageException;
 import lucee.runtime.ext.function.BIF;
 
 public class ORMGetSessionFactory extends BIF {
+    private static final int MIN_ARGUMENTS = 0;
+    private static final int MAX_ARGUMENTS = 1;
 
     private static final long serialVersionUID = -8739815940242857106L;
 

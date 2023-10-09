@@ -163,8 +163,12 @@ component extends="testbox.system.BaseSpec" {
 				} );
 			} );
 
-			describe( "transaction isolation", () => {
-				it( "uh, doesn't error", () => {
+			xdescribe( "transaction isolation", () => {
+				/**
+				 * From Lucee source: `core/src/main/java/lucee/runtime/tag/Transaction.java`
+				 * [read_uncommitted,read_committed,repeatable_read,serializable]
+				 */
+				xit( "serializable", () => {
 					transaction isolation="serializable" {
 						myEntity = entityNew(
 							"Auto",
@@ -180,6 +184,21 @@ component extends="testbox.system.BaseSpec" {
 					expect(
 						queryExecute( "SELECT * FROM Auto WHERE id=:id", { id : myEntity.getId() } ).recordCount
 					).toBe( 1 );
+				} );
+
+				// @TODO: Implement!
+				xit( "read_uncommitted", () => {
+					expect( false ).toBeTrue();
+				} );
+
+				// @TODO: Implement!
+				xit( "repeatable_read", () => {
+					expect( false ).toBeTrue();
+				} );
+
+				// @TODO: Implement!
+				xit( "snapshot", () => {
+					expect( false ).toBeTrue();
 				} );
 			} );
 		} )

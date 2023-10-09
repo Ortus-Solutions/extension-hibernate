@@ -31,7 +31,7 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    needs: [ tests, changelog ]
+    needs: [ tests ]
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     steps:
       - uses: actions/checkout@v3
@@ -65,17 +65,15 @@ jobs:
           fi
 
       - name: Update changelog [unreleased] with latest version
-        if: env.SNAPSHOT == 'false'
         uses: thomaseizinger/keep-a-changelog-new-release@1.3.0
-        if: "steps.changelog_check.outputs.HAS_VERSION == 'false' && !env.SNAPSHOT"
+        if: "steps.changelog_check.outputs.HAS_VERSION == 'false' && env.SNAPSHOT == 'false'"
         with:
           changelogPath: ./CHANGELOG.md
           tag: ${{ env.EXTENSION_VERSION }}
 
       - name: Commit Changelog
-        if: env.SNAPSHOT == 'false'
         uses: EndBug/add-and-commit@v9.1.1
-        if: "steps.changelog_check.outputs.HAS_VERSION == 'false' && !env.SNAPSHOT"
+        if: "steps.changelog_check.outputs.HAS_VERSION == 'false' && env.SNAPSHOT == 'false'"
         with:
           author_name: Github Actions
           author_email: info@ortussolutions.com

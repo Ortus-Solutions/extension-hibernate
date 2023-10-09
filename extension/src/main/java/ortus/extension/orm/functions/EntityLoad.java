@@ -35,6 +35,8 @@ import lucee.loader.engine.CFMLEngine;
  * CFML built-in function to load an ORM entity or entities by ID or criteria
  */
 public class EntityLoad extends BIF {
+    private static final int MIN_ARGUMENTS = 1;
+    private static final int MAX_ARGUMENTS = 4;
 
     public static Object call( PageContext pc, String name ) throws PageException {
 
@@ -102,6 +104,6 @@ public class EntityLoad extends BIF {
         if ( args.length == 4 )
             return call( pc, cast.toString( args[ 0 ] ), args[ 1 ], args[ 2 ], args[ 3 ] );
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "EntityLoad", 1, 4, args.length );
+        throw engine.getExceptionUtil().createFunctionException( pc, "EntityLoad", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
     }
 }

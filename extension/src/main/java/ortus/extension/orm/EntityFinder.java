@@ -182,7 +182,7 @@ public class EntityFinder {
      * @res Lucee Resource (file object) for a possible CFML component.
      */
     private PageSource getPageSource( PageContext pc, Mapping cfclocation, Resource res ) {
-        // MUST still a bad solution
+        // @TODO: still a bad solution
         PageSource ps = pc.toPageSource( res, null );
         if ( ps == null || ps.getComponentName().indexOf( ".." ) != -1 ) {
             PageSource ps2 = null;

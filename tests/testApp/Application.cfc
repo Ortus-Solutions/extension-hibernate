@@ -4,6 +4,14 @@ component {
 	this.mappings[ "models" ]        = "/tests/models";
 	this.mappings[ "luceeTestRoot" ] = this.mappings[ "testsRoot" ] & "/specs/luceeTests";
 
+	this.xmlFeatures = {
+		externalGeneralEntities                                : true,
+		secure                                                 : false,
+		// The disallowDoctypeDecl alias is broken in Lucee, so we need to use the full feature string name
+		// https://luceeserver.atlassian.net/browse/LDEV-4651
+		// disallowDoctypeDecl     : false,
+		"http://apache.org/xml/features/disallow-doctype-decl" : false
+	};
 	this.datasources[ "h2_HRdb" ] = {
 		class            : "org.h2.Driver",
 		bundleName       : "org.lucee.h2",

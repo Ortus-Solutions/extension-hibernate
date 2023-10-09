@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ortus.extension.orm.event.EventListenerIntegrator;
+import ortus.extension.orm.mapping.HBMCreator;
 import ortus.extension.orm.tuplizer.AbstractEntityTuplizerImpl;
 import ortus.extension.orm.util.CommonUtil;
 import ortus.extension.orm.util.ExceptionUtil;
@@ -336,7 +337,7 @@ public class HibernateORMEngine implements ORMEngine {
 
     @Override
     public int getMode() {
-        // MUST impl
+        // @TODO: implement
         return MODE_LAZY;
     }
 

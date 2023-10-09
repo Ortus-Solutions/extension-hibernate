@@ -32,6 +32,8 @@ import lucee.loader.engine.CFMLEngine;
  * CFML built-in function to reload an ORM entity.
  */
 public class EntityReload extends BIF {
+    private static final int MIN_ARGUMENTS = 1;
+    private static final int MAX_ARGUMENTS = 1;
 
     public static String call( PageContext pc, Object obj ) throws PageException {
         ORMSession session = ORMUtil.getSession( pc );
@@ -46,6 +48,6 @@ public class EntityReload extends BIF {
         if ( args.length == 1 )
             return call( pc, args[ 0 ] );
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "EntityReload", 1, 1, args.length );
+        throw engine.getExceptionUtil().createFunctionException( pc, "EntityReload", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
     }
 }

@@ -41,6 +41,8 @@ import lucee.loader.engine.CFMLEngine;
  * CFML built-in function to create a new instance of a Hibernate session entity.
  */
 public class EntityNew extends BIF {
+    private static final int MIN_ARGUMENTS = 1;
+    private static final int MAX_ARGUMENTS = 2;
 
     public static Object call( PageContext pc, String name ) throws PageException {
         return call( pc, name, null );
@@ -92,6 +94,6 @@ public class EntityNew extends BIF {
         if ( args.length == 2 )
             return call( pc, cast.toString( args[ 0 ] ), cast.toStruct( args[ 1 ] ) );
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "EntityNew", 1, 2, args.length );
+        throw engine.getExceptionUtil().createFunctionException( pc, "EntityNew", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
     }
 }

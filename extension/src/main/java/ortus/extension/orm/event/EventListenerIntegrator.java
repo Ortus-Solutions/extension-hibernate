@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 import org.hibernate.HibernateException;
 import org.hibernate.boot.Metadata;
+import org.hibernate.engine.internal.Nullability;
+import org.hibernate.engine.internal.Nullability.NullabilityCheckType;
 import org.hibernate.engine.spi.SessionFactoryImplementor;
 import org.hibernate.event.service.spi.EventListenerRegistry;
 import org.hibernate.event.spi.AbstractEvent;
@@ -45,8 +47,8 @@ import org.hibernate.service.spi.SessionFactoryServiceRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ortus.extension.orm.HBMCreator;
 import ortus.extension.orm.HibernateCaster;
+import ortus.extension.orm.mapping.CFConstants;
 import ortus.extension.orm.util.CommonUtil;
 
 import lucee.loader.engine.CFMLEngine;
@@ -152,8 +154,13 @@ public class EventListenerIntegrator
         fireOnEntity( event.getEntity(), EventListenerIntegrator.PRE_INSERT, event, null );
 
         Component entity = CommonUtil.toComponent( event.getEntity(), null );
+        Object[] stateValues = event.getState();
         if ( entity != null )
-            persistEntityChangesToState( event.getState(), propertyNames, entity );
+            persistEntityChangesToState( stateValues, propertyNames, entity );
+
+        new Nullability(event.getSession())
+            .checkNullability(stateValues, event.getPersister(), NullabilityCheckType.CREATE);
+        
         return false;
     }
 
@@ -190,8 +197,11 @@ public class EventListenerIntegrator
 
         fireOnEntity( event.getEntity(), EventListenerIntegrator.PRE_UPDATE, event, oldState );
         Component entity = CommonUtil.toComponent( event.getEntity(), null );
+        Object[] stateValues = event.getState();
         if ( entity != null )
-            persistEntityChangesToState( event.getState(), propertyNames, entity );
+            persistEntityChangesToState( stateValues, propertyNames, entity );
+        new Nullability(event.getSession())
+            .checkNullability(stateValues, event.getPersister(), NullabilityCheckType.CREATE);
         return false;
     }
 
@@ -398,7 +408,7 @@ public class EventListenerIntegrator
             logger.atDebug().log( String.format( "persisting entity state changes on state properties %s", Arrays.toString(stateProperties) ) );
         }
         try {
-            Property[] properties = entity.getProperties( true, false, false, false );
+            Property[] properties = entity.getProperties( true, true, false, false );
             if ( logger.isDebugEnabled() ){
                 String propNames = Arrays.stream(properties).map( el -> el.getName()).collect(Collectors.joining(","));
                 logger.atDebug().log( String.format( "persisting entity state changes for entity properties %s", propNames ) );
@@ -414,7 +424,6 @@ public class EventListenerIntegrator
                 if ( property.isPresent() ) {
                     Property theprop = property.get();
                     Object value = entity.getComponentScope().get( CommonUtil.createKey( theprop.getName() ), null );
-                    // Object value = theprop.getValue();
                     if ( value != null ) {
                         state[ n ] = HibernateCaster.toHibernateValue( entity, theprop );
                     }
@@ -429,6 +438,6 @@ public class EventListenerIntegrator
     private boolean isRelationshipField( Property prop ){
         Struct meta = (Struct) prop.getMetaData();
         String fieldType = CommonUtil.toString( meta.get( CommonUtil.FIELDTYPE, null ), null );
-        return fieldType != null && HBMCreator.Relationships.isRelationshipType(fieldType);
+        return fieldType != null && CFConstants.Relationships.isRelationshipType(fieldType);
     }
 }

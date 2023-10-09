@@ -135,6 +135,12 @@ public class ExceptionUtil {
             throw ( ThreadDeath ) t; // never catch a ThreadDeath
     }
 
+    /**
+     * Look upwards through an exception to find the root exception cause.
+     * 
+     * @param t Thrown exception
+     * @return The root exception
+     */
     private static Throwable unwrap( Throwable t ) {
         if ( t == null )
             return t;
@@ -146,9 +152,7 @@ public class ExceptionUtil {
     }
 
     /**
-     * TODO: Move to ExceptionUtil.
-     * 
-     * @param t
+     * @param t Throwable exception
      * 
      * @return
      */

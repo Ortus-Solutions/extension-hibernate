@@ -12,6 +12,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.collection.spi.PersistentCollection;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.type.Type;
+
+import ortus.extension.orm.mapping.HBMCreator;
+import ortus.extension.orm.mapping.CFConstants;
 import ortus.extension.orm.util.CommonUtil;
 import ortus.extension.orm.util.ExceptionUtil;
 import ortus.extension.orm.util.HibernateUtil;
@@ -88,7 +91,7 @@ public class HibernateCaster {
 
     private static String getName( Component cfc ) {
         String name = null;
-        // MUSTMUST cfc.getName() should return the real case, this should not be needed
+        // @TODO: cfc.getName() should return the real case, this should not be needed
         name = cfc.getPageSource().getDisplayPath();
         name = CommonUtil.last( name, "\\/" );
         int index = name.lastIndexOf( '.' );
@@ -603,7 +606,7 @@ public class HibernateCaster {
                 if ( obj instanceof Struct ) {
                     sct       = ( Struct ) obj;
                     fieldType = CommonUtil.toString( sct.get( CommonUtil.FIELDTYPE, null ), null );
-                    if ( HBMCreator.Relationships.isRelationshipType(fieldType)){
+                    if ( CFConstants.Relationships.isRelationshipType(fieldType)){
                         continue;
                     }
 
@@ -668,7 +671,7 @@ public class HibernateCaster {
             String entityName ) throws PageException {
         if ( getEntityName( child ).equalsIgnoreCase( entityName ) )
             return populateQuery( pc, session, child, qry );
-        return inheritance( pc, session, child, qry, entityName );// MUST geh ACF auch so tief?
+        return inheritance( pc, session, child, qry, entityName );// @TODO: geh ACF auch so tief?
     }
 
     public static Component toComponent( Object obj ) throws PageException {
