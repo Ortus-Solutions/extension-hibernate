@@ -42,8 +42,13 @@ public class ORMGetSessionFactory extends BIF {
 
     @Override
     public Object invoke( PageContext pc, Object[] args ) throws PageException {
+        CFMLEngine engine = CFMLEngineFactory.getInstance();
+
         if ( args.length == 0 )
             return call( pc );
-        return call( pc, CommonUtil.toString( args[ 0 ] ) );
+        if ( args.length == 1 )
+            return call( pc, CommonUtil.toString( args[ 0 ] ) );
+
+        throw engine.getExceptionUtil().createFunctionException( pc, "ORMGetSessionFactory", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
     }
 }
