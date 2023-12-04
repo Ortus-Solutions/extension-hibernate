@@ -5,15 +5,25 @@ component accessors="true" persistent="true" {
 		type     ="string"
 		fieldtype="id"
 		ormtype  ="string";
-	property name="make"     type="string";
-	property name="model"    type="string";
-	property name="dealer"
+	property name="make"  type="string";
+	property name="model" type="string";
+	property
+		name     ="dealer"
 		fieldtype="many-to-one"
-		cfc="Dealership"
-		fkcolumn="dealerID";
-	property name="inserted" type="boolean" default="false";
-	property name="updated" type="boolean" default="false";
-	property name="nonPersistentProp" type="string" persistent="false";
+		cfc      ="Dealership"
+		fkcolumn ="dealerID";
+	property
+		name   ="inserted"
+		type   ="boolean"
+		default="false";
+	property
+		name   ="updated" 
+		type   ="boolean"
+		default="false";
+	property
+		name      ="nonPersistentProp"
+		type      ="string"
+		persistent="false";
 
 	this.name = "Auto";
 

@@ -5,9 +5,15 @@ component persistent="true" cacheUse="read-write" {
 		type     ="string"
 		fieldtype="id"
 		ormtype  ="string";
-	property name="name"     type="string";
-	property name="username" type="string" notnull="true";
-	property name="password" type="string" notnull="true";
+	property name="name" type="string";
+	property
+		name   ="username"
+		type   ="string"
+		notnull="true";
+	property
+		name   ="password"
+		type   ="string"
+		notnull="true";
 	property
 		name     ="createdOn"
 		ormtype  ="datetime"
@@ -20,14 +26,15 @@ component persistent="true" cacheUse="read-write" {
 
 	function preInsert(){
 		setDateCreated( now() );
-		if ( isNull( getPassword() ) ){
+		if ( isNull( getPassword() ) ) {
 			setPassword( createUUID() );
 		}
 	}
 	function preUpdate(){
 		setDateUpdated( now() );
-		if ( isNull( getPassword() ) ){
+		if ( isNull( getPassword() ) ) {
 			setPassword( createUUID() );
 		}
 	}
+
 }
