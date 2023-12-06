@@ -6,14 +6,16 @@ component extends="testbox.system.BaseSpec" {
 		entitySave( variables.testDealer );
 		ormFlush();
 
-		queryExecute( "
+		queryExecute(
+			"
 			INSERT INTO `Auto`( id, make, model, dealerID, inserted )
 			VALUES
 				( '#createUUID()#', 'Ford', 'Fusion', '#variables.testDealer.getId()#', true ),
 				( '#createUUID()#', 'Ford', 'Focus', '#variables.testDealer.getId()#', true ),
 				( '#createUUID()#', 'Ford', 'Mustang', null, true ),
 				( '#createUUID()#', 'Ford', 'F-150', null, true )
-		" );
+		"
+		);
 	}
 
 	public void function run(){
