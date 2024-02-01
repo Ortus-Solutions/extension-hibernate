@@ -8,6 +8,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Define ORM entity mapping constants for Hibernate and ColdFusion.
+ * <p>
+ * For example, the Hibernate mapping file (hbm.xml) uses the "lazy" attribute to define the lazy-loading Hibernate should use when fetching a
+ * relationship. The possible values to use are defined in the `CFConstants.Lazy` class, such that we can get all possible values via
+ * `CFConstants.Lazy.getPossibleValues()`, or check if a given value is valid via `CFConstants.Lazy.isValidValue( value )`.
+ * <p>
+ * Hence, this class as a whole serves to encapsulate HBM mapping constants and provide a single point of reference for all possible values.
+ */
 public final class CFConstants {
 
 	private CFConstants() {
