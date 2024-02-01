@@ -1,4 +1,5 @@
 # Editor and OS artifacts
+.idea/
 .DS_Store
 **/.svn/
 /*.project
