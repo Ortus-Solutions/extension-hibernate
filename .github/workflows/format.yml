@@ -1,0 +1,45 @@
+name: Format Java and CFML Source Code
+
+on:
+  workflow_call:
+
+env:
+  SNAPSHOT: ${{ github.ref_name != 'main' && github.ref_name != 'master' }}
+
+jobs:
+  formatJava:
+    runs-on: ubuntu-latest
+    if: ${{ env.SNAPSHOT == 'true' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+
+      - name: Validate Java format
+        run: mvn --batch-mode -f pom.xml formatter:validate
+
+      - name: Commit Java Formatting Changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: '👌 IMPROVE: Apply mvn formatter:format changes - [ci skip]'
+
+  formatCFML:
+    runs-on: ubuntu-latest
+    needs: [ formatJava ]
+    if: ${{ env.SNAPSHOT == 'true' }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - uses: Ortus-Solutions/commandbox-action@v1.0.3
+        with:
+          cmd: run-script format
+
+      - name: Commit Format Changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: '👌 IMPROVE: Apply cfformat changes - [ci skip]'
