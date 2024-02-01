@@ -1,149 +1,148 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-   <modelVersion>4.0.0</modelVersion>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-   <groupId>ortus.extension</groupId>
-   <artifactId>orm-extension</artifactId>
-   <version>6.5.0</version>
-   <packaging>bundle</packaging>
+	<groupId>ortus.extension</groupId>
+	<artifactId>orm-extension</artifactId>
+	<version>6.5.0</version>
+	<packaging>bundle</packaging>
 
-   <name>Ortus ORM Extension</name>
-   <description>A Lucee Extension to provide a native CFML integration with the Hibernate ORM engine.</description>
-   <url>https://forgebox.io/view/D062D72F-F8A2-46F0-8CBC91325B2F067B</url>
+	<name>Ortus ORM Extension</name>
+	<description>A Lucee Extension to provide a native CFML integration with the Hibernate ORM engine.</description>
+	<url>https://forgebox.io/view/D062D72F-F8A2-46F0-8CBC91325B2F067B</url>
 
-   <properties>
-      <name>Ortus ORM Extension</name>
-      <bundlename>orm-extension</bundlename>
-      <id>D062D72F-F8A2-46F0-8CBC91325B2F067B</id>
-      <description>Hibernate ORM (Hibernate in short) is an object-relational mapping library for the Java language, providing a framework for mapping an object-oriented domain model to a traditional relational database. Hibernate solves object-relational impedance mismatch problems by replacing direct persistence-related database accesses with high-level object handling functions.</description>
-      <class>ortus.extension.orm.HibernateORMEngine</class>
+	<properties>
+		<name>Ortus ORM Extension</name>
+		<bundlename>orm-extension</bundlename>
+		<id>D062D72F-F8A2-46F0-8CBC91325B2F067B</id>
+		<description>Hibernate ORM (Hibernate in short) is an object-relational mapping library for the Java language, providing a framework for mapping an object-oriented domain model to a traditional relational database. Hibernate solves object-relational impedance mismatch problems by replacing direct persistence-related database accesses with high-level object handling functions.</description>
+		<class>ortus.extension.orm.HibernateORMEngine</class>
 
-      <!-- Dependency versions -->
-      <minLuceeVersion>5.3.9.73</minLuceeVersion>
+		<!-- Dependency versions -->
+		<minLuceeVersion>5.3.9.73</minLuceeVersion>
 
-      <!-- What version of the JDK should we compile against? -->
-      <maven.compiler.target>1.8</maven.compiler.target>
-      <maven.compiler.source>1.8</maven.compiler.source>
-      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-   </properties>
+		<!-- What version of the JDK should we compile against? -->
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
-   <licenses>
-      <license>
-         <name>The GNU Lesser General Public License, Version 2.1</name>
-         <url>http://www.gnu.org/licenses/lgpl-2.1.txt</url>
-         <distribution>repo</distribution>
-      </license>
-   </licenses>
+	<licenses>
+		<license>
+			<name>The GNU Lesser General Public License, Version 2.1</name>
+			<url>http://www.gnu.org/licenses/lgpl-2.1.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
-   <developers>
-      <developer>
-         <id>lmajano</id>
-         <name>Luis Majano</name>
-         <email>lmajano@ortussolutions.com</email>
-         <organization>Ortus Solutions, Corp.</organization>
-         <organizationUrl>https://www.ortussolutions.com/</organizationUrl>
-         <roles>
-            <role>Project-Administrator</role>
-            <role>Developer</role>
-         </roles>
-         <timezone>+1</timezone>
-      </developer>
-      <developer>
-         <id>michaelborn</id>
-         <name>Michael Born</name>
-         <email>michael@ortussolutions.com</email>
-         <organization>Ortus Solutions, Corp.</organization>
-         <organizationUrl>https://www.ortussolutions.com/</organizationUrl>
-         <roles>
-            <role>Project-Administrator</role>
-            <role>Developer</role>
-         </roles>
-         <timezone>-4</timezone>
-      </developer>
-      <developer>
-         <id>micstriit</id>
-         <name>Michael Offner</name>
-         <email>michael@lucee.org</email>
-         <organization>Lucee Association Switzerland</organization>
-         <organizationUrl>http://lucee.org</organizationUrl>
-         <roles>
-            <role>Developer</role>
-         </roles>
-         <timezone>+1</timezone>
-      </developer>
-   </developers>
+	<developers>
+		<developer>
+			<id>lmajano</id>
+			<name>Luis Majano</name>
+			<email>lmajano@ortussolutions.com</email>
+			<organization>Ortus Solutions, Corp.</organization>
+			<organizationUrl>https://www.ortussolutions.com/</organizationUrl>
+			<roles>
+				<role>Project-Administrator</role>
+				<role>Developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+		<developer>
+			<id>michaelborn</id>
+			<name>Michael Born</name>
+			<email>michael@ortussolutions.com</email>
+			<organization>Ortus Solutions, Corp.</organization>
+			<organizationUrl>https://www.ortussolutions.com/</organizationUrl>
+			<roles>
+				<role>Project-Administrator</role>
+				<role>Developer</role>
+			</roles>
+			<timezone>-4</timezone>
+		</developer>
+		<developer>
+			<id>micstriit</id>
+			<name>Michael Offner</name>
+			<email>michael@lucee.org</email>
+			<organization>Lucee Association Switzerland</organization>
+			<organizationUrl>http://lucee.org</organizationUrl>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
 
-   <build>
-      <directory>${project.basedir}/target</directory>
-      <sourceDirectory>${project.basedir}/extension/src/main/java/</sourceDirectory>
-      <testSourceDirectory>${project.basedir}/extension/src/test/java/</testSourceDirectory>
-      <plugins>
+	<build>
+		<directory>${project.basedir}/target</directory>
+		<sourceDirectory>${project.basedir}/extension/src/main/java/</sourceDirectory>
+		<testSourceDirectory>${project.basedir}/extension/src/test/java/</testSourceDirectory>
+		<plugins>
 
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>3.4.1</version>
-            <executions>
-               <execution>
-                  <id>attach-javadocs</id>
-                  <goals>
-                     <goal>jar</goal>
-                  </goals>
-               </execution>
-            </executions>
-            <configuration>
-               <reportOutputDirectory>${project.build.directory}/apidocs</reportOutputDirectory>
-               <additionalparam>-Xdoclint:none</additionalparam>
-               <failOnError>false</failOnError>
-            </configuration>
-         </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.4.1</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<reportOutputDirectory>${project.build.directory}/apidocs</reportOutputDirectory>
+					<additionalparam>-Xdoclint:none</additionalparam>
+					<failOnError>false</failOnError>
+				</configuration>
+			</plugin>
 
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.3</version>
-         </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+			</plugin>
 
-         <plugin>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>maven-bundle-plugin</artifactId>
-            <version>5.1.8</version>
-            <extensions>true</extensions>
-            <configuration>
-               <instructions>
-                  <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-                  <Bundle-Name>${project.artifactId}</Bundle-Name>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>5.1.8</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-Name>${project.artifactId}</Bundle-Name>
 
-                  <!--
+						<!--
                      Embed all dependencies inline, EXCEPT:
                      1. ehcache as it requires a certain package structure
                      2. jtaextensions as it is an optional dependency
                      https://felix.apache.org/documentation/subprojects/apache-felix-maven-bundle-plugin-bnd.html#_embedding_dependencies
                   -->
-                  <Embed-Dependency>*;scope=compile|runtime;inline=true;artifactId=!jtaextensions</Embed-Dependency>
-                  <Embed-Transitive>true</Embed-Transitive>
-                  <!-- Empty imports, because most dependencies are inlined.-->
-                  <Import-Package>javax.transaction.*</Import-Package>
-                  <Private-Package>ortus.extension.orm</Private-Package>
-                  <Require-Bundle>org.lucee.xml.apis;bundle-version=1.4.1</Require-Bundle>
+						<Embed-Dependency>*;scope=compile|runtime;inline=true;artifactId=!jtaextensions</Embed-Dependency>
+						<Embed-Transitive>true</Embed-Transitive>
+						<!-- Empty imports, because most dependencies are inlined.-->
+						<Import-Package>javax.transaction.*</Import-Package>
+						<Private-Package>ortus.extension.orm</Private-Package>
+						<Require-Bundle>org.lucee.xml.apis;bundle-version=1.4.1</Require-Bundle>
 
-                  <!-- The extension version, used in ExtensionUtil -->
-                  <Specification-Version>${project.version}</Specification-Version>
+						<!-- The extension version, used in ExtensionUtil -->
+						<Specification-Version>${project.version}</Specification-Version>
 
-                  <!-- The Hibernate version, used in org.hibernate.Version  -->
-                  <Implementation-Version>5.6.15.Final</Implementation-Version>
-                  <!-- 
+						<!-- The Hibernate version, used in org.hibernate.Version  -->
+						<Implementation-Version>5.6.15.Final</Implementation-Version>
+						<!-- 
                         See:
                         https://liferay.dev/blogs/-/blogs/osgi-and-java-package-imports
                         https://bnd.bndtools.org/instructions/noimportjava.html
                      -->
-                  <_noimportjava>true</_noimportjava>
-               </instructions>
-            </configuration>
-         </plugin>
+						<_noimportjava>true</_noimportjava>
+					</instructions>
+				</configuration>
+			</plugin>
 
-         <!--
+			<!--
             Generate the top-level MANIFEST.MF containing properties for this extension.
 
             Turns out using the NAME attribute for the lucee extension name breaks the jar manifest spec. 🤦‍♂️
@@ -153,20 +152,20 @@
             Thus, we have to manually echo this stuff to a custom extension manifest file,
             then use the maven assembly plugin to copy that file into the resulting .lex extension.
          -->
-         <plugin>
-            <groupId>com.github.ekryd.echo-maven-plugin</groupId>
-            <artifactId>echo-maven-plugin</artifactId>
-            <version>1.3.2</version>
-            <inherited>false</inherited>
-            <executions>
-               <execution>
-                  <id>append-manifest-entries</id>
-                  <phase>package</phase>
-                  <goals>
-                     <goal>echo</goal>
-                  </goals>
-                  <configuration>
-                     <message>
+			<plugin>
+				<groupId>com.github.ekryd.echo-maven-plugin</groupId>
+				<artifactId>echo-maven-plugin</artifactId>
+				<version>1.3.2</version>
+				<inherited>false</inherited>
+				<executions>
+					<execution>
+						<id>append-manifest-entries</id>
+						<phase>package</phase>
+						<goals>
+							<goal>echo</goal>
+						</goals>
+						<configuration>
+							<message>
 Manifest-Version: 1.0
 name: ${name}
 id: ${id}
@@ -174,205 +173,205 @@ description: ${description}
 version: ${project.version}
 orm: [{'class':'${class}','name':'${project.artifactId}','version':'${project.version}'}]
 lucee-core-version: ${minLuceeVersion}
-                     </message>
-                     <!-- warning: this plugin appears to wrongly interpolate properties,
+							</message>
+							<!-- warning: this plugin appears to wrongly interpolate properties,
                      so ${project.build.directory} ends up creating the full /home/user/path INSIDE this current
                      directory.
                      The best workaround appears to be not using those properties, and hardcoding a RELATIVE path
                      instead.-->
-                     <toFile>target/META-INF/MANIFEST.MF</toFile>
-                     <append>true</append>
-                  </configuration>
-               </execution>
-            </executions>
-         </plugin>
+							<toFile>target/META-INF/MANIFEST.MF</toFile>
+							<append>true</append>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 
-         <plugin>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <executions>
-               <execution>
-                  <phase>package</phase>
-                  <goals>
-                     <goal>single</goal>
-                  </goals>
-               </execution>
-            </executions>
-            <configuration>
-               <!--
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!--
                   Since Lucee's MANIFEST.MF is incompat with Java's manifest spec,
                   the Maven Archiver will strip a bunch of entries. Hence, we can't use this option.
                <archive>
                   <manifestFile>${project.basedir}/src/main/extension/META-INF/MANIFEST.MF</manifestFile>
                </archive> -->
-               <descriptors>
-                  <descriptor>build/assemble.xml</descriptor>
-               </descriptors>
-            </configuration>
-         </plugin>
+					<descriptors>
+						<descriptor>build/assemble.xml</descriptor>
+					</descriptors>
+				</configuration>
+			</plugin>
 
-         <!-- https://stackoverflow.com/a/26638952 -->
-         <!--
+			<!-- https://stackoverflow.com/a/26638952 -->
+			<!--
             Rename the .zip archive to a Lucee-friendly .lex file extension
          -->
-         <plugin>
-            <groupId>com.coderplus.maven.plugins</groupId>
-            <artifactId>copy-rename-maven-plugin</artifactId>
-            <version>1.0.1</version>
-            <executions>
-               <execution>
-                  <id>copy-file</id>
-                  <phase>package</phase>
-                  <goals>
-                     <goal>rename</goal>
-                  </goals>
-                  <configuration>
-                     <sourceFile>${project.build.directory}/${project.build.finalName}-lex.zip</sourceFile>
-                     <destinationFile>${project.build.directory}/ortus_orm_${project.version}.lex</destinationFile>
-                  </configuration>
-               </execution>
-            </executions>
-         </plugin>
+			<plugin>
+				<groupId>com.coderplus.maven.plugins</groupId>
+				<artifactId>copy-rename-maven-plugin</artifactId>
+				<version>1.0.1</version>
+				<executions>
+					<execution>
+						<id>copy-file</id>
+						<phase>package</phase>
+						<goals>
+							<goal>rename</goal>
+						</goals>
+						<configuration>
+							<sourceFile>${project.build.directory}/${project.build.finalName}-lex.zip</sourceFile>
+							<destinationFile>${project.build.directory}/ortus_orm_${project.version}.lex</destinationFile>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <version>3.6.0</version>
-            <executions>
-               <execution>
-                  <id>download</id>
-                  <phase>package</phase>
-                  <goals>
-                     <goal>copy-dependencies</goal>
-                  </goals>
-                  <configuration>
-                     <classifier>sources</classifier>
-                     <overWrite>true</overWrite>
-                     <includeScope>compile</includeScope>
-                  </configuration>
-               </execution>
-            </executions>
-         </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.6.0</version>
+				<executions>
+					<execution>
+						<id>download</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<classifier>sources</classifier>
+							<overWrite>true</overWrite>
+							<includeScope>compile</includeScope>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 
-      </plugins>
+		</plugins>
 
-   </build>
+	</build>
 
 
-   <dependencyManagement>
-      <dependencies>
-         <dependency>
-            <groupId>org.junit</groupId>
-            <artifactId>junit-bom</artifactId>
-            <version>5.9.2</version>
-            <type>pom</type>
-            <scope>import</scope>
-         </dependency>
-      </dependencies>
-   </dependencyManagement>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.junit</groupId>
+				<artifactId>junit-bom</artifactId>
+				<version>5.9.2</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
-   <dependencies>
-      <dependency>
-         <groupId>org.junit.jupiter</groupId>
-         <artifactId>junit-jupiter</artifactId>
-         <version>5.9.2</version>
-         <scope>test</scope>
-      </dependency>
+	<dependencies>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>5.9.2</version>
+			<scope>test</scope>
+		</dependency>
 
-      <dependency>
-         <groupId>org.mockito</groupId>
-         <artifactId>mockito-inline</artifactId>
-         <version>4.0.0</version>
-         <scope>test</scope>
-      </dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-inline</artifactId>
+			<version>4.0.0</version>
+			<scope>test</scope>
+		</dependency>
 
-      <dependency>
-         <groupId>org.mockito</groupId>
-         <artifactId>mockito-junit-jupiter</artifactId>
-         <version>4.0.0</version>
-         <scope>test</scope>
-      </dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-junit-jupiter</artifactId>
+			<version>4.0.0</version>
+			<scope>test</scope>
+		</dependency>
 
-      <!-- https://mvnrepository.com/artifact/org.lucee/lucee -->
-      <dependency>
-         <groupId>org.lucee</groupId>
-         <artifactId>lucee</artifactId>
-         <version>5.4.4.38</version>
-         <!-- https://www.baeldung.com/maven-dependency-scopes#2-provided -->
-         <scope>provided</scope>
-      </dependency>
+		<!-- https://mvnrepository.com/artifact/org.lucee/lucee -->
+		<dependency>
+			<groupId>org.lucee</groupId>
+			<artifactId>lucee</artifactId>
+			<version>5.4.4.38</version>
+			<!-- https://www.baeldung.com/maven-dependency-scopes#2-provided -->
+			<scope>provided</scope>
+		</dependency>
 
-      <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-      <dependency>
-         <groupId>org.hibernate</groupId>
-         <artifactId>hibernate-core</artifactId>
-         <version>5.6.15.Final</version>
-      </dependency>
-      <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-jcache -->
-      <!-- <dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.6.15.Final</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-jcache -->
+		<!-- <dependency>
          <groupId>org.hibernate</groupId>
          <artifactId>hibernate-jcache</artifactId>
          <version>5.6.15.Final</version>
       </dependency> -->
 
-      <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-ehcache -->
-      <dependency>
-         <groupId>org.hibernate</groupId>
-         <artifactId>hibernate-ehcache</artifactId>
-         <version>5.6.15.Final</version>
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-ehcache -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-ehcache</artifactId>
+			<version>5.6.15.Final</version>
 
-         <!--
+			<!--
          https://maven.apache.org/guides/introduction/introduction-to-optional-and-excludes-dependencies.html#how-to-use-dependency-exclusions -->
-         <exclusions>
-            <exclusion>
-               <groupId>org.glassfish.jaxb</groupId>
-               <artifactId>txw2</artifactId>
-            </exclusion>
-            <exclusion>
-               <groupId>net.sf.ehcache</groupId>
-               <artifactId>ehcache</artifactId>
-            </exclusion>
-         </exclusions>
-      </dependency>
+			<exclusions>
+				<exclusion>
+					<groupId>org.glassfish.jaxb</groupId>
+					<artifactId>txw2</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>net.sf.ehcache</groupId>
+					<artifactId>ehcache</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
-      <dependency>
-         <groupId>net.sf.ehcache.internal</groupId>
-         <artifactId>ehcache-core</artifactId>
-         <version>2.10.9.2</version>
-      </dependency>
+		<dependency>
+			<groupId>net.sf.ehcache.internal</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>2.10.9.2</version>
+		</dependency>
 
-      <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-      <dependency>
-         <groupId>org.slf4j</groupId>
-         <artifactId>slf4j-api</artifactId>
-         <version>2.0.7</version>
-      </dependency>
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>2.0.7</version>
+		</dependency>
 
-      <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
-      <dependency>
-         <groupId>ch.qos.logback</groupId>
-         <artifactId>logback-classic</artifactId>
-         <version>1.3.14</version>
-      </dependency>
+		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.3.14</version>
+		</dependency>
 
-   </dependencies>
+	</dependencies>
 
 
-   <repositories>
-      <repository>
-         <id>terracotta</id>
-         <url>https://repo.terracotta.org/maven2/</url>
-      </repository>
-      <repository>
-         <id>maven</id>
-         <url>https://repo1.maven.org/maven2/</url>
-      </repository>
-   </repositories>
+	<repositories>
+		<repository>
+			<id>terracotta</id>
+			<url>https://repo.terracotta.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>maven</id>
+			<url>https://repo1.maven.org/maven2/</url>
+		</repository>
+	</repositories>
 
-   <scm>
-      <url>https://github.com/Ortus-Solutions/extension-hibernate</url>
-      <connection>scm:git:git://github.com/Ortus-Solutions/extension-hibernate.git</connection>
-      <developerConnection>scm:git:git@github.com:Ortus-Solutions/extension-hibernate.git</developerConnection>
-      <tag>${project.version}</tag>
-   </scm>
+	<scm>
+		<url>https://github.com/Ortus-Solutions/extension-hibernate</url>
+		<connection>scm:git:git://github.com/Ortus-Solutions/extension-hibernate.git</connection>
+		<developerConnection>scm:git:git@github.com:Ortus-Solutions/extension-hibernate.git</developerConnection>
+		<tag>${project.version}</tag>
+	</scm>
 
 </project>
