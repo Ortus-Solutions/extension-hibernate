@@ -252,6 +252,18 @@ lucee-core-version: ${minLuceeVersion}
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>net.revelc.code.formatter</groupId>
+				<artifactId>formatter-maven-plugin</artifactId>
+				<version>2.23.0</version>
+				<configuration>
+					<configFile>${project.basedir}/extension/ortus-java-style.xml</configFile>
+					<directories>
+						<directory>${project.build.sourceDirectory}</directory>
+						<directory>${project.build.testSourceDirectory}</directory>
+					</directories>
+				</configuration>
+			</plugin>
 
 		</plugins>
 
