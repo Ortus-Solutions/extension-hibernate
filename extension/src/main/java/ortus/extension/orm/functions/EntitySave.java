@@ -32,29 +32,30 @@ import lucee.loader.engine.CFMLEngine;
  * CFML built-in function to persist an entity to the database.
  */
 public class EntitySave extends BIF {
-    private static final int MIN_ARGUMENTS = 1;
-    private static final int MAX_ARGUMENTS = 2;
 
-    public static String call( PageContext pc, Object obj ) throws PageException {
-        return call( pc, obj, false );
-    }
+	private static final int	MIN_ARGUMENTS	= 1;
+	private static final int	MAX_ARGUMENTS	= 2;
 
-    public static String call( PageContext pc, Object obj, boolean forceInsert ) throws PageException {
-        ORMSession session = ORMUtil.getSession( pc );
-        session.save( pc, obj, forceInsert );
-        return null;
-    }
+	public static String call( PageContext pc, Object obj ) throws PageException {
+		return call( pc, obj, false );
+	}
 
-    @Override
-    public Object invoke( PageContext pc, Object[] args ) throws PageException {
-        CFMLEngine engine = CFMLEngineFactory.getInstance();
-        Cast cast = engine.getCastUtil();
+	public static String call( PageContext pc, Object obj, boolean forceInsert ) throws PageException {
+		ORMSession session = ORMUtil.getSession( pc );
+		session.save( pc, obj, forceInsert );
+		return null;
+	}
 
-        if ( args.length == 1 )
-            return call( pc, args[ 0 ] );
-        if ( args.length == 2 )
-            return call( pc, args[ 0 ], cast.toBoolean( args[ 1 ] ) );
+	@Override
+	public Object invoke( PageContext pc, Object[] args ) throws PageException {
+		CFMLEngine	engine	= CFMLEngineFactory.getInstance();
+		Cast		cast	= engine.getCastUtil();
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "EntitySave", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
-    }
+		if ( args.length == 1 )
+			return call( pc, args[ 0 ] );
+		if ( args.length == 2 )
+			return call( pc, args[ 0 ], cast.toBoolean( args[ 1 ] ) );
+
+		throw engine.getExceptionUtil().createFunctionException( pc, "EntitySave", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
+	}
 }

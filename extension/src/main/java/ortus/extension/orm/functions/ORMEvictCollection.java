@@ -33,33 +33,34 @@ import lucee.loader.engine.CFMLEngine;
  * CFML built-in function to evict a collection from the first-level cache (the persistence context).
  */
 public class ORMEvictCollection extends BIF {
-    private static final int MIN_ARGUMENTS = 2;
-    private static final int MAX_ARGUMENTS = 3;
 
-    public static String call( PageContext pc, String entityName, String collectionName ) throws PageException {
-        return call( pc, entityName, collectionName, null );
-    }
+	private static final int	MIN_ARGUMENTS	= 2;
+	private static final int	MAX_ARGUMENTS	= 3;
 
-    public static String call( PageContext pc, String entityName, String collectionName, String primaryKey )
-            throws PageException {
-        ORMSession session = ORMUtil.getSession( pc );
-        if ( Util.isEmpty( primaryKey ) )
-            session.evictCollection( pc, entityName, collectionName );
-        else
-            session.evictCollection( pc, entityName, collectionName, primaryKey );
-        return null;
-    }
+	public static String call( PageContext pc, String entityName, String collectionName ) throws PageException {
+		return call( pc, entityName, collectionName, null );
+	}
 
-    @Override
-    public Object invoke( PageContext pc, Object[] args ) throws PageException {
-        CFMLEngine engine = CFMLEngineFactory.getInstance();
-        Cast cast = engine.getCastUtil();
+	public static String call( PageContext pc, String entityName, String collectionName, String primaryKey )
+	    throws PageException {
+		ORMSession session = ORMUtil.getSession( pc );
+		if ( Util.isEmpty( primaryKey ) )
+			session.evictCollection( pc, entityName, collectionName );
+		else
+			session.evictCollection( pc, entityName, collectionName, primaryKey );
+		return null;
+	}
 
-        if ( args.length == 2 )
-            return call( pc, cast.toString( args[ 0 ] ), cast.toString( args[ 1 ] ) );
-        if ( args.length == 3 )
-            return call( pc, cast.toString( args[ 0 ] ), cast.toString( args[ 1 ] ), cast.toString( args[ 2 ] ) );
+	@Override
+	public Object invoke( PageContext pc, Object[] args ) throws PageException {
+		CFMLEngine	engine	= CFMLEngineFactory.getInstance();
+		Cast		cast	= engine.getCastUtil();
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "ORMEvictCollection", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
-    }
+		if ( args.length == 2 )
+			return call( pc, cast.toString( args[ 0 ] ), cast.toString( args[ 1 ] ) );
+		if ( args.length == 3 )
+			return call( pc, cast.toString( args[ 0 ] ), cast.toString( args[ 1 ] ), cast.toString( args[ 2 ] ) );
+
+		throw engine.getExceptionUtil().createFunctionException( pc, "ORMEvictCollection", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
+	}
 }

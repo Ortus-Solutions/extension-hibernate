@@ -19,59 +19,59 @@ import org.slf4j.LoggerFactory;
  */
 public class LoggingConfigurator {
 
-    /**
-     * The logger factory (slf4j) or logger context (logback) that we'll be configurating.
-     */
-    private LoggerContext loggerContext;
+	/**
+	 * The logger factory (slf4j) or logger context (logback) that we'll be configurating.
+	 */
+	private LoggerContext	loggerContext;
 
-    /**
-     * Enable logging of all SQL queries and parameters.
-     */
-    private Boolean enableSQLLogging;
+	/**
+	 * Enable logging of all SQL queries and parameters.
+	 */
+	private Boolean			enableSQLLogging;
 
-    /**
-     * The default level that Hibernate classes should log at.
-     */
-    private Level defaultLogLevel;
+	/**
+	 * The default level that Hibernate classes should log at.
+	 */
+	private Level			defaultLogLevel;
 
-    public LoggingConfigurator( Level defaultLogLevel, Boolean enableSQLLogging ) {
-        ch.qos.logback.classic.Logger hibernateLogger = ( ch.qos.logback.classic.Logger ) LoggerFactory
-                .getLogger( "org.hibernate" );
+	public LoggingConfigurator( Level defaultLogLevel, Boolean enableSQLLogging ) {
+		ch.qos.logback.classic.Logger hibernateLogger = ( ch.qos.logback.classic.Logger ) LoggerFactory
+		    .getLogger( "org.hibernate" );
 
-        this.loggerContext    = hibernateLogger.getLoggerContext();
-        this.enableSQLLogging = enableSQLLogging;
-        this.defaultLogLevel  = defaultLogLevel;
-    }
+		this.loggerContext		= hibernateLogger.getLoggerContext();
+		this.enableSQLLogging	= enableSQLLogging;
+		this.defaultLogLevel	= defaultLogLevel;
+	}
 
-    public void configure() {
+	public void configure() {
 
-        /**
-         * @TODO: Come up with a sensible way to enable additional logging from a CFML app... not just for development.
-         */
-        Logger extensionLogger = loggerContext.getLogger( "ortus.extension.orm" );
-        extensionLogger.setLevel( Level.OFF );
+		/**
+		 * @TODO: Come up with a sensible way to enable additional logging from a CFML app... not just for development.
+		 */
+		Logger extensionLogger = loggerContext.getLogger( "ortus.extension.orm" );
+		extensionLogger.setLevel( Level.OFF );
 
-        Logger hibernateLogger = loggerContext.getLogger( "org.hibernate" );
-        hibernateLogger.setLevel( defaultLogLevel );
+		Logger hibernateLogger = loggerContext.getLogger( "org.hibernate" );
+		hibernateLogger.setLevel( defaultLogLevel );
 
-        // @TODO: In Hibernate 6, this will be `org.hibernate.orm.jdbc.bind`
-        Logger sqlLogger = loggerContext.getLogger( "org.hibernate.type.descriptor.sql" );
-        sqlLogger.setLevel( getSQLLogLevel() );
+		// @TODO: In Hibernate 6, this will be `org.hibernate.orm.jdbc.bind`
+		Logger sqlLogger = loggerContext.getLogger( "org.hibernate.type.descriptor.sql" );
+		sqlLogger.setLevel( getSQLLogLevel() );
 
-        Logger cacheLogger = loggerContext.getLogger( "org.hibernate.cache" );
-        cacheLogger.setLevel( defaultLogLevel );
+		Logger cacheLogger = loggerContext.getLogger( "org.hibernate.cache" );
+		cacheLogger.setLevel( defaultLogLevel );
 
-        // for some reason, the net.sf.ehcache logs do not go through org.hibernate/org.hibernate.cache.
-        Logger ehcacheLogger = loggerContext.getLogger( "net.sf.ehcache" );
-        ehcacheLogger.setLevel( defaultLogLevel );
+		// for some reason, the net.sf.ehcache logs do not go through org.hibernate/org.hibernate.cache.
+		Logger ehcacheLogger = loggerContext.getLogger( "net.sf.ehcache" );
+		ehcacheLogger.setLevel( defaultLogLevel );
 
-    }
+	}
 
-    public Level getSQLLogLevel() {
-        return Boolean.TRUE.equals( this.enableSQLLogging ) ? Level.DEBUG : Level.ERROR;
-    }
+	public Level getSQLLogLevel() {
+		return Boolean.TRUE.equals( this.enableSQLLogging ) ? Level.DEBUG : Level.ERROR;
+	}
 
-    public Level getDefaultLogLevel() {
-        return defaultLogLevel;
-    }
+	public Level getDefaultLogLevel() {
+		return defaultLogLevel;
+	}
 }

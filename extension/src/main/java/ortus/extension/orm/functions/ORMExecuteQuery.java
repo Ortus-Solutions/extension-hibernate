@@ -42,93 +42,93 @@ import lucee.loader.engine.CFMLEngine;
  */
 public class ORMExecuteQuery extends BIF {
 
-    private static final int MIN_ARGUMENTS = 1;
-    private static final int MAX_ARGUMENTS = 4;
+	private static final int	MIN_ARGUMENTS	= 1;
+	private static final int	MAX_ARGUMENTS	= 4;
 
-    /**
-     * Used in `ORMQueryExecute()` to ensure that "too many args" error messages have the correct method name.
-     */
-    protected String functionName = "ORMExecuteQuery";
+	/**
+	 * Used in `ORMQueryExecute()` to ensure that "too many args" error messages have the correct method name.
+	 */
+	protected String			functionName	= "ORMExecuteQuery";
 
-    public static Object call( PageContext pc, String hql ) throws PageException {
-        return _call( pc, hql, null, false, null );
-    }
+	public static Object call( PageContext pc, String hql ) throws PageException {
+		return _call( pc, hql, null, false, null );
+	}
 
-    public static Object call( PageContext pc, String hql, Object paramsOrUnique ) throws PageException {
-        if ( CommonUtil.isCastableToBoolean( paramsOrUnique ) ) {
-            return _call( pc, hql, null, CommonUtil.toBooleanValue( paramsOrUnique ), null );
-        }
-        return _call( pc, hql, paramsOrUnique, false, null );
-    }
+	public static Object call( PageContext pc, String hql, Object paramsOrUnique ) throws PageException {
+		if ( CommonUtil.isCastableToBoolean( paramsOrUnique ) ) {
+			return _call( pc, hql, null, CommonUtil.toBooleanValue( paramsOrUnique ), null );
+		}
+		return _call( pc, hql, paramsOrUnique, false, null );
+	}
 
-    public static Object call( PageContext pc, String hql, Object paramsOrUnique, Object uniqueOrQueryOptions )
-            throws PageException {
-        if ( CommonUtil.isCastableToBoolean( paramsOrUnique ) ) {
-            return _call( pc, hql, null, CommonUtil.toBooleanValue( paramsOrUnique ),
-                    CommonUtil.toStruct( uniqueOrQueryOptions ) );
-        }
-        if ( CommonUtil.isCastableToBoolean( uniqueOrQueryOptions ) ) {
-            return _call( pc, hql, paramsOrUnique, CommonUtil.toBooleanValue( uniqueOrQueryOptions ), null );
-        }
-        return _call( pc, hql, paramsOrUnique, false, CommonUtil.toStruct( uniqueOrQueryOptions ) );
-    }
+	public static Object call( PageContext pc, String hql, Object paramsOrUnique, Object uniqueOrQueryOptions )
+	    throws PageException {
+		if ( CommonUtil.isCastableToBoolean( paramsOrUnique ) ) {
+			return _call( pc, hql, null, CommonUtil.toBooleanValue( paramsOrUnique ),
+			    CommonUtil.toStruct( uniqueOrQueryOptions ) );
+		}
+		if ( CommonUtil.isCastableToBoolean( uniqueOrQueryOptions ) ) {
+			return _call( pc, hql, paramsOrUnique, CommonUtil.toBooleanValue( uniqueOrQueryOptions ), null );
+		}
+		return _call( pc, hql, paramsOrUnique, false, CommonUtil.toStruct( uniqueOrQueryOptions ) );
+	}
 
-    public static Object call( PageContext pc, String hql, Object params, boolean isUnique, Struct queryOptions )
-            throws PageException {
-        return _call( pc, hql, params, isUnique, queryOptions );
-    }
+	public static Object call( PageContext pc, String hql, Object params, boolean isUnique, Struct queryOptions )
+	    throws PageException {
+		return _call( pc, hql, params, isUnique, queryOptions );
+	}
 
-    private static Object _call( PageContext pc, String hql, Object params, boolean unique, Struct queryOptions )
-            throws PageException {
-        ORMSession session = ORMUtil.getSession( pc );
-        String dsn = null;
-        if ( queryOptions != null )
-            dsn = CommonUtil.toString( queryOptions.get( CommonUtil.createKey( "datasource" ), null ), null );
-        if ( Util.isEmpty( dsn, true ) )
-            dsn = ORMUtil.getDefaultDataSource( pc ).getName();
+	private static Object _call( PageContext pc, String hql, Object params, boolean unique, Struct queryOptions )
+	    throws PageException {
+		ORMSession	session	= ORMUtil.getSession( pc );
+		String		dsn		= null;
+		if ( queryOptions != null )
+			dsn = CommonUtil.toString( queryOptions.get( CommonUtil.createKey( "datasource" ), null ), null );
+		if ( Util.isEmpty( dsn, true ) )
+			dsn = ORMUtil.getDefaultDataSource( pc ).getName();
 
-        if ( params == null )
-            return toCFML( session.executeQuery( pc, dsn, hql, CommonUtil.createArray(), unique, queryOptions ) );
-        else if ( CommonUtil.isStruct( params ) )
-            return toCFML( session.executeQuery( pc, dsn, hql, CommonUtil.toStruct( params ), unique, queryOptions ) );
-        else if ( CommonUtil.isArray( params ) )
-            return toCFML( session.executeQuery( pc, dsn, hql, CommonUtil.toArray( params ), unique, queryOptions ) );
-        else if ( CommonUtil.isCastableToStruct( params ) )
-            return toCFML( session.executeQuery( pc, dsn, hql, CommonUtil.toStruct( params ), unique, queryOptions ) );
-        else if ( CommonUtil.isCastableToArray( params ) )
-            return toCFML( session.executeQuery( pc, dsn, hql, CommonUtil.toArray( params ), unique, queryOptions ) );
-        else
-            throw ExceptionUtil.createException( "ORMExecuteQuery : cannot convert the params to an array or a struct" );
+		if ( params == null )
+			return toCFML( session.executeQuery( pc, dsn, hql, CommonUtil.createArray(), unique, queryOptions ) );
+		else if ( CommonUtil.isStruct( params ) )
+			return toCFML( session.executeQuery( pc, dsn, hql, CommonUtil.toStruct( params ), unique, queryOptions ) );
+		else if ( CommonUtil.isArray( params ) )
+			return toCFML( session.executeQuery( pc, dsn, hql, CommonUtil.toArray( params ), unique, queryOptions ) );
+		else if ( CommonUtil.isCastableToStruct( params ) )
+			return toCFML( session.executeQuery( pc, dsn, hql, CommonUtil.toStruct( params ), unique, queryOptions ) );
+		else if ( CommonUtil.isCastableToArray( params ) )
+			return toCFML( session.executeQuery( pc, dsn, hql, CommonUtil.toArray( params ), unique, queryOptions ) );
+		else
+			throw ExceptionUtil.createException( "ORMExecuteQuery : cannot convert the params to an array or a struct" );
 
-    }
+	}
 
-    private static Object toCFML( Object obj ) throws PageException {
-        if ( obj instanceof List<?> && ! ( obj instanceof Array ) )
-            return CommonUtil.toArray( obj );
-        if ( obj instanceof Map<?, ?> && ! ( obj instanceof Struct ) )
-            return CommonUtil.toStruct( obj );
-        return obj;
-    }
+	private static Object toCFML( Object obj ) throws PageException {
+		if ( obj instanceof List<?> && ! ( obj instanceof Array ) )
+			return CommonUtil.toArray( obj );
+		if ( obj instanceof Map<?, ?> && ! ( obj instanceof Struct ) )
+			return CommonUtil.toStruct( obj );
+		return obj;
+	}
 
-    @Override
-    public Object invoke( PageContext pc, Object[] args ) throws PageException {
-        CFMLEngine engine = CFMLEngineFactory.getInstance();
-        Cast cast = engine.getCastUtil();
+	@Override
+	public Object invoke( PageContext pc, Object[] args ) throws PageException {
+		CFMLEngine	engine	= CFMLEngineFactory.getInstance();
+		Cast		cast	= engine.getCastUtil();
 
-        if ( args.length == 1 )
-            return call( pc, cast.toString( args[ 0 ] ) );
-        if ( args.length == 2 )
-            return call( pc, cast.toString( args[ 0 ] ), args[ 1 ] );
-        if ( args.length == 3 )
-            return call( pc, cast.toString( args[ 0 ] ), args[ 1 ], args[ 2 ] );
-        if ( args.length == 4 ) {
-            Struct queryOptions = null;
-            if ( args[ 3 ] != null ) {
-                queryOptions = cast.toStruct( args[ 3 ] );
-            }
-            return call( pc, cast.toString( args[ 0 ] ), args[ 1 ], cast.toBoolean( args[ 2 ], false ), queryOptions );
-        }
+		if ( args.length == 1 )
+			return call( pc, cast.toString( args[ 0 ] ) );
+		if ( args.length == 2 )
+			return call( pc, cast.toString( args[ 0 ] ), args[ 1 ] );
+		if ( args.length == 3 )
+			return call( pc, cast.toString( args[ 0 ] ), args[ 1 ], args[ 2 ] );
+		if ( args.length == 4 ) {
+			Struct queryOptions = null;
+			if ( args[ 3 ] != null ) {
+				queryOptions = cast.toStruct( args[ 3 ] );
+			}
+			return call( pc, cast.toString( args[ 0 ] ), args[ 1 ], cast.toBoolean( args[ 2 ], false ), queryOptions );
+		}
 
-        throw engine.getExceptionUtil().createFunctionException( pc, this.functionName, MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
-    }
+		throw engine.getExceptionUtil().createFunctionException( pc, this.functionName, MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
+	}
 }

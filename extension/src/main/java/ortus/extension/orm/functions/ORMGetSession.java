@@ -26,26 +26,27 @@ import lucee.runtime.exp.PageException;
 import lucee.runtime.ext.function.BIF;
 
 public class ORMGetSession extends BIF {
-    private static final int MIN_ARGUMENTS = 0;
-    private static final int MAX_ARGUMENTS = 0;
 
-    private static final long serialVersionUID = 349899413869883140L;
+	private static final int	MIN_ARGUMENTS		= 0;
+	private static final int	MAX_ARGUMENTS		= 0;
 
-    public static Object call( PageContext pc ) throws PageException {
-        return call( pc, null );
-    }
+	private static final long	serialVersionUID	= 349899413869883140L;
 
-    public static Object call( PageContext pc, String datasource ) throws PageException {
-        String dsn = ORMUtil.getDataSource( pc, datasource ).getName();
-        return ORMUtil.getSession( pc ).getRawSession( dsn );
-    }
+	public static Object call( PageContext pc ) throws PageException {
+		return call( pc, null );
+	}
 
-    @Override
-    public Object invoke( PageContext pc, Object[] args ) throws PageException {
-        if ( args.length == 0 )
-            return call( pc );
-        return call( pc, CommonUtil.toString( args[ 0 ] ) );
-        // @TODO: @nextMajorRelease Enable this throw in the next major version
-        // throw CFMLEngineFactory.getInstance().getExceptionUtil().createFunctionException( pc, "ORMGetSession", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
-    }
+	public static Object call( PageContext pc, String datasource ) throws PageException {
+		String dsn = ORMUtil.getDataSource( pc, datasource ).getName();
+		return ORMUtil.getSession( pc ).getRawSession( dsn );
+	}
+
+	@Override
+	public Object invoke( PageContext pc, Object[] args ) throws PageException {
+		if ( args.length == 0 )
+			return call( pc );
+		return call( pc, CommonUtil.toString( args[ 0 ] ) );
+		// @TODO: @nextMajorRelease Enable this throw in the next major version
+		// throw CFMLEngineFactory.getInstance().getExceptionUtil().createFunctionException( pc, "ORMGetSession", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
+	}
 }

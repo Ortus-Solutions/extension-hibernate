@@ -12,36 +12,36 @@ import lucee.runtime.type.ObjectWrap;
  */
 public class CFCHibernateProxy extends ComponentProxy implements HibernateProxy, ObjectWrap {
 
-    private static final long serialVersionUID = 4115236247834562085L;
+	private static final long	serialVersionUID	= 4115236247834562085L;
 
-    private CFCLazyInitializer li;
+	private CFCLazyInitializer	li;
 
-    @Override
-    public Component getComponent() {
-        return li.getCFC();
-    }
+	@Override
+	public Component getComponent() {
+		return li.getCFC();
+	}
 
-    public CFCHibernateProxy( CFCLazyInitializer li ) {
-        this.li = li;
-    }
+	public CFCHibernateProxy( CFCLazyInitializer li ) {
+		this.li = li;
+	}
 
-    @Override
-    public Object writeReplace() {
-        return this;
-    }
+	@Override
+	public Object writeReplace() {
+		return this;
+	}
 
-    @Override
-    public LazyInitializer getHibernateLazyInitializer() {
-        return li;
-    }
+	@Override
+	public LazyInitializer getHibernateLazyInitializer() {
+		return li;
+	}
 
-    @Override
-    public Object getEmbededObject( Object defaultValue ) {
-        return getComponent();
-    }
+	@Override
+	public Object getEmbededObject( Object defaultValue ) {
+		return getComponent();
+	}
 
-    @Override
-    public Object getEmbededObject() throws PageException {
-        return getComponent();
-    }
+	@Override
+	public Object getEmbededObject() throws PageException {
+		return getComponent();
+	}
 }

@@ -33,29 +33,30 @@ import lucee.loader.engine.CFMLEngine;
  * CFML built-in function to convert an entity to a query object.
  */
 public class EntityToQuery extends BIF {
-    private static final int MIN_ARGUMENTS = 1;
-    private static final int MAX_ARGUMENTS = 2;
 
-    public static Query call( PageContext pc, Object obj ) throws PageException {
-        return call( pc, obj, null );
-    }
+	private static final int	MIN_ARGUMENTS	= 1;
+	private static final int	MAX_ARGUMENTS	= 2;
 
-    public static Query call( PageContext pc, Object obj, String name ) throws PageException {
-        ORMSession session = ORMUtil.getSession( pc );
-        return session.toQuery( pc, obj, name );
+	public static Query call( PageContext pc, Object obj ) throws PageException {
+		return call( pc, obj, null );
+	}
 
-    }
+	public static Query call( PageContext pc, Object obj, String name ) throws PageException {
+		ORMSession session = ORMUtil.getSession( pc );
+		return session.toQuery( pc, obj, name );
 
-    @Override
-    public Object invoke( PageContext pc, Object[] args ) throws PageException {
-        CFMLEngine engine = CFMLEngineFactory.getInstance();
-        Cast cast = engine.getCastUtil();
+	}
 
-        if ( args.length == 1 )
-            return call( pc, args[ 0 ] );
-        if ( args.length == 2 )
-            return call( pc, args[ 0 ], cast.toString( args[ 1 ] ) );
+	@Override
+	public Object invoke( PageContext pc, Object[] args ) throws PageException {
+		CFMLEngine	engine	= CFMLEngineFactory.getInstance();
+		Cast		cast	= engine.getCastUtil();
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "EntityToQuery", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
-    }
+		if ( args.length == 1 )
+			return call( pc, args[ 0 ] );
+		if ( args.length == 2 )
+			return call( pc, args[ 0 ], cast.toString( args[ 1 ] ) );
+
+		throw engine.getExceptionUtil().createFunctionException( pc, "EntityToQuery", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
+	}
 }

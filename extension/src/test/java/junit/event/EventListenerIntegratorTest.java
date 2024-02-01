@@ -12,8 +12,9 @@ import org.junit.jupiter.api.Test;
 
 @Disabled
 public class EventListenerIntegratorTest {
-    @Test
-    public void canInitialize() {
-        new EventListenerIntegrator();
-    }
+
+	@Test
+	public void canInitialize() {
+		new EventListenerIntegrator();
+	}
 }

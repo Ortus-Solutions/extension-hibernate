@@ -32,32 +32,33 @@ import lucee.loader.engine.CFMLEngine;
  * CFML built-in function to flush the current session.
  */
 public class ORMReload extends BIF {
-    private static final int MIN_ARGUMENTS = 0;
-    private static final int MAX_ARGUMENTS = 0;
 
-    public static String call( PageContext pc ) throws PageException {
+	private static final int	MIN_ARGUMENTS	= 0;
+	private static final int	MAX_ARGUMENTS	= 0;
 
-        // flush and close session
-        ORMSession session = ORMUtil.getSession( pc, false );
-        if ( session != null ) {// @TODO: do the same with all sesson using the same engine
-            ORMConfiguration config = session.getEngine().getConfiguration( pc );
-            if ( config.autoManageSession() ) {
-                session.flushAll( pc );
-                session.closeAll( pc );
-            }
-        }
-        pc.getApplicationContext().reinitORM( pc );
-        ORMUtil.resetEngine( pc, true );
-        return null;
-    }
+	public static String call( PageContext pc ) throws PageException {
 
-    @Override
-    public Object invoke( PageContext pc, Object[] args ) throws PageException {
-        CFMLEngine engine = CFMLEngineFactory.getInstance();
+		// flush and close session
+		ORMSession session = ORMUtil.getSession( pc, false );
+		if ( session != null ) {// @TODO: do the same with all sesson using the same engine
+			ORMConfiguration config = session.getEngine().getConfiguration( pc );
+			if ( config.autoManageSession() ) {
+				session.flushAll( pc );
+				session.closeAll( pc );
+			}
+		}
+		pc.getApplicationContext().reinitORM( pc );
+		ORMUtil.resetEngine( pc, true );
+		return null;
+	}
 
-        if ( args.length == 0 )
-            return call( pc );
+	@Override
+	public Object invoke( PageContext pc, Object[] args ) throws PageException {
+		CFMLEngine engine = CFMLEngineFactory.getInstance();
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "ORMReload", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
-    }
+		if ( args.length == 0 )
+			return call( pc );
+
+		throw engine.getExceptionUtil().createFunctionException( pc, "ORMReload", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
+	}
 }

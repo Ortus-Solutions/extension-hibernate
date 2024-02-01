@@ -33,32 +33,33 @@ import lucee.loader.engine.CFMLEngine;
  * CFML built-in function to evict an entity from the current ORM session.
  */
 public class ORMEvictEntity extends BIF {
-    private static final int MIN_ARGUMENTS = 1;
-    private static final int MAX_ARGUMENTS = 2;
 
-    public static String call( PageContext pc, String entityName ) throws PageException {
-        return call( pc, entityName, null );
-    }
+	private static final int	MIN_ARGUMENTS	= 1;
+	private static final int	MAX_ARGUMENTS	= 2;
 
-    public static String call( PageContext pc, String entityName, String primaryKey ) throws PageException {
-        ORMSession session = ORMUtil.getSession( pc );
-        if ( Util.isEmpty( primaryKey ) )
-            session.evictEntity( pc, entityName );
-        else
-            session.evictEntity( pc, entityName, primaryKey );
-        return null;
-    }
+	public static String call( PageContext pc, String entityName ) throws PageException {
+		return call( pc, entityName, null );
+	}
 
-    @Override
-    public Object invoke( PageContext pc, Object[] args ) throws PageException {
-        CFMLEngine engine = CFMLEngineFactory.getInstance();
-        Cast cast = engine.getCastUtil();
+	public static String call( PageContext pc, String entityName, String primaryKey ) throws PageException {
+		ORMSession session = ORMUtil.getSession( pc );
+		if ( Util.isEmpty( primaryKey ) )
+			session.evictEntity( pc, entityName );
+		else
+			session.evictEntity( pc, entityName, primaryKey );
+		return null;
+	}
 
-        if ( args.length == 1 )
-            return call( pc, cast.toString( args[ 0 ] ) );
-        if ( args.length == 2 )
-            return call( pc, cast.toString( args[ 0 ] ), cast.toString( args[ 1 ] ) );
+	@Override
+	public Object invoke( PageContext pc, Object[] args ) throws PageException {
+		CFMLEngine	engine	= CFMLEngineFactory.getInstance();
+		Cast		cast	= engine.getCastUtil();
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "ORMEvictEntity", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
-    }
+		if ( args.length == 1 )
+			return call( pc, cast.toString( args[ 0 ] ) );
+		if ( args.length == 2 )
+			return call( pc, cast.toString( args[ 0 ] ), cast.toString( args[ 1 ] ) );
+
+		throw engine.getExceptionUtil().createFunctionException( pc, "ORMEvictEntity", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
+	}
 }

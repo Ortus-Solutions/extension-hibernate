@@ -15,6 +15,7 @@ import lucee.runtime.type.Collection.Key;
 
 import org.hibernate.JDBCException;
 import org.hibernate.exception.ConstraintViolationException;
+
 /**
  * Contains many exception helper methods. Mostly wraps Lucee's own ExceptionUtil.
  *
@@ -22,138 +23,138 @@ import org.hibernate.exception.ConstraintViolationException;
  */
 public class ExceptionUtil {
 
-    private static Method setAdditional;
+	private static Method setAdditional;
 
-    private ExceptionUtil() {
-        throw new IllegalStateException( "Utility class; please don't instantiate!" );
-    }
+	private ExceptionUtil() {
+		throw new IllegalStateException( "Utility class; please don't instantiate!" );
+	}
 
-    /**
-     * creates a message for key not found with soundex check for similar key
-     *
-     * @param keys
-     * @param keyLabel
-     *
-     * @return
-     */
-    public static String similarKeyMessage( Collection.Key[] keys, String keySearched, String keyLabel, String keyLabels,
-            String in, boolean listAll ) {
-        return CFMLEngineFactory.getInstance().getExceptionUtil().similarKeyMessage( keys, keySearched, keyLabel, keyLabels, in,
-                listAll );
-    }
+	/**
+	 * creates a message for key not found with soundex check for similar key
+	 *
+	 * @param keys
+	 * @param keyLabel
+	 *
+	 * @return
+	 */
+	public static String similarKeyMessage( Collection.Key[] keys, String keySearched, String keyLabel, String keyLabels,
+	    String in, boolean listAll ) {
+		return CFMLEngineFactory.getInstance().getExceptionUtil().similarKeyMessage( keys, keySearched, keyLabel, keyLabels, in,
+		    listAll );
+	}
 
-    /**
-     * Create a generic PageException with the given message. Utilizes Lucee's
-     * <code>lucee.runtime.op.ExceptonImpl</code> under the hood.
-     *
-     * @param message
-     *                Exception message
-     *
-     * @return A PageException object
-     */
-    public static PageException createException( String message ) {
-        return CFMLEngineFactory.getInstance().getExceptionUtil().createApplicationException( message );
-    }
+	/**
+	 * Create a generic PageException with the given message. Utilizes Lucee's
+	 * <code>lucee.runtime.op.ExceptonImpl</code> under the hood.
+	 *
+	 * @param message
+	 *                Exception message
+	 *
+	 * @return A PageException object
+	 */
+	public static PageException createException( String message ) {
+		return CFMLEngineFactory.getInstance().getExceptionUtil().createApplicationException( message );
+	}
 
-    /**
-     * Create a generic PageException with the given message and detail. Utilizes Lucee's
-     * <code>lucee.runtime.op.ExceptonImpl</code> under the hood.
-     *
-     * @param message
-     *                Exception message
-     * @param detail
-     *                Exception detail string
-     *
-     * @return A PageException object
-     */
-    public static PageException createException( String message, String detail ) {
-        return CFMLEngineFactory.getInstance().getExceptionUtil().createApplicationException( message, detail );
-    }
+	/**
+	 * Create a generic PageException with the given message and detail. Utilizes Lucee's
+	 * <code>lucee.runtime.op.ExceptonImpl</code> under the hood.
+	 *
+	 * @param message
+	 *                Exception message
+	 * @param detail
+	 *                Exception detail string
+	 *
+	 * @return A PageException object
+	 */
+	public static PageException createException( String message, String detail ) {
+		return CFMLEngineFactory.getInstance().getExceptionUtil().createApplicationException( message, detail );
+	}
 
-    public static PageException createException( SessionFactoryData data, Component cfc, String msg, String detail ) {
+	public static PageException createException( SessionFactoryData data, Component cfc, String msg, String detail ) {
 
-        PageException pe = createException( ( ORMSession ) null, cfc, msg, detail );
-        if ( data != null )
-            setAddional( pe, data );
-        return pe;
-    }
+		PageException pe = createException( ( ORMSession ) null, cfc, msg, detail );
+		if ( data != null )
+			setAddional( pe, data );
+		return pe;
+	}
 
-    public static PageException createException( SessionFactoryData data, Component cfc, Throwable t ) {
-        PageException pe = createException( ( ORMSession ) null, cfc, t );
-        if ( data != null )
-            setAddional( pe, data );
-        return pe;
-    }
+	public static PageException createException( SessionFactoryData data, Component cfc, Throwable t ) {
+		PageException pe = createException( ( ORMSession ) null, cfc, t );
+		if ( data != null )
+			setAddional( pe, data );
+		return pe;
+	}
 
-    public static PageException createException( ORMSession session, Component cfc, Throwable t ) {
-        return CFMLEngineFactory.getInstance().getORMUtil().createException( session, cfc, t );
-    }
+	public static PageException createException( ORMSession session, Component cfc, Throwable t ) {
+		return CFMLEngineFactory.getInstance().getORMUtil().createException( session, cfc, t );
+	}
 
-    public static PageException createException( ORMSession session, Component cfc, String message, String detail ) {
-        return CFMLEngineFactory.getInstance().getORMUtil().createException( session, cfc, message, detail );
-    }
+	public static PageException createException( ORMSession session, Component cfc, String message, String detail ) {
+		return CFMLEngineFactory.getInstance().getORMUtil().createException( session, cfc, message, detail );
+	}
 
-    private static void setAddional( PageException pe, SessionFactoryData data ) {
-        setAdditional( pe, CommonUtil.createKey( "Entities" ),
-                CFMLEngineFactory.getInstance().getListUtil().toListEL( data.getEntityNames(), ", " ) );
-        setAddional( pe, data.getDataSources() );
-    }
+	private static void setAddional( PageException pe, SessionFactoryData data ) {
+		setAdditional( pe, CommonUtil.createKey( "Entities" ),
+		    CFMLEngineFactory.getInstance().getListUtil().toListEL( data.getEntityNames(), ", " ) );
+		setAddional( pe, data.getDataSources() );
+	}
 
-    private static void setAddional( PageException pe, DataSource... sources ) {
-        if ( sources != null && sources.length > 0 ) {
-            StringBuilder sb = new StringBuilder();
-            for ( int i = 0; i < sources.length; i++ ) {
-                if ( i > 0 )
-                    sb.append( ", " );
-                sb.append( sources[ i ].getName() );
-            }
-            setAdditional( pe, CommonUtil.createKey( "_Datasource" ), sb.toString() );
-        }
-    }
+	private static void setAddional( PageException pe, DataSource... sources ) {
+		if ( sources != null && sources.length > 0 ) {
+			StringBuilder sb = new StringBuilder();
+			for ( int i = 0; i < sources.length; i++ ) {
+				if ( i > 0 )
+					sb.append( ", " );
+				sb.append( sources[ i ].getName() );
+			}
+			setAdditional( pe, CommonUtil.createKey( "_Datasource" ), sb.toString() );
+		}
+	}
 
-    public static void setAdditional( PageException pe, Key name, Object value ) {
-        try {
-            if ( setAdditional == null || setAdditional.getDeclaringClass() != pe.getClass() ) {
-                setAdditional = pe.getClass().getMethod( "setAdditional", Key.class, Object.class );
-            }
-            setAdditional.invoke( pe, name, value );
-        } catch ( Exception t ) {
-            /**
-             * We purposely swallow exceptions, since this very class is an exception handler.
-             * We can't have exceptions prevent our exceptions from being shown and logged!
-             * 
-             * With that said... we should definitely log a failure here.
-             * 
-             * @TODO: Log.log( Level.ERROR, "Unable to set additional context on an exception", t ) 
-             */
-        }
-    }
+	public static void setAdditional( PageException pe, Key name, Object value ) {
+		try {
+			if ( setAdditional == null || setAdditional.getDeclaringClass() != pe.getClass() ) {
+				setAdditional = pe.getClass().getMethod( "setAdditional", Key.class, Object.class );
+			}
+			setAdditional.invoke( pe, name, value );
+		} catch ( Exception t ) {
+			/**
+			 * We purposely swallow exceptions, since this very class is an exception handler.
+			 * We can't have exceptions prevent our exceptions from being shown and logged!
+			 *
+			 * With that said... we should definitely log a failure here.
+			 *
+			 * @TODO: Log.log( Level.ERROR, "Unable to set additional context on an exception", t )
+			 */
+		}
+	}
 
-    /**
-     * @param t Throwable exception
-     * 
-     * @return
-     */
-    public static PageException toPageException( Throwable t ) {
-        PageException pe = CommonUtil.caster().toPageException( t );
-        if ( t instanceof org.hibernate.HibernateException ) {
-            org.hibernate.HibernateException he = ( org.hibernate.HibernateException ) t;
-            Throwable cause = he.getCause();
-            if ( cause != null ) {
-                pe = CommonUtil.caster().toPageException( cause );
-                setAdditional( pe, CommonUtil.createKey( "hibernate exception" ), t );
-            }
-        }
-        if ( t instanceof JDBCException ) {
-            JDBCException je = ( JDBCException ) t;
-            setAdditional( pe, CommonUtil.createKey( "sql" ), je.getSQL() );
-        }
-        if ( t instanceof ConstraintViolationException ) {
-            ConstraintViolationException cve = ( ConstraintViolationException ) t;
-            if ( !Util.isEmpty( cve.getConstraintName() ) ) {
-                setAdditional( pe, CommonUtil.createKey( "constraint name" ), cve.getConstraintName() );
-            }
-        }
-        return pe;
-    }
+	/**
+	 * @param t Throwable exception
+	 *
+	 * @return
+	 */
+	public static PageException toPageException( Throwable t ) {
+		PageException pe = CommonUtil.caster().toPageException( t );
+		if ( t instanceof org.hibernate.HibernateException ) {
+			org.hibernate.HibernateException	he		= ( org.hibernate.HibernateException ) t;
+			Throwable							cause	= he.getCause();
+			if ( cause != null ) {
+				pe = CommonUtil.caster().toPageException( cause );
+				setAdditional( pe, CommonUtil.createKey( "hibernate exception" ), t );
+			}
+		}
+		if ( t instanceof JDBCException ) {
+			JDBCException je = ( JDBCException ) t;
+			setAdditional( pe, CommonUtil.createKey( "sql" ), je.getSQL() );
+		}
+		if ( t instanceof ConstraintViolationException ) {
+			ConstraintViolationException cve = ( ConstraintViolationException ) t;
+			if ( !Util.isEmpty( cve.getConstraintName() ) ) {
+				setAdditional( pe, CommonUtil.createKey( "constraint name" ), cve.getConstraintName() );
+			}
+		}
+		return pe;
+	}
 }

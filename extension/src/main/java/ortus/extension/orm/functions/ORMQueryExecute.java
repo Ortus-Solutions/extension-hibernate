@@ -23,8 +23,8 @@ package ortus.extension.orm.functions;
  */
 public class ORMQueryExecute extends ORMExecuteQuery {
 
-    /**
-     * Override ORMExecuteQuery to ensure that "too many args" error messages have the correct method name.
-     */
-    protected String functionName = "ORMQueryExecute";
+	/**
+	 * Override ORMExecuteQuery to ensure that "too many args" error messages have the correct method name.
+	 */
+	protected String functionName = "ORMQueryExecute";
 }

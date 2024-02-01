@@ -41,70 +41,72 @@ import lucee.loader.engine.CFMLEngine;
  * CFML built-in function to create a new instance of a Hibernate session entity.
  */
 public class EntityNew extends BIF {
-    private static final int MIN_ARGUMENTS = 1;
-    private static final int MAX_ARGUMENTS = 2;
 
-    public static Object call( PageContext pc, String name ) throws PageException {
-        return call( pc, name, null );
-    }
+	private static final int	MIN_ARGUMENTS	= 1;
+	private static final int	MAX_ARGUMENTS	= 2;
 
-    public static Object call( PageContext pc, String name, Struct properties ) throws PageException {
-        ORMSession session = ORMUtil.getSession( pc );
-        if ( properties == null )
-            return session.create( pc, name );
+	public static Object call( PageContext pc, String name ) throws PageException {
+		return call( pc, name, null );
+	}
 
-        Component entity = session.create( pc, name );
-        setPropeties( pc, entity, properties, false );
-        return entity;
+	public static Object call( PageContext pc, String name, Struct properties ) throws PageException {
+		ORMSession session = ORMUtil.getSession( pc );
+		if ( properties == null )
+			return session.create( pc, name );
 
-    }
+		Component entity = session.create( pc, name );
+		setPropeties( pc, entity, properties, false );
+		return entity;
 
-    /**
-     * 
-     * @TODO: Move this to a reusable EntityPopulator? Do we populate entities anywhere else?
-     * @TODO: Either drop ignoreNotExisting argument, or implement a 'true' condition. This is always `false`, currently.
-     * 
-     * @param pc Lucee PageContext
-     * @param c The new entity Component
-     * @param properties Struct of properties to persist into the entity
-     * @param ignoreNotExisting Should non-existing property key names be ignored? If true, will ignore. If false, will throw error.
-     * @throws PageException
-     */
-    public static void setPropeties( PageContext pc, Component c, Struct properties, boolean ignoreNotExisting )
-            throws PageException {
-        if ( properties == null )
-            return;
+	}
 
-        // argumentCollection
-        if ( properties.size() == 1 && properties.containsKey( CommonUtil.createKey( "argumentCollection" ) )
-                && !c.containsKey( CommonUtil.createKey( "setArgumentCollection" ) ) ) {
-            properties = CommonUtil.toStruct( properties.get( CommonUtil.createKey( "argumentCollection" ) ) );
-        }
+	/**
+	 *
+	 * @TODO: Move this to a reusable EntityPopulator? Do we populate entities anywhere else?
+	 * @TODO: Either drop ignoreNotExisting argument, or implement a 'true' condition. This is always `false`, currently.
+	 *
+	 * @param pc                Lucee PageContext
+	 * @param c                 The new entity Component
+	 * @param properties        Struct of properties to persist into the entity
+	 * @param ignoreNotExisting Should non-existing property key names be ignored? If true, will ignore. If false, will throw error.
+	 *
+	 * @throws PageException
+	 */
+	public static void setPropeties( PageContext pc, Component c, Struct properties, boolean ignoreNotExisting )
+	    throws PageException {
+		if ( properties == null )
+			return;
 
-        Iterator<Entry<Key, Object>> it = properties.entryIterator();
-        Entry<Key, Object> e;
-        while ( it.hasNext() ) {
-            e = it.next();
-            Key funcName = CommonUtil.createKey( "set" + e.getKey().getString() );
-            if ( ignoreNotExisting ) {
-                if ( c.get( funcName, null ) instanceof UDF )
-                    c.call( pc, funcName, new Object[] { e.getValue() } );
-            } else {
-                c.call( pc, funcName, new Object[] { e.getValue() } );
-            }
-        }
-    }
+		// argumentCollection
+		if ( properties.size() == 1 && properties.containsKey( CommonUtil.createKey( "argumentCollection" ) )
+		    && !c.containsKey( CommonUtil.createKey( "setArgumentCollection" ) ) ) {
+			properties = CommonUtil.toStruct( properties.get( CommonUtil.createKey( "argumentCollection" ) ) );
+		}
 
-    @Override
-    public Object invoke( PageContext pc, Object[] args ) throws PageException {
-        CFMLEngine engine = CFMLEngineFactory.getInstance();
-        Cast cast = engine.getCastUtil();
+		Iterator<Entry<Key, Object>>	it	= properties.entryIterator();
+		Entry<Key, Object>				e;
+		while ( it.hasNext() ) {
+			e = it.next();
+			Key funcName = CommonUtil.createKey( "set" + e.getKey().getString() );
+			if ( ignoreNotExisting ) {
+				if ( c.get( funcName, null ) instanceof UDF )
+					c.call( pc, funcName, new Object[] { e.getValue() } );
+			} else {
+				c.call( pc, funcName, new Object[] { e.getValue() } );
+			}
+		}
+	}
 
-        if ( args.length == 1 )
-            return call( pc, cast.toString( args[ 0 ] ) );
-        if ( args.length == 2 )
-            return call( pc, cast.toString( args[ 0 ] ), cast.toStruct( args[ 1 ] ) );
+	@Override
+	public Object invoke( PageContext pc, Object[] args ) throws PageException {
+		CFMLEngine	engine	= CFMLEngineFactory.getInstance();
+		Cast		cast	= engine.getCastUtil();
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "EntityNew", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
-    }
+		if ( args.length == 1 )
+			return call( pc, cast.toString( args[ 0 ] ) );
+		if ( args.length == 2 )
+			return call( pc, cast.toString( args[ 0 ] ), cast.toStruct( args[ 1 ] ) );
+
+		throw engine.getExceptionUtil().createFunctionException( pc, "EntityNew", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
+	}
 }

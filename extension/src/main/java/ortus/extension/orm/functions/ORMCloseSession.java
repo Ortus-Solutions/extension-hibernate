@@ -32,31 +32,32 @@ import lucee.loader.engine.CFMLEngine;
  * CFML built-in function to close the ORM session for the named datasource.
  */
 public class ORMCloseSession extends BIF {
-    private static final int MIN_ARGUMENTS = 0;
-    private static final int MAX_ARGUMENTS = 1;
 
-    public static String call( PageContext pc ) throws PageException {
-        return call( pc, null );
-    }
+	private static final int	MIN_ARGUMENTS	= 0;
+	private static final int	MAX_ARGUMENTS	= 1;
 
-    public static String call( PageContext pc, String datasource ) throws PageException {
-        if ( Util.isEmpty( datasource, true ) )
-            ORMUtil.getSession( pc ).close( pc );
-        else
-            ORMUtil.getSession( pc ).close( pc, datasource.trim() );
-        return null;
-    }
+	public static String call( PageContext pc ) throws PageException {
+		return call( pc, null );
+	}
 
-    @Override
-    public Object invoke( PageContext pc, Object[] args ) throws PageException {
-        CFMLEngine engine = CFMLEngineFactory.getInstance();
-        Cast cast = engine.getCastUtil();
+	public static String call( PageContext pc, String datasource ) throws PageException {
+		if ( Util.isEmpty( datasource, true ) )
+			ORMUtil.getSession( pc ).close( pc );
+		else
+			ORMUtil.getSession( pc ).close( pc, datasource.trim() );
+		return null;
+	}
 
-        if ( args.length == 0 )
-            return call( pc );
-        if ( args.length == 1 )
-            return call( pc, cast.toString( args[ 0 ] ) );
+	@Override
+	public Object invoke( PageContext pc, Object[] args ) throws PageException {
+		CFMLEngine	engine	= CFMLEngineFactory.getInstance();
+		Cast		cast	= engine.getCastUtil();
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "ORMCloseSession", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
-    }
+		if ( args.length == 0 )
+			return call( pc );
+		if ( args.length == 1 )
+			return call( pc, cast.toString( args[ 0 ] ) );
+
+		throw engine.getExceptionUtil().createFunctionException( pc, "ORMCloseSession", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
+	}
 }

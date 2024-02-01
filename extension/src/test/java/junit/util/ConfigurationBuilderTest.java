@@ -22,29 +22,30 @@ import lucee.runtime.db.DataSource;
 
 @Disabled
 public class ConfigurationBuilderTest {
-    @Test
-    public void canInitialize() {
-        new ConfigurationBuilder();
-    }
 
-    @Test
-    public void canBuildConfiguration() throws SQLException, IOException, PageException {
-        ConfigurationBuilder builder = new ConfigurationBuilder();
+	@Test
+	public void canInitialize() {
+		new ConfigurationBuilder();
+	}
 
-        // @Mock
-        ORMConfiguration conf = Mockito.mock(ORMConfiguration.class);
-        Mockito.when(conf.logSQL()).thenReturn(true);
-        Mockito.when(conf.secondaryCacheEnabled()).thenReturn(true);
+	@Test
+	public void canBuildConfiguration() throws SQLException, IOException, PageException {
+		ConfigurationBuilder	builder	= new ConfigurationBuilder();
 
-        // @Mock
-        DataSource datasource = Mockito.mock(DataSource.class);
-        ConnectionProviderImpl connProvider = Mockito.mock(ConnectionProviderImpl.class);
+		// @Mock
+		ORMConfiguration		conf	= Mockito.mock( ORMConfiguration.class );
+		Mockito.when( conf.logSQL() ).thenReturn( true );
+		Mockito.when( conf.secondaryCacheEnabled() ).thenReturn( true );
 
-        Configuration config = builder.withEventListener(new EventListenerIntegrator())
-                .withConnectionProvider(connProvider).withDatasource(datasource).withDatasourceCreds("foo", "myPass123")
-                .withORMConfig(conf).withXMLMappings("<xml></xml>").build();
+		// @Mock
+		DataSource				datasource		= Mockito.mock( DataSource.class );
+		ConnectionProviderImpl	connProvider	= Mockito.mock( ConnectionProviderImpl.class );
 
-        assertNotNull(config);
-        assertEquals("false", config.getProperty(AvailableSettings.AUTO_CLOSE_SESSION));
-    }
+		Configuration			config			= builder.withEventListener( new EventListenerIntegrator() )
+		    .withConnectionProvider( connProvider ).withDatasource( datasource ).withDatasourceCreds( "foo", "myPass123" )
+		    .withORMConfig( conf ).withXMLMappings( "<xml></xml>" ).build();
+
+		assertNotNull( config );
+		assertEquals( "false", config.getProperty( AvailableSettings.AUTO_CLOSE_SESSION ) );
+	}
 }

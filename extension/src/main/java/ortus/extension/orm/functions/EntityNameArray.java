@@ -32,20 +32,21 @@ import lucee.loader.engine.CFMLEngine;
  * CFML built-in function to retrieve an array of all ORM entity names.
  */
 public class EntityNameArray extends BIF {
-    private static final int MIN_ARGUMENTS = 0;
-    private static final int MAX_ARGUMENTS = 0;
 
-    public static Array call( PageContext pc ) throws PageException {
-        return CommonUtil.toArray( ORMUtil.getSession( pc ).getEntityNames() );
-    }
+	private static final int	MIN_ARGUMENTS	= 0;
+	private static final int	MAX_ARGUMENTS	= 0;
 
-    @Override
-    public Object invoke( PageContext pc, Object[] args ) throws PageException {
-        CFMLEngine engine = CFMLEngineFactory.getInstance();
+	public static Array call( PageContext pc ) throws PageException {
+		return CommonUtil.toArray( ORMUtil.getSession( pc ).getEntityNames() );
+	}
 
-        if ( args.length == 0 )
-            return call( pc );
+	@Override
+	public Object invoke( PageContext pc, Object[] args ) throws PageException {
+		CFMLEngine engine = CFMLEngineFactory.getInstance();
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "entityNameArray", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
-    }
+		if ( args.length == 0 )
+			return call( pc );
+
+		throw engine.getExceptionUtil().createFunctionException( pc, "entityNameArray", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
+	}
 }

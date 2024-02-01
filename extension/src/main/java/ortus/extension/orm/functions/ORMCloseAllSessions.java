@@ -30,21 +30,22 @@ import lucee.loader.engine.CFMLEngine;
  * CFML built-in function to close all open ORM sessions.
  */
 public class ORMCloseAllSessions extends BIF {
-    private static final int MIN_ARGUMENTS = 0;
-    private static final int MAX_ARGUMENTS = 0;
 
-    public static String call( PageContext pc ) throws PageException {
-        ORMUtil.getSession( pc ).closeAll( pc );
-        return null;
-    }
+	private static final int	MIN_ARGUMENTS	= 0;
+	private static final int	MAX_ARGUMENTS	= 0;
 
-    @Override
-    public Object invoke( PageContext pc, Object[] args ) throws PageException {
-        CFMLEngine engine = CFMLEngineFactory.getInstance();
+	public static String call( PageContext pc ) throws PageException {
+		ORMUtil.getSession( pc ).closeAll( pc );
+		return null;
+	}
 
-        if ( args.length == 0 )
-            return call( pc );
+	@Override
+	public Object invoke( PageContext pc, Object[] args ) throws PageException {
+		CFMLEngine engine = CFMLEngineFactory.getInstance();
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "ORMCloseAllSessions", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
-    }
+		if ( args.length == 0 )
+			return call( pc );
+
+		throw engine.getExceptionUtil().createFunctionException( pc, "ORMCloseAllSessions", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
+	}
 }

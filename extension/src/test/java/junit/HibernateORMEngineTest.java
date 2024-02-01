@@ -11,11 +11,11 @@ import org.junit.jupiter.api.Test;
 
 class HibernateORMEngineTest {
 
-    HibernateORMEngine engine = new HibernateORMEngine();
+	HibernateORMEngine engine = new HibernateORMEngine();
 
-    @Test
-    void canInitialize() {
-        assertEquals(0, engine.getMode());
-    }
+	@Test
+	void canInitialize() {
+		assertEquals( 0, engine.getMode() );
+	}
 
 }

@@ -31,21 +31,22 @@ import lucee.loader.engine.CFMLEngine;
  * Merge a detached or transient entity into the Hibernate session.
  */
 public class EntityMerge extends BIF {
-    private static final int MIN_ARGUMENTS = 1;
-    private static final int MAX_ARGUMENTS = 1;
 
-    public static Object call( PageContext pc, Object obj ) throws PageException {
-        ORMSession session = ORMUtil.getSession( pc );
-        return session.merge( pc, obj );
-    }
+	private static final int	MIN_ARGUMENTS	= 1;
+	private static final int	MAX_ARGUMENTS	= 1;
 
-    @Override
-    public Object invoke( PageContext pc, Object[] args ) throws PageException {
-        CFMLEngine engine = CFMLEngineFactory.getInstance();
+	public static Object call( PageContext pc, Object obj ) throws PageException {
+		ORMSession session = ORMUtil.getSession( pc );
+		return session.merge( pc, obj );
+	}
 
-        if ( args.length == 1 )
-            return call( pc, args[ 0 ] );
+	@Override
+	public Object invoke( PageContext pc, Object[] args ) throws PageException {
+		CFMLEngine engine = CFMLEngineFactory.getInstance();
 
-        throw engine.getExceptionUtil().createFunctionException( pc, "EntityMerge", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
-    }
+		if ( args.length == 1 )
+			return call( pc, args[ 0 ] );
+
+		throw engine.getExceptionUtil().createFunctionException( pc, "EntityMerge", MIN_ARGUMENTS, MAX_ARGUMENTS, args.length );
+	}
 }
