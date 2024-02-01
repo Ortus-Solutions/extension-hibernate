@@ -37,7 +37,6 @@ jobs:
           distribution: 'temurin'
 
       - name: Validate Java format
-        if: env.SNAPSHOT == 'false'
         run: mvn --batch-mode -f pom.xml formatter:validate
 
   # Most incoming PRs from forks will not have the secrets or permissions needed to commit changes. Hence, we do format:check and force the developer to fix the formatting themselves.
