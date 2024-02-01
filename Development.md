@@ -27,6 +27,8 @@ You will need to install the following for extension development:
 * `mvn package` Package the extension into a Lucee-installable `.lex` extension file
 * `mvn test` run java-based (junit) tests
 * `mvn javadoc:javadoc` generate java docs
+* `mvn formatter:format` format java source code
+* `box run-script format` format CFML source code (mainly the `tests/` directory.)
 
 ## Testing
 
