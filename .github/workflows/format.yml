@@ -12,11 +12,10 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '8'
+          java-version: '11'
           distribution: 'temurin'
 
-      - name: Validate Java format
-        run: mvn --batch-mode -f pom.xml formatter:validate
+      - run: mvn --batch-mode -f pom.xml formatter:format
 
       - name: Commit Java Formatting Changes
         uses: stefanzweifel/git-auto-commit-action@v4
@@ -29,7 +28,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-
+      
       - uses: Ortus-Solutions/commandbox-action@v1.0.3
         with:
           cmd: run-script format
