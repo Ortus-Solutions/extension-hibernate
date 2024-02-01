@@ -247,6 +247,7 @@ lucee-core-version: ${minLuceeVersion}
 							<classifier>sources</classifier>
 							<overWrite>true</overWrite>
 							<includeScope>compile</includeScope>
+							<excludeScope>test</excludeScope>
 						</configuration>
 					</execution>
 				</executions>
