@@ -30,7 +30,7 @@ jobs:
     uses: ./.github/workflows/tests.yml
 
   format:
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && github.ref_name != 'main' && github.ref_name != 'master'"
     uses: ./.github/workflows/format.yml
 
   release:
