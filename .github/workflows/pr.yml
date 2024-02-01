@@ -22,19 +22,32 @@ jobs:
     secrets:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-  # Format PR
-  format:
-    name: Format
+  # Most incoming PRs from forks will not have the secrets or permissions needed to commit changes. Hence, we do formatter:validate and force the developer to fix the formatting themselves.
+  checkJavaFormat:
+    name: Validate Java Format
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+
+      - name: Validate Java format
+        if: env.SNAPSHOT == 'false'
+        run: mvn --batch-mode -f pom.xml formatter:validate
+
+  # Most incoming PRs from forks will not have the secrets or permissions needed to commit changes. Hence, we do format:check and force the developer to fix the formatting themselves.
+  checkCFMLFormat:
+    name: Validate CFML Format
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
       - uses: Ortus-Solutions/commandbox-action@v1.0.2
         with:
-          cmd: run-script format
-
-      - name: Commit Format Changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: '👌 IMPROVE: Apply cfformat changes - [ci skip]'
+          cmd: run-script format:check
