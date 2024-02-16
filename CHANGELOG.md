@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### 🐛 Fixed
+
+* Fixes an incorrect property name lookup for the `unsavedValue` persistent property attribute.
+
 ### ♻️ Changed
 
 Add the entity name to the exception message when attempting to persist changes from `preInsert` or `preUpdate` event listeners. The updated exception message is now:

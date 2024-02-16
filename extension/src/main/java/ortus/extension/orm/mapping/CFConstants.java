@@ -202,8 +202,8 @@ public final class CFConstants {
 		public static final String		NULL			= "null";
 		public static final String		UNDEFINED		= "undefined";
 
-		public static final String		ATTRIBUTE_NAME	= "source";
-		public static final String		HBM_KEY			= "source";
+		public static final String		ATTRIBUTE_NAME	= "unsavedValue";
+		public static final String		HBM_KEY			= "unsaved-value";
 
 		public static final Set<String>	EMPTY_TO_NULL	= Collections.unmodifiableSet(
 		    new HashSet<>( Arrays.asList( "string", "character", "text" ) )
