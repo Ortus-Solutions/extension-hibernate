@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### 🐛 Fixed
 
 * Fixes an incorrect property name lookup for the `unsavedValue` persistent property attribute.
+* Fixes the pre-event listeners to ignore empty strings in entity state properties if the field type is one of `string`, `character`, or `text`. This resolves issues where a `preInsert()` or `preUpdate()` throws a "can't cast [] to date value" when processing event listeners if a date field (for example) is unpopulated or has an empty `default` attribute.
 
 ### ♻️ Changed
 

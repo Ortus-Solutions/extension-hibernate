@@ -500,7 +500,7 @@ public class HibernateCaster {
 		// If the value is an empty string, and the field type is not one of the types that should be converted to null
 		if ( value instanceof String &&
 		    ( ( String ) value ).trim().isEmpty() &&
-		    !CFConstants.UnsavedValue.EMPTY_TO_NULL.contains( fieldType ) ) {
+		    !CFConstants.STRINGLIKE_FIELDS.contains( fieldType ) ) {
 			return null;
 		}
 

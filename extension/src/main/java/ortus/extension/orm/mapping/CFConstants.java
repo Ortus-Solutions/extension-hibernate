@@ -19,6 +19,13 @@ import java.util.stream.Stream;
  */
 public final class CFConstants {
 
+	/**
+	 * Define a set of string-y field types which can support an empty string as the default value.
+	 */
+	public static final Set<String> STRINGLIKE_FIELDS = Collections.unmodifiableSet(
+	    new HashSet<>( Arrays.asList( "string", "character", "text" ) )
+	);
+
 	private CFConstants() {
 		throw new IllegalStateException( "Utility class; please don't instantiate!" );
 	}
@@ -199,15 +206,11 @@ public final class CFConstants {
 
 	public static class UnsavedValue {
 
-		public static final String		NULL			= "null";
-		public static final String		UNDEFINED		= "undefined";
+		public static final String	NULL			= "null";
+		public static final String	UNDEFINED		= "undefined";
 
-		public static final String		ATTRIBUTE_NAME	= "unsavedValue";
-		public static final String		HBM_KEY			= "unsaved-value";
-
-		public static final Set<String>	EMPTY_TO_NULL	= Collections.unmodifiableSet(
-		    new HashSet<>( Arrays.asList( "string", "character", "text" ) )
-		);
+		public static final String	ATTRIBUTE_NAME	= "unsavedValue";
+		public static final String	HBM_KEY			= "unsaved-value";
 
 		public static List<String> getPossibleValues() {
 			return Stream.of( NULL, UNDEFINED ).collect( Collectors.toList() );
