@@ -26,7 +26,7 @@ component extends="org.lucee.cfml.test.LuceeTestCase" labels="orm" {
 					expect( result.filecontent.trim() ).toBe( "success" );
 				} );
 			},
-			skip = !isResolved
+			skip = !isResolved || !server.helpers.canUseDatasource( "mysql" )
 		);
 	}
 
