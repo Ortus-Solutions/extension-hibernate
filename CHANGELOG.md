@@ -7,16 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.5.0] - 2024-02-16
+
 ### 🐛 Fixed
 
-* Fixes an incorrect property name lookup for the `unsavedValue` persistent property attribute.
-* Fixes the pre-event listeners to ignore empty strings in entity state properties if the field type is one of `string`, `character`, or `text`. This resolves issues where a `preInsert()` or `preUpdate()` throws a "can't cast [] to date value" when processing event listeners if a date field (for example) is unpopulated or has an empty `default` attribute.
+-   Fixes an incorrect property name lookup for the `unsavedValue` persistent property attribute.
+-   Fixes the pre-event listeners to ignore empty strings in entity state properties if the field type is one of `string`, `character`, or `text`. This resolves issues where a `preInsert()` or `preUpdate()` throws a "can't cast \[] to date value" when processing event listeners if a date field (for example) is unpopulated or has an empty `default` attribute.
 
 ### ♻️ Changed
 
 Add the entity name to the exception message when attempting to persist changes from `preInsert` or `preUpdate` event listeners. The updated exception message is now:
 
-> Error populating event state for persistance in [&lt;entity name&gt;] entity pre-event listener method: &lt;error message from Hibernate&gt;
+> Error populating event state for persistance in [&lt;entity name&gt;] entity pre-event listener method: &lt;error message from Hibernate>
 
 ### 🔐 Security
 
@@ -234,7 +236,9 @@ See [OOE-3](https://ortussolutions.atlassian.net/browse/OOE-3).
 -   Better build/test documentation
 -   Improved maintenance and build docs
 
-[Unreleased]: https://github.com/Ortus-Solutions/extension-hibernate/compare/6.4.0...HEAD
+[Unreleased]: https://github.com/Ortus-Solutions/extension-hibernate/compare/6.5.0...HEAD
+
+[6.5.0]: https://github.com/Ortus-Solutions/extension-hibernate/compare/6.4.0...6.5.0
 
 [6.4.0]: https://github.com/Ortus-Solutions/extension-hibernate/compare/6.3.2...6.4.0
 
