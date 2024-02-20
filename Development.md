@@ -72,7 +72,7 @@ Once you push, the `release` GitHub workflow will kick in and:
 After pushing a stable release:
 
 1. Check out `development` branch for further work - `git checkout development`
-2. Bump the major, minor, or patch version number so you don't push snapshots on a released version: `box bump --minor`
+2. Bump the patch version number so you don't push snapshots on a released version: `box run-script startNextVersion`
 
 ## Publishing a Snapshot Release
 

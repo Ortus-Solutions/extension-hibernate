@@ -1,48 +1,49 @@
 {
-    "name":"Ortus ORM Extension",
-    "version":"6.6.0",
-    "location":"https://downloads.ortussolutions.com/ortussolutions/lucee-extensions/ortus-orm/",
-    "type":"lucee-extensions",
-    "slug":"D062D72F-F8A2-46F0-8CBC91325B2F067B",
-    "shortDescription":"Lucee extension providing a Hibernate ORM wrapper for CFML",
-    "description":"The Ortus ORM extension is a Lucee extension which integrates the popular Hibernate ORM library into the Lucee CFML server.",
-    "author":"Ortus Solutions",
-    "organization":"ortus-solutions",
-    "homepage":"https://github.com/ortus-solutions/extension-hibernate",
-    "documentation":"https://github.com/ortus-solutions/extension-hibernate/blob/master/README.md",
-    "bugs":"https://ortussolutions.atlassian.net/jira/software/c/projects/OOE/issues",
-    "thumbnail":"https://s3.amazonaws.com/downloads.ortussolutions.com/lucee/extensions/hibernate/logo.png",
-    "private":false,
-    "projectURL":"https://github.com/ortus-solutions/extension-hibernate",
-    "repository":{
-        "type":"git",
-        "URL":"https://github.com/ortus-solutions/extension-hibernate"
-    },
-    "keywords":[
-        "hibernate",
-        "orm",
-        "extension"
-    ],
-    "devDependencies":{
-        "testbox":"*"
-    },
-    "installPaths":{
-        "testbox":"testbox/"
-    },
-    "scripts":{
-        "build":"!mvn clean package",
-        "deploy.lucee5":"!mvn clean package -Dmaven.javadoc.skip=true && cp target/*.lex .engine/lucee5/WEB-INF/lucee-server/deploy",
-        "deploy.lucee6":"!mvn clean package -Dmaven.javadoc.skip=true && cp target/*.lex .engine/lucee6/WEB-INF/lucee-server/deploy",
-        "format":"cfformat run path=tests/ overwrite=true settingsPath=./.cfformat.json",
-        "format:watch":"cfformat watch path=tests/ settingsPath=./.cfformat.json",
-        "format:check":"cfformat check path=tests/ settingsPath=./.cfformat.json",
-        "postVersion":"!./build/bump.sh ${interceptData.versionArgs.version}"
-    },
-    "testbox":{
-        "runner":[
-            {
-                "default":"http://localhost:49339/tests/runner.cfm"
-            }
-        ]
-    }
+	"name": "Ortus ORM Extension",
+	"version": "6.6.0",
+	"location": "https://downloads.ortussolutions.com/ortussolutions/lucee-extensions/ortus-orm/",
+	"type": "lucee-extensions",
+	"slug": "D062D72F-F8A2-46F0-8CBC91325B2F067B",
+	"shortDescription": "Lucee extension providing a Hibernate ORM wrapper for CFML",
+	"description": "The Ortus ORM extension is a Lucee extension which integrates the popular Hibernate ORM library into the Lucee CFML server.",
+	"author": "Ortus Solutions",
+	"organization": "ortus-solutions",
+	"homepage": "https://github.com/ortus-solutions/extension-hibernate",
+	"documentation": "https://github.com/ortus-solutions/extension-hibernate/blob/master/README.md",
+	"bugs": "https://ortussolutions.atlassian.net/jira/software/c/projects/OOE/issues",
+	"thumbnail": "https://s3.amazonaws.com/downloads.ortussolutions.com/lucee/extensions/hibernate/logo.png",
+	"private": false,
+	"projectURL": "https://github.com/ortus-solutions/extension-hibernate",
+	"repository": {
+		"type": "git",
+		"URL": "https://github.com/ortus-solutions/extension-hibernate"
+	},
+	"keywords": [
+		"hibernate",
+		"orm",
+		"extension"
+	],
+	"devDependencies": {
+		"testbox": "*"
+	},
+	"installPaths": {
+		"testbox": "testbox/"
+	},
+	"scripts": {
+		"build": "!mvn clean package",
+		"deploy.lucee5": "!mvn clean package -Dmaven.javadoc.skip=true && cp target/*.lex .engine/lucee5/WEB-INF/lucee-server/deploy",
+		"deploy.lucee6": "!mvn clean package -Dmaven.javadoc.skip=true && cp target/*.lex .engine/lucee6/WEB-INF/lucee-server/deploy",
+		"format": "cfformat run path=tests/ overwrite=true settingsPath=./.cfformat.json",
+		"format:watch": "cfformat watch path=tests/ settingsPath=./.cfformat.json",
+		"format:check": "cfformat check path=tests/ settingsPath=./.cfformat.json",
+		"postVersion": "!./build/bump.sh ${interceptData.versionArgs.version}",
+		"startNextVersion": "bump --patch"
+	},
+	"testbox": {
+		"runner": [
+			{
+				"default": "http://localhost:49339/tests/runner.cfm"
+			}
+		]
+	}
 }
