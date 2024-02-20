@@ -76,8 +76,8 @@ component persistent="true" {
 		default="";
 
 	property
-		name   ="dbdefault"
-		ormtype="string"
+		name     ="dbdefault"
+		ormtype  ="string"
 		dbdefault="''";
 
 	property
