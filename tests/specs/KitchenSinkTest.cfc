@@ -241,8 +241,19 @@ component extends="testbox.system.BaseSpec" {
 				} );
 			});
 
+			it( "+dbdefault", () => {
+				var sink = entityNew( "KitchenSink", { id : createUUID() } );
+				var column = getColumnInfo( "DBDEFAULT" );
+				expect( column.COLUMN_DEFAULT_VALUE ).toBe( "''" );
+			});
+
 			// validation
-			xit( "+notnull", () => {});
+			it( "+notnull", () => {
+				var column = getColumnInfo( "NOTNULLABLE" );
+				expect( column.NULLABLE ).toBe( 0 );
+				var column = getColumnInfo( "NULLABLE" );
+				expect( column.NULLABLE ).toBe( 1 );
+			});
 			xit( "+uniquekey", () => {});
 			xit( "+unique", () => {});
 			xit( "+validate", () => {});
@@ -264,4 +275,10 @@ component extends="testbox.system.BaseSpec" {
 		});
 	}
 
+	function getColumnInfo( required string name ){
+		cfdbinfo(type="Columns", name="result", table="KITCHENSINK" );
+		return result.filter( ( row ) => {
+			return row.COLUMN_NAME == name;
+		} );
+	}
 }

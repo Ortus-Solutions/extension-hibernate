@@ -12,6 +12,17 @@ component persistent="true" {
 		ormtype  ="string";
 
 	property
+		name   ="notnullable"
+		ormtype="string"
+		notnull="true"
+		default="foo";
+
+	property
+		name   ="nullable"
+		ormtype="string"
+		notnull="false";
+
+	property
 		name   ="timezone"
 		ormtype="timezone"
 		default="America/Los_Angelos";
@@ -64,6 +75,11 @@ component persistent="true" {
 		ormtype="string"
 		notnull="true"
 		default="";
+
+	property
+		name   ="dbdefault"
+		ormtype="string"
+		dbdefault="''";
 
 	property
 		name   ="timestamp"
