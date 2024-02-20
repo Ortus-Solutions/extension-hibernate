@@ -12,6 +12,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.collection.spi.PersistentCollection;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.type.Type;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import lucee.commons.lang.types.RefBoolean;
 import lucee.loader.engine.CFMLEngineFactory;
@@ -33,6 +35,8 @@ import ortus.extension.orm.util.ExceptionUtil;
 import ortus.extension.orm.util.HibernateUtil;
 
 public class HibernateCaster {
+
+	private static final Logger logger = LoggerFactory.getLogger( HibernateCaster.class );
 
 	private HibernateCaster() {
 		throw new IllegalStateException( "Utility class; please don't instantiate!" );
@@ -493,14 +497,14 @@ public class HibernateCaster {
 			return value;
 		}
 
-		Struct	meta		= ( Struct ) property.getMetaData();
-		String	ormType		= CommonUtil.toString( meta.get( CommonUtil.ORMTYPE, "" ) );
-		String	fieldType	= !ormType.trim().isEmpty() ? ormType : property.getType();
+		Struct	meta				= ( Struct ) property.getMetaData();
+		String	ormType				= CommonUtil.toString( meta.get( CommonUtil.ORMTYPE, "" ) );
+		String	fieldType			= !ormType.trim().isEmpty() ? ormType : property.getType();
 
-		// If the value is an empty string, and the field type is not one of the types that should be converted to null
-		if ( value instanceof String &&
-		    ( ( String ) value ).trim().isEmpty() &&
-		    !CFConstants.STRINGLIKE_FIELDS.contains( fieldType ) ) {
+		boolean	isStringSafeField	= ( fieldType == null || !fieldType.isBlank() || !CFConstants.STRINGLIKE_FIELDS.contains( fieldType ) );
+
+		// If the value is an empty string, and the field type is not "string-safe", coerce to a null.
+		if ( value instanceof String && ( ( String ) value ).trim().isEmpty() && !isStringSafeField ) {
 			return null;
 		}
 

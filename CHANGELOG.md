@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### 🐛 Fixed
+
+- Fixes empty string values coercing to `NULL` when no property type is declared. - Resolves [OOE-25](https://ortussolutions.atlassian.net/browse/OOE-25)
+
 ## [6.5.0] - 2024-02-16
 
 ### 🐛 Fixed
