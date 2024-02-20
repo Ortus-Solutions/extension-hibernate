@@ -247,13 +247,13 @@ component extends="testbox.system.BaseSpec" {
 					entityReload( sink );
 					expect( sink.getEmptyDefault() ).toBe( "" );
 				} );
-			});
+			} );
 
 			it( "+dbdefault", () => {
-				var sink = entityNew( "KitchenSink", { id : createUUID() } );
+				var sink   = entityNew( "KitchenSink", { id : createUUID() } );
 				var column = getColumnInfo( "DBDEFAULT" );
 				expect( column.COLUMN_DEFAULT_VALUE ).toBe( "''" );
-			});
+			} );
 
 			// validation
 			it( "+notnull", () => {
@@ -261,32 +261,51 @@ component extends="testbox.system.BaseSpec" {
 				expect( column.NULLABLE ).toBe( 0 );
 				var column = getColumnInfo( "NULLABLE" );
 				expect( column.NULLABLE ).toBe( 1 );
-			});
-			xit( "+uniquekey", () => {});
-			xit( "+unique", () => {});
-			xit( "+validate", () => {});
-			xit( "+validateParams", () => {});
+			} );
+			xit( "+uniquekey", () => {
+			} );
+			xit( "+unique", () => {
+			} );
+			xit( "+validate", () => {
+			} );
+			xit( "+validateParams", () => {
+			} );
 
 			// Collection modifiers
-			xit( "+structkeycolumn", () => {});
-			xit( "+structkeytype", () => {});
-			xit( "+elementtype", () => {});
-			xit( "+elementcolumn", () => {});
+			xit( "+structkeycolumn", () => {
+			} );
+			xit( "+structkeytype", () => {
+			} );
+			xit( "+elementtype", () => {
+			} );
+			xit( "+elementcolumn", () => {
+			} );
 
 			// other
-			xit( "+scale", () => {});
-			xit( "+length", () => {});
-			xit( "+precision", () => {});
-			xit( "+formula", () => {});
-			xit( "+index", () => {});
-			xit( "+unsavedValue", () => {});
-		});
+			xit( "+scale", () => {
+			} );
+			xit( "+length", () => {
+			} );
+			xit( "+precision", () => {
+			} );
+			xit( "+formula", () => {
+			} );
+			xit( "+index", () => {
+			} );
+			xit( "+unsavedValue", () => {
+			} );
+		} );
 	}
 
 	function getColumnInfo( required string name ){
-		cfdbinfo(type="Columns", name="result", table="KITCHENSINK" );
+		cfdbinfo(
+			type  = "Columns",
+			name  = "result",
+			table = "KITCHENSINK"
+		);
 		return result.filter( ( row ) => {
 			return row.COLUMN_NAME == name;
 		} );
 	}
+
 }
