@@ -60,6 +60,12 @@ component persistent="true" {
 		update =false;
 
 	property
+		name   ="emptydefault"
+		ormtype="string"
+		notnull="true"
+		default="";
+
+	property
 		name   ="timestamp"
 		ormtype="timestamp"
 		default="2023-07-29T04:56";

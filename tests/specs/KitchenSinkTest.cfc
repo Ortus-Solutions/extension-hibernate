@@ -223,6 +223,45 @@ component extends="testbox.system.BaseSpec" {
 				} );
 			} );
 		} );
+
+		describe( "other property attributes", () => {
+			describe( "+default", () => {
+				it( "Can get the default value", () => {
+					var sink = entityNew( "KitchenSink", { id : createUUID() } );
+					expect( sink.getEmptyDefault() ).toBe( "" );
+				} );
+				it( "can set value", () => {
+					var sink = entityNew( "KitchenSink", { id : createUUID() } );
+					sink.setEmptyDefault( "" );
+					expect( sink.getEmptyDefault() ).toBe( "" );
+					entitySave( sink );
+					ormFlush();
+					entityReload( sink );
+					expect( sink.getEmptyDefault() ).toBe( "" );
+				} );
+			});
+
+			// validation
+			xit( "+notnull", () => {});
+			xit( "+uniquekey", () => {});
+			xit( "+unique", () => {});
+			xit( "+validate", () => {});
+			xit( "+validateParams", () => {});
+
+			// Collection modifiers
+			xit( "+structkeycolumn", () => {});
+			xit( "+structkeytype", () => {});
+			xit( "+elementtype", () => {});
+			xit( "+elementcolumn", () => {});
+
+			// other
+			xit( "+scale", () => {});
+			xit( "+length", () => {});
+			xit( "+precision", () => {});
+			xit( "+formula", () => {});
+			xit( "+index", () => {});
+			xit( "+unsavedValue", () => {});
+		});
 	}
 
 }
