@@ -72,7 +72,6 @@ component persistent="true" {
 
 	property
 		name   ="emptydefault"
-		ormtype="string"
 		notnull="true"
 		default="";
 

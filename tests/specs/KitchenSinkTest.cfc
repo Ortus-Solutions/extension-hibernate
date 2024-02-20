@@ -239,6 +239,14 @@ component extends="testbox.system.BaseSpec" {
 					entityReload( sink );
 					expect( sink.getEmptyDefault() ).toBe( "" );
 				} );
+				it( "can save entity with default value", () => {
+					var sink = entityNew( "KitchenSink", { id : createUUID() } );
+					expect( sink.getEmptyDefault() ).toBe( "" );
+					entitySave( sink );
+					ormFlush();
+					entityReload( sink );
+					expect( sink.getEmptyDefault() ).toBe( "" );
+				} );
 			});
 
 			it( "+dbdefault", () => {
