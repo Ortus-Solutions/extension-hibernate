@@ -7,15 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.5.2] - 2024-02-21
+
 ### 🐛 Fixed
 
-- Fixes a regression on [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26) where empty string values are coerced to `NULL` when an ORM type *is* declared. Originally reported against `6.4.0`, resolved in `6.5.0`, then regressed in `6.5.1`. - Resolves [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26).
+-   Fixes a regression on [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26) where empty string values are coerced to `NULL` when an ORM type _is_ declared. Originally reported against `6.4.0`, resolved in `6.5.0`, then regressed in `6.5.1`. - Resolves [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26).
 
 ## [6.5.1] - 2024-02-20
 
 ### 🐛 Fixed
 
-- Fixes empty string values coercing to `NULL` when no property type is declared. - Resolves [OOE-25](https://ortussolutions.atlassian.net/browse/OOE-25), introduced in 6.5.0.
+-   Fixes empty string values coercing to `NULL` when no property type is declared. - Resolves [OOE-25](https://ortussolutions.atlassian.net/browse/OOE-25), introduced in 6.5.0.
 
 ## [6.5.0] - 2024-02-16
 
@@ -246,7 +248,9 @@ See [OOE-3](https://ortussolutions.atlassian.net/browse/OOE-3).
 -   Better build/test documentation
 -   Improved maintenance and build docs
 
-[Unreleased]: https://github.com/Ortus-Solutions/extension-hibernate/compare/v6.5.1...HEAD
+[Unreleased]: https://github.com/Ortus-Solutions/extension-hibernate/compare/6.5.2...HEAD
+
+[6.5.2]: https://github.com/Ortus-Solutions/extension-hibernate/compare/v6.5.1...6.5.2
 
 [6.5.1]: https://github.com/Ortus-Solutions/extension-hibernate/compare/v6.5.0...v6.5.1
 
