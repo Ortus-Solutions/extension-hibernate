@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### 🐛 Fixed
+
+- Fixes a regression on [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26) where empty string values are coerced to `NULL` when an ORM type *is* declared. Originally reported against `6.4.0`, resolved in `6.5.0`, then regressed in `6.5.1`. - Resolves [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26).
 
 ### 🔐 Security
 

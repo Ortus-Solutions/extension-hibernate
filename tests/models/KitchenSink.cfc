@@ -85,6 +85,12 @@ component persistent="true" {
 		ormtype="timestamp"
 		default="2023-07-29T04:56";
 
+	property
+		name   ="expireDate"
+		notnull="false"
+		ormtype="timestamp"
+		default="";
+
 	this.name = "KitchenSink";
 
 }

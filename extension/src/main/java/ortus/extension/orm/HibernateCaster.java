@@ -501,10 +501,13 @@ public class HibernateCaster {
 		String	ormType				= CommonUtil.toString( meta.get( CommonUtil.ORMTYPE, "" ) );
 		String	fieldType			= !ormType.trim().isEmpty() ? ormType : property.getType();
 
-		boolean	isStringSafeField	= ( fieldType == null || !fieldType.trim().isEmpty() || !CFConstants.STRINGLIKE_FIELDS.contains( fieldType ) );
+		boolean	isStringSafeField	= ( ormType == null || ormType.trim().isEmpty() || CFConstants.STRINGLIKE_FIELDS.contains( ormType ) );
 
 		// If the value is an empty string, and the field type is not "string-safe", coerce to a null.
 		if ( value instanceof String && ( ( String ) value ).trim().isEmpty() && !isStringSafeField ) {
+			logger.atDebug().log(
+			    "toHibernateValue: Coercing {} property to a NULL, since the ORMtype [{}] or fieldType [{}] is not a string-safe field (one of [{}]",
+			    property.getName(), ormType, fieldType, CFConstants.STRINGLIKE_FIELDS );
 			return null;
 		}
 
