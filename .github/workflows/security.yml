@@ -1,6 +1,14 @@
 name: Snyk Vulnerability Scan
 
 on:
+  push:
+    branches:
+      - master
+      - main
+      - development
+      - release/**
+  workflow_dispatch:
+  # Reusable workflow : Usually called by a `snapshot` workflow
   workflow_call:
 
 
