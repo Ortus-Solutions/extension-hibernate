@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+### 🔐 Security
+
+Bump Lucee build dependency to `6.0.0.585` to avoid [vulnerable dependencies in []`org.apache.commons:commons-compress`](https://security.snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-6254296), [`com.github.mwiede:jsch`](https://security.snyk.io/vuln/SNYK-JAVA-COMGITHUBMWIEDE-6130900), and [`org.apache.commons:commons-compress`](https://security.snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-6254297). NOTE: None of these vulnerabilities are realized in the Ortus ORM Extension, since we do not ship any Lucee code.
+
 ## [6.5.1] - 2024-02-20
 
 ### 🐛 Fixed
