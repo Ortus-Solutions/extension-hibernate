@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.5.1] - 2024-02-20
+
 ### 🐛 Fixed
 
 - Fixes empty string values coercing to `NULL` when no property type is declared. - Resolves [OOE-25](https://ortussolutions.atlassian.net/browse/OOE-25), introduced in 6.5.0.
@@ -240,7 +242,9 @@ See [OOE-3](https://ortussolutions.atlassian.net/browse/OOE-3).
 -   Better build/test documentation
 -   Improved maintenance and build docs
 
-[Unreleased]: https://github.com/Ortus-Solutions/extension-hibernate/compare/v6.5.0...HEAD
+[Unreleased]: https://github.com/Ortus-Solutions/extension-hibernate/compare/v6.5.1...HEAD
+
+[6.5.1]: https://github.com/Ortus-Solutions/extension-hibernate/compare/v6.5.0...v6.5.1
 
 [6.5.0]: https://github.com/Ortus-Solutions/extension-hibernate/compare/v6.4.0...v6.5.0
 
