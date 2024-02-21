@@ -8,7 +8,7 @@ component extends="testbox.system.BaseSpec" {
 			beforeEach( () => {
 				ormClearSession();
 			} );
-			describe( "+timezone", () => {
+			describe( "timezone", () => {
 				it( "Can get the default value", () => {
 					var sink = entityNew( "KitchenSink", { id : createUUID() } );
 					expect( sink.getTimezone() ).toBe( "America/Los_Angelos" );
@@ -23,7 +23,7 @@ component extends="testbox.system.BaseSpec" {
 					expect( sink.getTimeZone() ).toBe( "Pacific/Midway" );
 				} );
 			} );
-			describe( "+string", () => {
+			describe( "string", () => {
 				it( "Can get the default value", () => {
 					var sink = entityNew( "KitchenSink", { id : createUUID() } );
 					expect( sink.getString() ).toBe( "johnwhish" );
@@ -47,7 +47,7 @@ component extends="testbox.system.BaseSpec" {
 					} ).toThrow( "javax.persistence.PersistenceException" );
 				} );
 			} );
-			describe( "+boolean", () => {
+			describe( "boolean", () => {
 				it( "Can get the default value", () => {
 					var sink = entityNew( "KitchenSink", { id : createUUID() } );
 					expect( sink.getBoolean() ).toBe( false );
@@ -62,7 +62,7 @@ component extends="testbox.system.BaseSpec" {
 					expect( sink.getBoolean() ).toBe( true );
 				} );
 			} );
-			describe( "+date", () => {
+			describe( "date", () => {
 				it( "Can get the default value", () => {
 					var sink = entityNew( "KitchenSink", { id : createUUID() } );
 					expect( sink.getDate() ).toBe( "2023-07-29" );
@@ -80,7 +80,7 @@ component extends="testbox.system.BaseSpec" {
 					expect( dateCompare( sink.getDate(), currentTime ) ).toBe( -1 );
 				} );
 			} );
-			describe( "+datetime", () => {
+			describe( "datetime", () => {
 				it( "Can get the default value", () => {
 					var sink = entityNew( "KitchenSink", { id : createUUID() } );
 					expect( sink.getDatetime() ).toBe( "2023-07-29T04:56" );
@@ -97,7 +97,7 @@ component extends="testbox.system.BaseSpec" {
 					expect( sink.getDatetime() ).toBe( theVal );
 				} );
 			} );
-			describe( "+integer", () => {
+			describe( "integer", () => {
 				it( "Can get the default value", () => {
 					var sink = entityNew( "KitchenSink", { id : createUUID() } );
 					expect( sink.getInteger() ).toBe( 12303 );
@@ -112,7 +112,7 @@ component extends="testbox.system.BaseSpec" {
 					expect( sink.getInteger() ).toBe( 99901 );
 				} );
 			} );
-			describe( "+int", () => {
+			describe( "int", () => {
 				it( "Can get the default value", () => {
 					var sink = entityNew( "KitchenSink", { id : createUUID() } );
 					expect( sink.getInt() ).toBe( 12404 );
@@ -127,7 +127,7 @@ component extends="testbox.system.BaseSpec" {
 					expect( sink.getInt() ).toBe( 88808 );
 				} );
 			} );
-			describe( "+timestamp", () => {
+			describe( "timestamp", () => {
 				it( "Can get the default value", () => {
 					var sink = entityNew( "KitchenSink", { id : createUUID() } );
 					expect( dateFormat( sink.getTimestamp(), "yyyy-mm-dd" ) ).toBe( "2023-07-29" );
@@ -148,33 +148,33 @@ component extends="testbox.system.BaseSpec" {
 			 * @TODO: Implement these (list from https://cfdocs.org/cfproperty):
 			 * @TODO: Identify any missing types from the above list, based on HibernateCaster.java.
 			 */
-			xdescribe( "+character", () => {
+			xdescribe( "character", () => {
 			} );
-			xdescribe( "+char", () => {
+			xdescribe( "char", () => {
 			} );
-			xdescribe( "+short", () => {
+			xdescribe( "short", () => {
 			} );
-			xdescribe( "+long", () => {
+			xdescribe( "long", () => {
 			} );
-			xdescribe( "+big_decimal", () => {
+			xdescribe( "big_decimal", () => {
 			} );
-			xdescribe( "+float", () => {
+			xdescribe( "float", () => {
 			} );
-			xdescribe( "+double", () => {
+			xdescribe( "double", () => {
 			} );
-			xdescribe( "+yes_no", () => {
+			xdescribe( "yes_no", () => {
 			} );
-			xdescribe( "+true_false", () => {
+			xdescribe( "true_false", () => {
 			} );
-			xdescribe( "+text", () => {
+			xdescribe( "text", () => {
 			} );
-			xdescribe( "+binary", () => {
+			xdescribe( "binary", () => {
 			} );
-			xdescribe( "+serializable", () => {
+			xdescribe( "serializable", () => {
 			} );
-			xdescribe( "+blob", () => {
+			xdescribe( "blob", () => {
 			} );
-			xdescribe( "+clob", () => {
+			xdescribe( "clob", () => {
 			} );
 		} );
 
@@ -225,7 +225,7 @@ component extends="testbox.system.BaseSpec" {
 		} );
 
 		describe( "other property attributes", () => {
-			describe( "+default", () => {
+			describe( "default", () => {
 				it( "Can get the default value", () => {
 					var sink = entityNew( "KitchenSink", { id : createUUID() } );
 					expect( sink.getEmptyDefault() ).toBe( "" );
@@ -249,50 +249,50 @@ component extends="testbox.system.BaseSpec" {
 				} );
 			} );
 
-			it( "+dbdefault", () => {
+			it( "dbdefault", () => {
 				var sink   = entityNew( "KitchenSink", { id : createUUID() } );
 				var column = getColumnInfo( "DBDEFAULT" );
 				expect( column.COLUMN_DEFAULT_VALUE ).toBe( "''" );
 			} );
 
 			// validation
-			it( "+notnull", () => {
+			it( "notnull", () => {
 				var column = getColumnInfo( "NOTNULLABLE" );
 				expect( column.NULLABLE ).toBe( 0 );
 				var column = getColumnInfo( "NULLABLE" );
 				expect( column.NULLABLE ).toBe( 1 );
 			} );
-			xit( "+uniquekey", () => {
+			xit( "uniquekey", () => {
 			} );
-			xit( "+unique", () => {
+			xit( "unique", () => {
 			} );
-			xit( "+validate", () => {
+			xit( "validate", () => {
 			} );
-			xit( "+validateParams", () => {
+			xit( "validateParams", () => {
 			} );
 
 			// Collection modifiers
-			xit( "+structkeycolumn", () => {
+			xit( "structkeycolumn", () => {
 			} );
-			xit( "+structkeytype", () => {
+			xit( "structkeytype", () => {
 			} );
-			xit( "+elementtype", () => {
+			xit( "elementtype", () => {
 			} );
-			xit( "+elementcolumn", () => {
+			xit( "elementcolumn", () => {
 			} );
 
 			// other
-			xit( "+scale", () => {
+			xit( "scale", () => {
 			} );
-			xit( "+length", () => {
+			xit( "length", () => {
 			} );
-			xit( "+precision", () => {
+			xit( "precision", () => {
 			} );
-			xit( "+formula", () => {
+			xit( "formula", () => {
 			} );
-			xit( "+index", () => {
+			xit( "index", () => {
 			} );
-			xit( "+unsavedValue", () => {
+			xit( "unsavedValue", () => {
 			} );
 		} );
 	}
