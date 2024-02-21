@@ -11,10 +11,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fixes a regression on [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26) where empty string values are coerced to `NULL` when an ORM type *is* declared. Originally reported against `6.4.0`, resolved in `6.5.0`, then regressed in `6.5.1`. - Resolves [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26).
 
-### 🔐 Security
-
-Bump Lucee build dependency to `6.0.0.585` to avoid [vulnerable dependencies in []`org.apache.commons:commons-compress`](https://security.snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-6254296), [`com.github.mwiede:jsch`](https://security.snyk.io/vuln/SNYK-JAVA-COMGITHUBMWIEDE-6130900), and [`org.apache.commons:commons-compress`](https://security.snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-6254297). NOTE: None of these vulnerabilities are realized in the Ortus ORM Extension, since we do not ship any Lucee code.
-
 ## [6.5.1] - 2024-02-20
 
 ### 🐛 Fixed
