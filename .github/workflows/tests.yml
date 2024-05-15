@@ -27,7 +27,7 @@ jobs:
         experimental: [ false ]
         include:
           - lucee_version: "6-snapshot"
-            java_version: "11"
+            java_version: "21"
             experimental: true
 
     steps:
