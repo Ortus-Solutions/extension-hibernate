@@ -53,7 +53,7 @@ jobs:
     - name: Build with Maven
       # TODO: Build against Lucee versions in case loader ever changes 
       # `-Dlucee.version=${{matrix.lucee_version}} `
-      run: mvn --batch-mode -f pom.xml -Djdk.version=${{matrix.java_version}} package
+      run: mvn --batch-mode -f pom.xml -Djdk.version=${{matrix.java_version}} -Dmaven.javadoc.skip=true package
 
     - name: Deploy Package
       run: |
