@@ -14,6 +14,8 @@ Bumped Lucee development dependency to 5.4.5.23 to fix a potential Authenticatio
 
 As with most Lucee CVEs in this repo, this security issue is merely theoretical as this extension does not bundle Lucee. This is why you should keep your Lucee version up to date. 😁
 
+## [6.5.2] - 2024-02-21
+
 ### 🐛 Fixed
 
 - Fixes a regression on [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26) where empty string values are coerced to `NULL` when an ORM type *is* declared. Originally reported against `6.4.0`, resolved in `6.5.0`, then regressed in `6.5.1`. - Resolves [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26).
