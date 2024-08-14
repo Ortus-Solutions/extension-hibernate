@@ -145,7 +145,7 @@
 			<!--
             Generate the top-level MANIFEST.MF containing properties for this extension.
 
-            Turns out using the NAME attribute for the lucee extension name breaks the jar manifest spec. 🤦‍♂️
+            Turns out using the NAME attribute for the lucee extension name breaks the jar manifest spec.
             See
          https://github.com/codehaus-plexus/plexus-archiver/blob/7eb5a660a9ccb2968ce4f172baaa949c72e87f87/src/main/java/org/codehaus/plexus/archiver/jar/Manifest.java#L556
 
