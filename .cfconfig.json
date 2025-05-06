@@ -22,7 +22,7 @@
       "clob": "false",
       "connectionLimit": "-1",
       "connectionTimeout": "1",
-      "custom": "mode=MySQL&path=${H2_DBFILE}",
+      "custom": "mode=MySQL;path=${H2_DBFILE}",
       "database": "h2",
       "dbdriver": "H2",
       "dsn": "jdbc:h2:${H2_DBFILE}/{database};MODE={mode}",
