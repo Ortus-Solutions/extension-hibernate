@@ -9,10 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### 🔐 Security
 
-Bumped Lucee development dependency to 5.4.5.23 to fix a potential Authentication Bypass[CVE-2023-48795OPEN THIS LINK IN A NEW TAB 
-](https://security.snyk.io/vuln/SNYK-JAVA-COMGITHUBMWIEDE-6130900) issue in Lucee's `com.github.mwiede:jsch` dependency.
-
-As with most Lucee CVEs in this repo, this security issue is merely theoretical as this extension does not bundle Lucee. This is why you should keep your Lucee version up to date. 😁
+- Bumped Logback dependency to `1.3.15` to resolve [SNYK-JAVA-CHQOSLOGBACK-8539866](https://security.snyk.io/vuln/SNYK-JAVA-CHQOSLOGBACK-8539866) vulnerability.
 
 ## [6.5.2] - 2024-02-21
 
