@@ -5,13 +5,16 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.stream.Stream;
 
 import org.hibernate.MappingException;
 import org.hibernate.HibernateException;
@@ -100,6 +103,7 @@ public class ConfigurationBuilder {
 		BootstrapServiceRegistry bootstrapRegistry = new BootstrapServiceRegistryBuilder().applyIntegrator( this.eventListener )
 		    .build();
 		this.configuration = new Configuration( bootstrapRegistry );
+		Properties customProps = new Properties();
 
 		if ( datasource != null ) {
 			String	dialect		= null;
@@ -131,7 +135,7 @@ public class ConfigurationBuilder {
 			 */
 			configuration.setProperty( AvailableSettings.CHECK_NULLABILITY, "false" );
 
-			addProperty( AvailableSettings.CONNECTION_PROVIDER, this.connectionProvider );
+			customProps.put( AvailableSettings.CONNECTION_PROVIDER, this.connectionProvider );
 		}
 
 		// ormConfig
@@ -182,11 +186,31 @@ public class ConfigurationBuilder {
 					configuration.setProperty( AvailableSettings.CACHE_PROVIDER_CONFIG, cacheConfig.getAbsolutePath() );
 				}
 
-				addProperty( AvailableSettings.CACHE_REGION_FACTORY, getCacheRegionFactory( cacheProvider ) );
+				customProps.put( AvailableSettings.CACHE_REGION_FACTORY, getCacheRegionFactory( cacheProvider ) );
 			}
 
 			configuration.setProperty( AvailableSettings.USE_QUERY_CACHE, "true" );
 		}
+
+		Field[] availableSettings = AvailableSettings.class.getFields();
+		for ( Entry<Object, Object> prop : System.getProperties().entrySet() ) {
+			String settingName = ( ( String ) prop.getKey() ).toUpperCase();
+			if ( settingName.startsWith( "HIBERNATE_" ) ) {
+				Object	value			= prop.getValue();
+				Field	foundSetting	= Stream.of( availableSettings ).filter( field -> field.getName().equalsIgnoreCase( settingName ) ).findFirst()
+				    .orElse( null );
+				try {
+					if ( foundSetting != null ) {
+						customProps.put( foundSetting.get( foundSetting ), value );
+					}
+				} catch ( IllegalAccessException e ) {
+					log.error( "Unable to read or set setting from env var: {}", settingName );
+				}
+			}
+
+			customProps.put( prop.getKey(), prop.getValue() );
+		}
+		configuration.addProperties( customProps );
 
 		return configuration;
 	}
@@ -297,22 +321,6 @@ public class ConfigurationBuilder {
 	public ConfigurationBuilder withConnectionProvider( ConnectionProvider connectionProvider ) {
 		this.connectionProvider = connectionProvider;
 		return this;
-	}
-
-	/**
-	 * Set a complex property on the provided Hibernate Configuration object.
-	 *
-	 * @param configuration
-	 *                      Hibernate configuration on which to add a property
-	 * @param name
-	 *                      New setting / property name
-	 * @param value
-	 *                      Any value or object, like a {@link ConnectionProviderImpl} instance
-	 */
-	private void addProperty( String name, Object value ) {
-		Properties props = new Properties();
-		props.put( name, value );
-		configuration.addProperties( props );
 	}
 
 	/**
