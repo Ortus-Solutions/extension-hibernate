@@ -4,7 +4,7 @@
 
 	<groupId>ortus.extension</groupId>
 	<artifactId>orm-extension</artifactId>
-	<version>6.5.3</version>
+	<version>6.5.4</version>
 	<packaging>bundle</packaging>
 
 	<name>Ortus ORM Extension</name>
