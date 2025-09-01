@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### 🐛 Fixed
+
+* Resolved "NoClassDefFoundError: javax/validation/ValidatorFactory" on Lucee 6 by adding missing javax.validation dependency. Big thanks to [Zack Spitzer on the Lucee team](https://github.com/Ortus-Solutions/extension-hibernate/pull/18)! - Resolves [OOE-29](https://ortussolutions.atlassian.net/browse/OOE-29)
+
 ### 🔐 Security
 
 - Bumped Logback dependency to `1.3.15` to resolve [SNYK-JAVA-CHQOSLOGBACK-8539866](https://security.snyk.io/vuln/SNYK-JAVA-CHQOSLOGBACK-8539866) vulnerability.
