@@ -7,11 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### 🐛 Fixed
+
+* Resolved "NoClassDefFoundError: javax/validation/ValidatorFactory" on Lucee 6 by adding missing javax.validation dependency. Big thanks to [Zack Spitzer on the Lucee team](https://github.com/Ortus-Solutions/extension-hibernate/pull/18)! - Resolves [OOE-29](https://ortussolutions.atlassian.net/browse/OOE-29)
+
+### 🔐 Security
+
+- Bumped Logback dependency to `1.3.15` to resolve [SNYK-JAVA-CHQOSLOGBACK-8539866](https://security.snyk.io/vuln/SNYK-JAVA-CHQOSLOGBACK-8539866) vulnerability.
+
 ## [6.5.2] - 2024-02-21
 
 ### 🐛 Fixed
 
--   Fixes a regression on [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26) where empty string values are coerced to `NULL` when an ORM type _is_ declared. Originally reported against `6.4.0`, resolved in `6.5.0`, then regressed in `6.5.1`. - Resolves [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26).
+- Fixes a regression on [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26) where empty string values are coerced to `NULL` when an ORM type *is* declared. Originally reported against `6.4.0`, resolved in `6.5.0`, then regressed in `6.5.1`. - Resolves [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26).
 
 ## [6.5.1] - 2024-02-20
 

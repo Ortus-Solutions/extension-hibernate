@@ -39,18 +39,10 @@ To run CFML tests against the extension:
 2. Build and deploy the extension source via `box run-script deploy.lucee5`
    1. For testing on Lucee 6, run `box run-script deploy.lucee6`
 3. Restart the server to pick up the new extension - `box server restart`
+   1. For testing on Lucee 6, run `box server restart name=hibernate-lucee6`
 4. Run tests from the extension root with `box testbox run`
 
 For "full" database suite tests, you'll want to start the test databases using Docker-compose `docker-compose up -d`. This will start up MSSQL, MySQL, and Postgres database instances for database-specific tests.
-
-### Lucee 6 Testing
-
-To build and test on Lucee 6, use the `server-lucee6.json` file and `deploy.lucee6` build script:
-
-* `box server start server-lucee6.json`
-* `box run-script deploy.lucee6`
-* `box server restart name=lucee6`
-* `box testbox run`
 
 ## Publishing a (Stable) Release
 

@@ -23,11 +23,14 @@ jobs:
       matrix:
         # We can run tests against any Lucee version, but we can only compile against Lucee releases available on mvnrepository.com.
         lucee_version: [ "5" ]
-        java_version: [ "8", "11", "17" ]
+        java_version: [ "8", "11" ]
         experimental: [ false ]
         include:
-          - lucee_version: "6-snapshot"
-            java_version: "11"
+          - lucee_version: "6"
+            java_version: "21"
+            experimental: false
+          - lucee_version: "7"
+            java_version: "21"
             experimental: true
 
     steps:
@@ -38,7 +41,22 @@ jobs:
       with:
         java-version: "${{matrix.java_version}}"
         distribution: "temurin"
-
+    # work around cfconfig incompatability between 5 and 6
+    - name: Set H2_CUSTOM for Lucee 5
+      if: ${{ matrix.lucee_version == '5' }}
+      run: |
+        H2_DBFILE=$(grep '^H2_DBFILE=' .env.template | cut -d '=' -f2)
+        echo "H2_DBFILE=$H2_DBFILE" >> $GITHUB_ENV
+        echo "H2_CUSTOM=&mode=MySQL&path=${H2_DBFILE}:" >> $GITHUB_ENV
+    - name: Unset H2_CUSTOM for Lucee 6+
+      if: ${{ matrix.lucee_version != '5' }}
+      run: echo "H2_CUSTOM=" >> $GITHUB_ENV
+    - name: Cache Maven packages
+      if: always()
+      uses: actions/cache@v4
+      with:
+        path: ~/.m2
+        key: maven-cache
     - name: Setup CommandBox CLI
       uses: Ortus-Solutions/setup-commandbox@main
 
@@ -53,7 +71,7 @@ jobs:
     - name: Build with Maven
       # TODO: Build against Lucee versions in case loader ever changes 
       # `-Dlucee.version=${{matrix.lucee_version}} `
-      run: mvn --batch-mode -f pom.xml -Djdk.version=${{matrix.java_version}} package
+      run: mvn --batch-mode -f pom.xml -Djdk.version=${{matrix.java_version}} -Dmaven.javadoc.skip=true package
 
     - name: Deploy Package
       run: |
