@@ -14,5 +14,8 @@ echo "Setting version=${NEW_VERSION} in pom.xml..."
 git checkout -- pom.xml
 sed -i -e "s/$OLD_VERSION/$NEW_VERSION/g" pom.xml
 
-git add pom.xml box.json
+echo "Marking version ${OLD_VERSION} in CHANGELOG.md as released..."
+sed -i -e "s/\#\# \[Unreleased\]/## [Unreleased]\n\n## [$OLD_VERSION] - $(date -I)/" CHANGELOG.md
+
+git add pom.xml box.json CHANGELOG.md
 git commit -m "🚀 RELEASE: Begin development on $NEW_VERSION [ci skip]"

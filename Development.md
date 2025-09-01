@@ -48,7 +48,7 @@ For "full" database suite tests, you'll want to start the test databases using D
 
 Releasing is *mostly* automated. To publish a release:
 
-1. Check out the `master` branch - `git checkout master`
+1. Check out the `master` branch - `git checkout master && git pull`
 2. Merge in `development` changes - `git merge development`
 3. Push to github: `git push`
 
