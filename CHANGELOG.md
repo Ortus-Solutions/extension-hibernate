@@ -7,19 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.5.3] - 2025-09-01
+
 ### 🐛 Fixed
 
-* Resolved "NoClassDefFoundError: javax/validation/ValidatorFactory" on Lucee 6 by adding missing javax.validation dependency. Big thanks to [Zack Spitzer on the Lucee team](https://github.com/Ortus-Solutions/extension-hibernate/pull/18)! - Resolves [OOE-29](https://ortussolutions.atlassian.net/browse/OOE-29)
+-   Resolved "NoClassDefFoundError: javax/validation/ValidatorFactory" on Lucee 6 by adding missing javax.validation dependency. Big thanks to [Zack Spitzer on the Lucee team](https://github.com/Ortus-Solutions/extension-hibernate/pull/18)! - Resolves [OOE-29](https://ortussolutions.atlassian.net/browse/OOE-29)
 
 ### 🔐 Security
 
-- Bumped Logback dependency to `1.3.15` to resolve [SNYK-JAVA-CHQOSLOGBACK-8539866](https://security.snyk.io/vuln/SNYK-JAVA-CHQOSLOGBACK-8539866) vulnerability.
+-   Bumped Logback dependency to `1.3.15` to resolve [SNYK-JAVA-CHQOSLOGBACK-8539866](https://security.snyk.io/vuln/SNYK-JAVA-CHQOSLOGBACK-8539866) vulnerability.
 
 ## [6.5.2] - 2024-02-21
 
 ### 🐛 Fixed
 
-- Fixes a regression on [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26) where empty string values are coerced to `NULL` when an ORM type *is* declared. Originally reported against `6.4.0`, resolved in `6.5.0`, then regressed in `6.5.1`. - Resolves [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26).
+-   Fixes a regression on [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26) where empty string values are coerced to `NULL` when an ORM type _is_ declared. Originally reported against `6.4.0`, resolved in `6.5.0`, then regressed in `6.5.1`. - Resolves [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26).
 
 ## [6.5.1] - 2024-02-20
 
@@ -256,7 +258,9 @@ See [OOE-3](https://ortussolutions.atlassian.net/browse/OOE-3).
 -   Better build/test documentation
 -   Improved maintenance and build docs
 
-[Unreleased]: https://github.com/Ortus-Solutions/extension-hibernate/compare/6.5.2...HEAD
+[Unreleased]: https://github.com/Ortus-Solutions/extension-hibernate/compare/6.5.3...HEAD
+
+[6.5.3]: https://github.com/Ortus-Solutions/extension-hibernate/compare/6.5.2...6.5.3
 
 [6.5.2]: https://github.com/Ortus-Solutions/extension-hibernate/compare/v6.5.1...6.5.2
 
