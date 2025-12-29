@@ -59,6 +59,9 @@ jobs:
         key: maven-cache
     - name: Setup CommandBox CLI
       uses: Ortus-Solutions/setup-commandbox@main
+      with:
+        # required for Lucee 7 support (cfconfig 2.7.7+)
+        installSystemModules: true
 
     - name: Install Dependencies
       run: box install
