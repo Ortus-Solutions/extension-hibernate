@@ -125,8 +125,7 @@
 						<!-- Empty imports, because most dependencies are inlined.-->
 						<Import-Package>javax.transaction.*</Import-Package>
 						<Private-Package>ortus.extension.orm</Private-Package>
-						<Require-Bundle>org.lucee.xml.apis;bundle-version=1.4.1</Require-Bundle>
-
+						
 						<!-- The extension version, used in ExtensionUtil -->
 						<Specification-Version>${project.version}</Specification-Version>
 
@@ -180,7 +179,7 @@ lucee-core-version: ${minLuceeVersion}
                      The best workaround appears to be not using those properties, and hardcoding a RELATIVE path
                      instead.-->
 							<toFile>target/META-INF/MANIFEST.MF</toFile>
-							<append>true</append>
+							<append>false</append>
 						</configuration>
 					</execution>
 				</executions>
