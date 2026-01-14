@@ -1,3 +1,10 @@
+> [!IMPORTANT]
+> This extension is now on LTS (Long Term Support) for patches and security fixes ONLY! <br>
+> New features and updates are only going to our new Hibernate Extension for BoxLang <br>
+> https://github.com/ortus-boxlang/bx-orm
+
+----
+
 # Lucee Hibernate Extension (ORM)
 
 ![the Ortus ORM Extension logo](https://raw.githubusercontent.com/Ortus-Solutions/extension-hibernate/e82ed175c9b19528b130b079c942f7f654bc6147/logo.png)
