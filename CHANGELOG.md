@@ -7,10 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.5.4] - 2026-03-16
+
 ### 🐛 Fixed
 
-* fix duplicate entries in manifest
-* Remove old org.lucee.xml.apis from Require-bundle
+-   fix duplicate entries in manifest
+-   Remove old org.lucee.xml.apis from Require-bundle
 
 Big thanks to [Zack Spitzer on the Lucee team](https://github.com/Ortus-Solutions/extension-hibernate/pull/18) for this release!
 
@@ -265,7 +267,9 @@ See [OOE-3](https://ortussolutions.atlassian.net/browse/OOE-3).
 -   Better build/test documentation
 -   Improved maintenance and build docs
 
-[Unreleased]: https://github.com/Ortus-Solutions/extension-hibernate/compare/6.5.3...HEAD
+[Unreleased]: https://github.com/Ortus-Solutions/extension-hibernate/compare/6.5.4...HEAD
+
+[6.5.4]: https://github.com/Ortus-Solutions/extension-hibernate/compare/6.5.3...6.5.4
 
 [6.5.3]: https://github.com/Ortus-Solutions/extension-hibernate/compare/6.5.2...6.5.3
 
