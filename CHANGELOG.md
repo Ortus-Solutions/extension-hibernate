@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### 🐛 Fixed
+
+* fix duplicate entries in manifest
+* Remove old org.lucee.xml.apis from Require-bundle
+
+Big thanks to [Zack Spitzer on the Lucee team](https://github.com/Ortus-Solutions/extension-hibernate/pull/18) for this release!
+
 ## [6.5.3] - 2025-09-01
 
 ### 🐛 Fixed
