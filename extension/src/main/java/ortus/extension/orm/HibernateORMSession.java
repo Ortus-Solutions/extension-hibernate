@@ -1,8 +1,6 @@
 package ortus.extension.orm;
 
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -40,7 +38,6 @@ import lucee.runtime.Component;
 import lucee.runtime.ComponentScope;
 import lucee.runtime.PageContext;
 import lucee.runtime.db.DataSource;
-import lucee.runtime.db.DatasourceConnection;
 import lucee.runtime.db.SQLItem;
 import lucee.runtime.exp.PageException;
 import lucee.runtime.orm.ORMEngine;
@@ -75,7 +72,6 @@ public class HibernateORMSession implements ORMSession {
 	public class SessionAndConn {
 
 		private Session					s;
-		private DatasourceConnection	dc;
 		private final DataSource		d;
 		private SessionFactory			factory;
 		private final Logger			logger	= LoggerFactory.getLogger( SessionAndConn.class );
@@ -105,34 +101,16 @@ public class HibernateORMSession implements ORMSession {
 			return s;
 		}
 
-		public Connection getConnection( PageContext pc ) throws PageException {
-			try {
-				if ( dc == null || dc.isClosed() ) {
-					connect( pc );
-				}
-			} catch ( SQLException e ) {
-				throw ExceptionUtil.toPageException( e );
-			}
-			return dc.getConnection();
-		}
-
-		public void connect( PageContext pc ) throws PageException {
-			if ( dc != null )
-				CommonUtil.releaseDatasourceConnection( pc, dc, true );
-			dc = CommonUtil.getDatasourceConnection( pc, d, null, null, true );
-		}
-
 		public void close( PageContext pc ) throws PageException {
 			if ( logger.isDebugEnabled() )
 				logger.atDebug().log( "closing session" );
-			if ( s != null && s.isOpen() ) {
-				s.close();
-				s = null;
-			}
-
-			if ( dc != null ) {
-				CommonUtil.releaseDatasourceConnection( pc, dc, true );
-				dc = null;
+			try {
+				if ( s != null && s.isOpen() ) {
+					s.close();
+					s = null;
+				}
+			} catch ( Exception e ) {
+				logger.atError().log( "error closing session: {}", e.getMessage() );
 			}
 		}
 
@@ -206,26 +184,12 @@ public class HibernateORMSession implements ORMSession {
 			throw ExceptionUtil.createException( data, null, message, null );
 		}
 		Session s = sac.getSession( pc );
-		if ( !s.isOpen() || !s.isConnected() || isClosed( s ) ) {
-			if ( logger.isWarnEnabled() )
-				logger.atWarn().log( "session is open or not connected or closed; reconnecting" );
-			if ( pc == null )
-				pc = CFMLEngineFactory.getInstance().getThreadPageContext();
-
-			sac.connect( pc );
-			s.reconnect( sac.getConnection( pc ) );
-
+		if ( !s.isOpen() || !s.isConnected() ) {
+			// Session is broken — close and let getSession() open a fresh one
+			sac.close( pc );
+			sac.getSession( pc );
 		}
 		return sac;
-	}
-
-	/**
-	 * Check if the session is disconnected.
-	 *
-	 * @param s Hibernate session
-	 */
-	private boolean isClosed( Session s ) {
-		return !s.isConnected();
 	}
 
 	/**
@@ -901,10 +865,18 @@ public class HibernateORMSession implements ORMSession {
 	 */
 	@Override
 	public void closeAll( PageContext pc ) throws PageException {
+		PageException firstException = null;
 		for ( SessionAndConn sac : sessions.values() ) {
-			if ( sac.isOpen() )
-				sac.close( pc );
+			try {
+				if ( sac.isOpen() )
+					sac.close( pc );
+			} catch ( PageException e ) {
+				if ( firstException == null )
+					firstException = e;
+			}
 		}
+		if ( firstException != null )
+			throw firstException;
 	}
 
 	@Override
