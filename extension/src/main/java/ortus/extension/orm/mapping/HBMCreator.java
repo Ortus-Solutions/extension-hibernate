@@ -2123,8 +2123,9 @@ public class HBMCreator {
 	public static String loadMapping( Component cfc ) throws PageException, IOException {
 
 		Resource resource = getMappingResource( cfc );
-		if ( resource == null ) {
-			String message = String.format( "Hibernate mapping not found for entity [%s]", cfc.getName() );
+		if ( resource == null || !resource.exists() ) {
+			String message = String.format( "Hibernate mapping not found for entity [%s], missing xml file [%s]",
+			    cfc.getName(), resource != null ? resource.getAbsoluteResource() : "null" );
 			throw ExceptionUtil.createException( message );
 		}
 
