@@ -1,6 +1,12 @@
 component persistent="true" cfcName="person" {
 
-	property name="ID" type="numeric" ormtype="int" fieldtype="id" ormtype="long" generator="increment";
+	property
+		name     ="ID"
+		type     ="numeric"
+		ormtype  ="int"
+		fieldtype="id"
+		ormtype  ="long"
+		generator="increment";
 	property name="Person" type="string";
 
 	public function preInsert(){
@@ -8,7 +14,7 @@ component persistent="true" cfcName="person" {
 	}
 
 	private function eventLog( required struct args ){
-		var eventName = CallStackGet( "array" )[ 2 ].function;
+		var eventName = callStackGet( "array" )[ 2 ].function;
 		application.ormEventLog.append( "cfc_" & eventName );
 	}
 

@@ -11,7 +11,7 @@ component hint="logs out any orm events" {
 	}
 
 	private function eventLog( required struct args ){
-		var eventName = CallStackGet( "array" )[ 2 ].function;
+		var eventName = callStackGet( "array" )[ 2 ].function;
 		application.ormEventLog.append( "global_" & eventName );
 	}
 

@@ -7,15 +7,15 @@ component {
 	server.helpers                   = new tests.specs.luceeTests.TestHelper();
 	this.datasource                  = server.helpers.getDatasource( "h2", expandPath( "db" ) );
 
-	this.ormEnabled = true;
+	this.ormEnabled  = true;
 	this.ormSettings = {
-		dbcreate         : "dropcreate",
-		eventHandling    : true,
-		eventHandler     : "eventHandler",
+		dbcreate          : "dropcreate",
+		eventHandling     : true,
+		eventHandler      : "eventHandler",
 		autoManageSession : false,
 		flushAtRequestEnd : false,
-		useDBForMapping  : false,
-		dialect          : "h2"
+		useDBForMapping   : false,
+		dialect           : "h2"
 	};
 
 	function onApplicationStart(){
@@ -23,9 +23,9 @@ component {
 	}
 
 	public function onRequestStart(){
-		setting requesttimeout=10;
-		application.ormEventLog = [];
-		application.ormEventErrorLog = [];
+		setting requesttimeout      =10;
+		application.ormEventLog     = [];
+		application.ormEventErrorLog= [];
 	}
 
 }
