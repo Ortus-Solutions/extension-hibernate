@@ -19,11 +19,11 @@ public class LuceeSLF4JServiceProvider implements SLF4JServiceProvider {
 	/**
 	 * Must match the SLF4J API version we compile against.
 	 */
-	public static final String			REQUESTED_API_VERSION	= "2.0.7";
+	public static final String				REQUESTED_API_VERSION	= "2.0.7";
 
 	private static LuceeBackedLoggerFactory	loggerFactory;
-	private IMarkerFactory				markerFactory;
-	private MDCAdapter					mdcAdapter;
+	private IMarkerFactory					markerFactory;
+	private MDCAdapter						mdcAdapter;
 
 	/**
 	 * Get the shared logger factory instance.

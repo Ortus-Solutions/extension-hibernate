@@ -34,7 +34,7 @@ import lucee.runtime.type.Collection.Key;
 
 public class HibernateORMEngine implements ORMEngine {
 
-	private Map<String, SessionFactoryData>	factories	= new ConcurrentHashMap<>();
+	private Map<String, SessionFactoryData> factories = new ConcurrentHashMap<>();
 
 	static {
 		/**
@@ -167,13 +167,13 @@ public class HibernateORMEngine implements ORMEngine {
 			throw ExceptionUtil.createException( ( ORMSession ) null, null, "ORM is not enabled", "" );
 
 		// datasource
-		ORMConfiguration ormConf = appContext.getORMConfiguration();
+		ORMConfiguration	ormConf		= appContext.getORMConfiguration();
 
 		// Configure ORM logging BEFORE Hibernate classes load, so level filtering is active
 		// from the start. Otherwise Hibernate's boot logging (type registration, session factory
 		// properties dump, etc.) leaks through at DEBUG level.
-		Log log = pc.getConfig().getLog( "orm" );
-		OrmLoggingSettings logSettings = OrmLoggingSettings.load( pc, ormConf );
+		Log					log			= pc.getConfig().getLog( "orm" );
+		OrmLoggingSettings	logSettings	= OrmLoggingSettings.load( pc, ormConf );
 		LoggerLevelManager.configure( log, logSettings.logSQL, logSettings.logParams,
 		    logSettings.logCache, logSettings.logLevel );
 

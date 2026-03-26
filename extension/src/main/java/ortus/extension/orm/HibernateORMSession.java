@@ -71,10 +71,10 @@ public class HibernateORMSession implements ORMSession {
 
 	public class SessionAndConn {
 
-		private Session					s;
-		private final DataSource		d;
-		private SessionFactory			factory;
-		private final Logger			logger	= LoggerFactory.getLogger( SessionAndConn.class );
+		private Session				s;
+		private final DataSource	d;
+		private SessionFactory		factory;
+		private final Logger		logger	= LoggerFactory.getLogger( SessionAndConn.class );
 
 		public SessionAndConn( PageContext pc, SessionFactory factory, DataSource ds ) {
 			this.d			= ds;

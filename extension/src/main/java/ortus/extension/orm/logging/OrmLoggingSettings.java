@@ -51,7 +51,7 @@ public class OrmLoggingSettings {
 		boolean	logCache	= false;
 		String	logLevel	= null;
 
-		Struct ormSettings = getOrmSettingsStruct( pc );
+		Struct	ormSettings	= getOrmSettingsStruct( pc );
 		if ( ormSettings != null ) {
 			logSQL		= CommonUtil.toBooleanValue( ormSettings.get( KEY_LOG_SQL, logSQL ), logSQL );
 			logParams	= CommonUtil.toBooleanValue( ormSettings.get( KEY_LOG_PARAMS, false ), false );
@@ -71,9 +71,9 @@ public class OrmLoggingSettings {
 	 */
 	private static Struct getOrmSettingsStruct( PageContext pc ) {
 		try {
-			ApplicationContext ac = pc.getApplicationContext();
-			Method getComponent = ac.getClass().getMethod( "getComponent" );
-			Component appCFC = ( Component ) getComponent.invoke( ac );
+			ApplicationContext	ac				= pc.getApplicationContext();
+			Method				getComponent	= ac.getClass().getMethod( "getComponent" );
+			Component			appCFC			= ( Component ) getComponent.invoke( ac );
 			if ( appCFC == null )
 				return null;
 			Object settings = appCFC.get( KEY_ORM_SETTINGS, null );

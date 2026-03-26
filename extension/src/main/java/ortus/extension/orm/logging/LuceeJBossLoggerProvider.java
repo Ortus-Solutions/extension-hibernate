@@ -19,7 +19,7 @@ import lucee.commons.io.log.Log;
  */
 public class LuceeJBossLoggerProvider implements LoggerProvider {
 
-	private static volatile Log	luceeLog;
+	private static volatile Log luceeLog;
 
 	public static void setLuceeLog( Log log ) {
 		luceeLog = log;

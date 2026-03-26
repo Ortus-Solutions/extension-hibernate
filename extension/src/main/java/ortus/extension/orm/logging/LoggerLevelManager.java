@@ -19,23 +19,23 @@ public class LoggerLevelManager {
 	/**
 	 * Hibernate logging categories.
 	 */
-	private static final String								CAT_HIBERNATE	= "org.hibernate";
-	private static final String								CAT_SQL			= "org.hibernate.SQL";
-	private static final String								CAT_PARAMS		= "org.hibernate.type.descriptor.sql";
-	private static final String								CAT_CACHE		= "org.hibernate.cache";
-	private static final String								CAT_EHCACHE		= "net.sf.ehcache";
-	private static final String								CAT_EXTENSION	= "ortus.extension.orm";
+	private static final String								CAT_HIBERNATE		= "org.hibernate";
+	private static final String								CAT_SQL				= "org.hibernate.SQL";
+	private static final String								CAT_PARAMS			= "org.hibernate.type.descriptor.sql";
+	private static final String								CAT_CACHE			= "org.hibernate.cache";
+	private static final String								CAT_EHCACHE			= "net.sf.ehcache";
+	private static final String								CAT_EXTENSION		= "ortus.extension.orm";
 
 	/**
 	 * Per-category severity thresholds using standard ordering.
 	 * A message is enabled if its severity >= the category's threshold.
 	 */
-	private static final ConcurrentHashMap<String, Integer>	thresholds		= new ConcurrentHashMap<>();
+	private static final ConcurrentHashMap<String, Integer>	thresholds			= new ConcurrentHashMap<>();
 
 	/**
 	 * Default threshold before configure() is called.
 	 */
-	private static volatile int								defaultThreshold = Severity.ERROR;
+	private static volatile int								defaultThreshold	= Severity.ERROR;
 
 	/**
 	 * Check if a message at the given standard severity is enabled for the named category.
@@ -49,10 +49,10 @@ public class LoggerLevelManager {
 	/**
 	 * Get the threshold for a logger, checking parent categories.
 	 * E.g. for "org.hibernate.type.BasicTypeRegistry":
-	 *   checks "org.hibernate.type.BasicTypeRegistry"
-	 *   then "org.hibernate.type"
-	 *   then "org.hibernate"
-	 *   then falls back to defaultThreshold.
+	 * checks "org.hibernate.type.BasicTypeRegistry"
+	 * then "org.hibernate.type"
+	 * then "org.hibernate"
+	 * then falls back to defaultThreshold.
 	 */
 	private static int getThreshold( String name ) {
 		// Exact match
@@ -74,11 +74,11 @@ public class LoggerLevelManager {
 	/**
 	 * Configure all logging based on ormSettings.
 	 *
-	 * @param luceeLog   The Lucee Log instance (orm log) to route all output to.
-	 * @param logSQL     Enable SQL statement logging (includes DDL during schema export).
-	 * @param logParams  Enable parameter binding logging.
-	 * @param logCache   Enable cache activity logging.
-	 * @param logLevel   Overall log level. One of: trace, debug, info, warn, error. Defaults to error.
+	 * @param luceeLog  The Lucee Log instance (orm log) to route all output to.
+	 * @param logSQL    Enable SQL statement logging (includes DDL during schema export).
+	 * @param logParams Enable parameter binding logging.
+	 * @param logCache  Enable cache activity logging.
+	 * @param logLevel  Overall log level. One of: trace, debug, info, warn, error. Defaults to error.
 	 */
 	public static void configure( Log luceeLog, boolean logSQL, boolean logParams, boolean logCache,
 	    String logLevel ) {

@@ -14,9 +14,9 @@ import lucee.commons.io.log.Log;
  */
 public class LuceeJBossLogger extends Logger {
 
-	private static final long serialVersionUID = 1L;
+	private static final long	serialVersionUID	= 1L;
 
-	private final String name;
+	private final String		name;
 
 	protected LuceeJBossLogger( String name ) {
 		super( name );
@@ -87,10 +87,10 @@ public class LuceeJBossLogger extends Logger {
 	protected void doLog( Level level, String loggerClassName, Object message, Object[] parameters, Throwable thrown ) {
 		if ( !isEnabled( level ) )
 			return;
-		String text = parameters == null || parameters.length == 0
+		String	text	= parameters == null || parameters.length == 0
 		    ? String.valueOf( message )
 		    : MessageFormat.format( String.valueOf( message ), parameters );
-		Log log = getLuceeLog();
+		Log		log		= getLuceeLog();
 		if ( log == null )
 			return;
 		int luceeLevel = toLuceeLevel( level );
@@ -104,8 +104,8 @@ public class LuceeJBossLogger extends Logger {
 	protected void doLogf( Level level, String loggerClassName, String format, Object[] parameters, Throwable thrown ) {
 		if ( !isEnabled( level ) )
 			return;
-		String text = parameters == null ? String.format( format ) : String.format( format, parameters );
-		Log log = getLuceeLog();
+		String	text	= parameters == null ? String.format( format ) : String.format( format, parameters );
+		Log		log		= getLuceeLog();
 		if ( log == null )
 			return;
 		int luceeLevel = toLuceeLevel( level );
