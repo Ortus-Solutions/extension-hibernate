@@ -763,6 +763,9 @@ public class HibernateORMSession implements ORMSession {
 						if ( name == null )
 							continue; // param not needed will be ignored
 						type	= meta.getNamedParameterExpectedType( name );
+						if ( type == null )
+							throw ExceptionUtil.createException( this, null,
+							    "couldn't get type for ORM parameter [" + e.getKey() + "], entity names are case sensitive!", null );
 
 						obj		= HibernateCaster.toSQL( type, obj, isArray );
 						if ( isArray.toBooleanValue() ) {
