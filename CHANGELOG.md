@@ -19,6 +19,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### 🐛 Fixed
 
+-   fix duplicate entries in manifest
+-   Remove old org.lucee.xml.apis from Require-bundle
+
+Big thanks to [Zack Spitzer on the Lucee team](https://github.com/Ortus-Solutions/extension-hibernate/pull/18) for this release!
+
+## [6.5.4] - 2026-03-16
+
+### 🐛 Fixed
+
 * fix duplicate entries in manifest
 * Remove old org.lucee.xml.apis from Require-bundle
 
@@ -33,6 +42,11 @@ Big thanks to [Zack Spitzer on the Lucee team](https://github.com/Ortus-Solution
 ### 🔐 Security
 
 * Bumped Logback dependency to `1.3.15` to resolve [SNYK-JAVA-CHQOSLOGBACK-8539866](https://security.snyk.io/vuln/SNYK-JAVA-CHQOSLOGBACK-8539866) vulnerability.
+* Resolved "NoClassDefFoundError: javax/validation/ValidatorFactory" on Lucee 6 by adding missing javax.validation dependency. Big thanks to [Zack Spitzer on the Lucee team](https://github.com/Ortus-Solutions/extension-hibernate/pull/18)! - Resolves [OOE-29](https://ortussolutions.atlassian.net/browse/OOE-29)
+
+### 🔐 Security
+
+-   Bumped Logback dependency to `1.3.15` to resolve [SNYK-JAVA-CHQOSLOGBACK-8539866](https://security.snyk.io/vuln/SNYK-JAVA-CHQOSLOGBACK-8539866) vulnerability.
 
 ## [6.5.2] - 2024-02-21
 
@@ -276,6 +290,8 @@ See [OOE-3](https://ortussolutions.atlassian.net/browse/OOE-3).
 * Improved maintenance and build docs
 
 [Unreleased]: https://github.com/Ortus-Solutions/extension-hibernate/compare/6.5.3...HEAD
+
+[6.5.4]: https://github.com/Ortus-Solutions/extension-hibernate/compare/6.5.3...6.5.4
 
 [6.5.3]: https://github.com/Ortus-Solutions/extension-hibernate/compare/6.5.2...6.5.3
 
