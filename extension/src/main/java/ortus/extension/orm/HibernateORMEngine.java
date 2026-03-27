@@ -7,10 +7,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.hibernate.EntityMode;
 import org.hibernate.tuple.entity.EntityTuplizerFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import ortus.extension.orm.event.EventListenerIntegrator;
+import ortus.extension.orm.logging.LoggerLevelManager;
+import ortus.extension.orm.logging.OrmLoggingSettings;
 import ortus.extension.orm.mapping.HBMCreator;
 import ortus.extension.orm.tuplizer.AbstractEntityTuplizerImpl;
 import ortus.extension.orm.util.CommonUtil;
@@ -32,12 +32,9 @@ import lucee.runtime.orm.ORMEngine;
 import lucee.runtime.orm.ORMSession;
 import lucee.runtime.type.Collection.Key;
 
-import ch.qos.logback.classic.Level;
-
 public class HibernateORMEngine implements ORMEngine {
 
-	private Map<String, SessionFactoryData>	factories	= new ConcurrentHashMap<>();
-	private static final Logger				logger		= LoggerFactory.getLogger( HibernateORMEngine.class );
+	private Map<String, SessionFactoryData> factories = new ConcurrentHashMap<>();
 
 	static {
 		/**
@@ -85,7 +82,9 @@ public class HibernateORMEngine implements ORMEngine {
 	public boolean reload( PageContext pc, boolean force ) throws PageException {
 		String applicationName = pc.getApplicationContext().getName();
 		if ( force || !isInitializedForApplication( applicationName ) ) {
-			logger.atInfo().log( "Reloading ORM" );
+			Log log = pc.getConfig().getLog( "orm" );
+			if ( log != null )
+				log.info( "HibernateORMEngine", "Reloading ORM" );
 			clearSessionFactory( applicationName );
 			buildSessionFactoryData( pc );
 			return false;
@@ -168,9 +167,15 @@ public class HibernateORMEngine implements ORMEngine {
 			throw ExceptionUtil.createException( ( ORMSession ) null, null, "ORM is not enabled", "" );
 
 		// datasource
-		ORMConfiguration ormConf = appContext.getORMConfiguration();
+		ORMConfiguration	ormConf		= appContext.getORMConfiguration();
 
-		new LoggingConfigurator( Level.ERROR, ormConf.logSQL() ).configure();
+		// Configure ORM logging BEFORE Hibernate classes load, so level filtering is active
+		// from the start. Otherwise Hibernate's boot logging (type registration, session factory
+		// properties dump, etc.) leaks through at DEBUG level.
+		Log					log			= pc.getConfig().getLog( "orm" );
+		OrmLoggingSettings	logSettings	= OrmLoggingSettings.load( pc, ormConf );
+		LoggerLevelManager.configure( log, logSettings.logSQL, logSettings.logParams,
+		    logSettings.logCache, logSettings.logLevel );
 
 		SessionFactoryData data = new SessionFactoryData( this, ormConf );
 		setSessionFactory( pc.getApplicationContext().getName(), data );
@@ -221,8 +226,6 @@ public class HibernateORMEngine implements ORMEngine {
 		} finally {
 			data.tmpList = null;
 		}
-
-		Log log = pc.getConfig().getLog( "orm" );
 
 		/**
 		 * SET CONFIGURATION PER DATASOURCE
@@ -295,6 +298,7 @@ public class HibernateORMEngine implements ORMEngine {
 		String	entityName	= HibernateCaster.getEntityName( cfc );
 		CFCInfo	info		= data.getCFC( entityName, null );
 		String	xml;
+		Log		log			= pc.getConfig().getLog( "orm" );
 		if ( info == null || ( CommonUtil.equals( info.getCFC(), cfc ) ) ) {
 			DataSource ds = CommonUtil.getDataSource( pc, cfc );
 
@@ -308,7 +312,8 @@ public class HibernateORMEngine implements ORMEngine {
 				 */
 				DatasourceConnection dc = CommonUtil.getDatasourceConnection( pc, ds, null, null, false );
 				try {
-					logger.atInfo().log( String.format( "Creating XML mapping for entity %s", entityName ) );
+					if ( log != null )
+						log.info( "HibernateORMEngine", String.format( "Creating XML mapping for entity %s", entityName ) );
 					xml = HBMCreator.toMappingString( HBMCreator.createXMLMapping( pc, dc, cfc, data ) );
 					if ( ormConf.saveMapping() ) {
 						HBMCreator.saveMapping( cfc, xml );
@@ -323,7 +328,8 @@ public class HibernateORMEngine implements ORMEngine {
 			// load
 			else {
 				try {
-					logger.atInfo().log( String.format( "Loading XML mapping for entity %s", entityName ) );
+					if ( log != null )
+						log.info( "HibernateORMEngine", String.format( "Loading XML mapping for entity %s", entityName ) );
 					xml = HBMCreator.loadMapping( cfc );
 				} catch ( Exception e ) {
 					throw ExceptionUtil.toPageException( e );

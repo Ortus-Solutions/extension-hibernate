@@ -159,8 +159,8 @@ public class EventListenerIntegrator
 		Struct		state			= entityStateToStruct( propertyNames, event.getState() );
 		Component	entityCFC		= CommonUtil.toComponent( event.getEntity(), null );
 
-		fireEventOnGlobalListener( EventListenerIntegrator.PRE_INSERT, event.getEntity(), event, state );
 		fireOnEntity( entityCFC, EventListenerIntegrator.PRE_INSERT, event, null );
+		fireEventOnGlobalListener( EventListenerIntegrator.PRE_INSERT, event.getEntity(), event, state );
 
 		// Convert state changes from CFML -> Java
 		Object[] stateValues = event.getState();
@@ -176,23 +176,23 @@ public class EventListenerIntegrator
 
 	@Override
 	public void onPostInsert( PostInsertEvent event ) {
-		fireEventOnGlobalListener( EventListenerIntegrator.POST_INSERT, event.getEntity(), event, null );
 		fireOnEntity( event.getEntity(), EventListenerIntegrator.POST_INSERT, event, null );
+		fireEventOnGlobalListener( EventListenerIntegrator.POST_INSERT, event.getEntity(), event, null );
 	}
 
 	// PreDeleteEventListener
 	@Override
 	public boolean onPreDelete( PreDeleteEvent event ) {
-		fireEventOnGlobalListener( EventListenerIntegrator.PRE_DELETE, event.getEntity(), event, null );
 		fireOnEntity( event.getEntity(), EventListenerIntegrator.PRE_DELETE, event, null );
+		fireEventOnGlobalListener( EventListenerIntegrator.PRE_DELETE, event.getEntity(), event, null );
 		return false;
 	}
 
 	// PostDeleteEventListener
 	@Override
 	public void onPostDelete( PostDeleteEvent event ) {
-		fireEventOnGlobalListener( EventListenerIntegrator.POST_DELETE, event.getEntity(), event, null );
 		fireOnEntity( event.getEntity(), EventListenerIntegrator.POST_DELETE, event, null );
+		fireEventOnGlobalListener( EventListenerIntegrator.POST_DELETE, event.getEntity(), event, null );
 	}
 
 	// PreUpdateEventListener
@@ -203,8 +203,8 @@ public class EventListenerIntegrator
 		Struct		oldState		= entityStateToStruct( propertyNames, event.getOldState() );
 		Component	entityCFC		= CommonUtil.toComponent( event.getEntity(), null );
 
-		fireEventOnGlobalListener( EventListenerIntegrator.PRE_UPDATE, event.getEntity(), event, oldState );
 		fireOnEntity( entityCFC, EventListenerIntegrator.PRE_UPDATE, event, oldState );
+		fireEventOnGlobalListener( EventListenerIntegrator.PRE_UPDATE, event.getEntity(), event, oldState );
 
 		// Convert state changes from CFML -> Java
 		Object[] stateValues = event.getState();
@@ -221,8 +221,8 @@ public class EventListenerIntegrator
 	// PostUpdateEventListener
 	@Override
 	public void onPostUpdate( PostUpdateEvent event ) {
-		fireEventOnGlobalListener( EventListenerIntegrator.POST_UPDATE, event.getEntity(), event, null );
 		fireOnEntity( event.getEntity(), EventListenerIntegrator.POST_UPDATE, event, null );
+		fireEventOnGlobalListener( EventListenerIntegrator.POST_UPDATE, event.getEntity(), event, null );
 	}
 
 	// PreLoadEventListener
@@ -235,8 +235,8 @@ public class EventListenerIntegrator
 	// PostLoadEventListener
 	@Override
 	public void onPostLoad( PostLoadEvent event ) {
-		fireEventOnGlobalListener( EventListenerIntegrator.POST_LOAD, event.getEntity(), event, null );
 		fireOnEntity( event.getEntity(), EventListenerIntegrator.POST_LOAD, event, null );
+		fireEventOnGlobalListener( EventListenerIntegrator.POST_LOAD, event.getEntity(), event, null );
 	}
 
 	@Override

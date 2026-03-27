@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### 🐛 Fixed
+
+* [LDEV-3768](https://luceeserver.atlassian.net/browse/LDEV-3768)
+* [LDEV-3525](https://luceeserver.atlassian.net/browse/LDEV-3525)
+* [LDEV-4561](https://luceeserver.atlassian.net/browse/LDEV-4561)
+* [LDEV-6156](https://luceeserver.atlassian.net/browse/LDEV-6156)
+* [LDEV-6159](https://luceeserver.atlassian.net/browse/LDEV-6159)
+
 ## [6.5.4] - 2026-03-16
 
 ### 🐛 Fixed
@@ -16,11 +24,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Big thanks to [Zack Spitzer on the Lucee team](https://github.com/Ortus-Solutions/extension-hibernate/pull/18) for this release!
 
+## [6.5.4] - 2026-03-16
+
+### 🐛 Fixed
+
+* fix duplicate entries in manifest
+* Remove old org.lucee.xml.apis from Require-bundle
+
+Big thanks to [Zack Spitzer on the Lucee team](https://github.com/Ortus-Solutions/extension-hibernate/pull/18) for this release!
+
 ## [6.5.3] - 2025-09-01
 
 ### 🐛 Fixed
 
--   Resolved "NoClassDefFoundError: javax/validation/ValidatorFactory" on Lucee 6 by adding missing javax.validation dependency. Big thanks to [Zack Spitzer on the Lucee team](https://github.com/Ortus-Solutions/extension-hibernate/pull/18)! - Resolves [OOE-29](https://ortussolutions.atlassian.net/browse/OOE-29)
+* Resolved "NoClassDefFoundError: javax/validation/ValidatorFactory" on Lucee 6 by adding missing javax.validation dependency. Big thanks to [Zack Spitzer on the Lucee team](https://github.com/Ortus-Solutions/extension-hibernate/pull/18)! - Resolves [OOE-29](https://ortussolutions.atlassian.net/browse/OOE-29)
+
+### 🔐 Security
+
+* Bumped Logback dependency to `1.3.15` to resolve [SNYK-JAVA-CHQOSLOGBACK-8539866](https://security.snyk.io/vuln/SNYK-JAVA-CHQOSLOGBACK-8539866) vulnerability.
+* Resolved "NoClassDefFoundError: javax/validation/ValidatorFactory" on Lucee 6 by adding missing javax.validation dependency. Big thanks to [Zack Spitzer on the Lucee team](https://github.com/Ortus-Solutions/extension-hibernate/pull/18)! - Resolves [OOE-29](https://ortussolutions.atlassian.net/browse/OOE-29)
 
 ### 🔐 Security
 
@@ -30,20 +52,20 @@ Big thanks to [Zack Spitzer on the Lucee team](https://github.com/Ortus-Solution
 
 ### 🐛 Fixed
 
--   Fixes a regression on [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26) where empty string values are coerced to `NULL` when an ORM type _is_ declared. Originally reported against `6.4.0`, resolved in `6.5.0`, then regressed in `6.5.1`. - Resolves [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26).
+* Fixes a regression on [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26) where empty string values are coerced to `NULL` when an ORM type _is_ declared. Originally reported against `6.4.0`, resolved in `6.5.0`, then regressed in `6.5.1`. - Resolves [OOE-26](https://ortussolutions.atlassian.net/browse/OOE-26).
 
 ## [6.5.1] - 2024-02-20
 
 ### 🐛 Fixed
 
--   Fixes empty string values coercing to `NULL` when no property type is declared. - Resolves [OOE-25](https://ortussolutions.atlassian.net/browse/OOE-25), introduced in 6.5.0.
+* Fixes empty string values coercing to `NULL` when no property type is declared. - Resolves [OOE-25](https://ortussolutions.atlassian.net/browse/OOE-25), introduced in 6.5.0.
 
 ## [6.5.0] - 2024-02-16
 
 ### 🐛 Fixed
 
--   Fixes an incorrect property name lookup for the `unsavedValue` persistent property attribute.
--   Fixes the pre-event listeners to ignore empty strings in entity state properties if the field type is one of `string`, `character`, or `text`. This resolves issues where a `preInsert()` or `preUpdate()` throws a "can't cast \[] to date value" when processing event listeners if a date field (for example) is unpopulated or has an empty `default` attribute.
+* Fixes an incorrect property name lookup for the `unsavedValue` persistent property attribute.
+* Fixes the pre-event listeners to ignore empty strings in entity state properties if the field type is one of `string`, `character`, or `text`. This resolves issues where a `preInsert()` or `preUpdate()` throws a "can't cast \[] to date value" when processing event listeners if a date field (for example) is unpopulated or has an empty `default` attribute.
 
 ### ♻️ Changed
 
@@ -59,7 +81,7 @@ Bump Lucee build dependency to `5.4.4.38` to avoid [vulnerable dependencies in t
 
 ### 🔐 Security
 
-Resolve an [Uncontrolled Resource Consumption](https://security.snyk.io/vuln/SNYK-JAVA-CHQOSLOGBACK-6097493) vulnerability disclosed on 12/4/2023 by upgrading `logback-core` to `1.3.14`. [See vulnerability details](https://security.snyk.io/vuln/SNYK-JAVA-CHQOSLOGBACK-6097493). 
+Resolve an [Uncontrolled Resource Consumption](https://security.snyk.io/vuln/SNYK-JAVA-CHQOSLOGBACK-6097493) vulnerability disclosed on 12/4/2023 by upgrading `logback-core` to `1.3.14`. [See vulnerability details](https://security.snyk.io/vuln/SNYK-JAVA-CHQOSLOGBACK-6097493).
 
 ### ⭐ Added
 
@@ -67,9 +89,9 @@ New `ORMQueryExecute()` alias for the `ORMExecuteQuery`. This new alias behaves 
 
 ### 🐛 Fixed
 
--   Fixes custom configuration support via `this.ormSettings.ormConfig`.
--   Fixes named argument support for `entityLoad()` - [LDEV-4285](https://luceeserver.atlassian.net/browse/LDEV-4285)
--   Fixes named argument support for `entityLoadByPK()` - [LDEV-4461](https://luceeserver.atlassian.net/browse/LDEV-4461)
+* Fixes custom configuration support via `this.ormSettings.ormConfig`.
+* Fixes named argument support for `entityLoad()` - [LDEV-4285](https://luceeserver.atlassian.net/browse/LDEV-4285)
+* Fixes named argument support for `entityLoadByPK()` - [LDEV-4461](https://luceeserver.atlassian.net/browse/LDEV-4461)
 
 ### ♻️ Changed
 
@@ -97,10 +119,10 @@ Added context to the error message in `CFCGetter`, which handles retrieving enti
 
 Switched the [EHCache](https://mvnrepository.com/artifact/net.sf.ehcache/ehcache/2.10.6) library to use [net.sf.ehcache.internal:ehcache-core](https://mvnrepository.com/artifact/net.sf.ehcache.internal/ehcache-core/2.10.9.2).
 
--   Upgrades EHCache version from `2.10.6` to `2.10.9.2`.
--   Drops an embedded `rest-management-private-classpath` directory
--   Drops a number of (unused) vulnerable jackson and jetty libraries such as jackson-core.
--   As an added bonus, this reduces the final `.lex` extension file size by over 6 MB. 🎉
+* Upgrades EHCache version from `2.10.6` to `2.10.9.2`.
+* Drops an embedded `rest-management-private-classpath` directory
+* Drops a number of (unused) vulnerable jackson and jetty libraries such as jackson-core.
+* As an added bonus, this reduces the final `.lex` extension file size by over 6 MB. 🎉
 
 **Note:** While it is not 100% clear, [some of these CVEs may have been false positives](https://github.com/jeremylong/DependencyCheck/issues/517).
 
@@ -114,8 +136,8 @@ This brings the Hibernate dependencies up to date (released Feb. 2023), and shou
 
 See the migration guides for more info:
 
--   [Hibernate 5.4 -> 5.4 migration guide](https://github.com/hibernate/hibernate-orm/blob/5.5/migration-guide.adoc)
--   [Hibernate 5.5 -> 5.6 migration guide](https://github.com/hibernate/hibernate-orm/blob/5.6/migration-guide.adoc)
+* [Hibernate 5.4 -> 5.4 migration guide](https://github.com/hibernate/hibernate-orm/blob/5.5/migration-guide.adoc)
+* [Hibernate 5.5 -> 5.6 migration guide](https://github.com/hibernate/hibernate-orm/blob/5.6/migration-guide.adoc)
 
 #### CLOB columns in Postgres81
 
@@ -127,27 +149,27 @@ The default `ehcache.xml` for EHCache changed to include [`clearOnFlush="true"`]
 
 ### 🐛 Fixed
 
--   Fixes handling of `"timezone"`-typed column values. Previously, fields defined with `ormtype="timezone"` would neither use the `default` value nor allow new values to be set. [OOE-10](https://ortussolutions.atlassian.net/browse/OOE-10)
--   Fixes entity state changes in `preInsert()`/`preUpdate()` listeners for properties with no `default` defined. [OOE-9](https://ortussolutions.atlassian.net/browse/OOE-9)
+* Fixes handling of `"timezone"`-typed column values. Previously, fields defined with `ormtype="timezone"` would neither use the `default` value nor allow new values to be set. [OOE-10](https://ortussolutions.atlassian.net/browse/OOE-10)
+* Fixes entity state changes in `preInsert()`/`preUpdate()` listeners for properties with no `default` defined. [OOE-9](https://ortussolutions.atlassian.net/browse/OOE-9)
 
 ## [6.1.0] - 2023-07-14
 
 ### ♻️ Changed
 
--   Lots of java source code cleanup that won't affect the CFML experience, but will aid in faster development and fewer bugs. 
+* Lots of java source code cleanup that won't affect the CFML experience, but will aid in faster development and fewer bugs.
 
 ### 🐛 Fixed
 
--   Any hibernate exceptions returned during schema generation are once again logged to the Lucee ORM log file.
+* Any hibernate exceptions returned during schema generation are once again logged to the Lucee ORM log file.
 
 ### 💥 Removed
 
--   Dropped the public `getDialectNames()` method from the Dialect class. This method was unused (to my knowledge) and unnecessary.
+* Dropped the public `getDialectNames()` method from the Dialect class. This method was unused (to my knowledge) and unnecessary.
 
 ### 🔐 Security
 
--   Switched to [Snyk vulnerability scanner](https://github.com/snyk/actions/tree/master/maven-3-jdk-11) to limit false positives. Security vulnerabilities will now be published on the [GitHub repository's Security Advisories page](https://github.com/Ortus-Solutions/extension-hibernate/security/advisories).
--   Bumped Lucee dependency to `5.40.80` to remove vulnerability notices on [org.apache.tika:tika-core](https://security.snyk.io/vuln/SNYK-JAVA-ORGAPACHETIKA-2936441) and [commons-net:commons-net](https://security.snyk.io/vuln/SNYK-JAVA-COMMONSNET-3153503). These vulnerabilities are only theoretical, since Lucee is a `provided` dependency and not bundled with the extension.
+* Switched to [Snyk vulnerability scanner](https://github.com/snyk/actions/tree/master/maven-3-jdk-11) to limit false positives. Security vulnerabilities will now be published on the [GitHub repository's Security Advisories page](https://github.com/Ortus-Solutions/extension-hibernate/security/advisories).
+* Bumped Lucee dependency to `5.40.80` to remove vulnerability notices on [org.apache.tika:tika-core](https://security.snyk.io/vuln/SNYK-JAVA-ORGAPACHETIKA-2936441) and [commons-net:commons-net](https://security.snyk.io/vuln/SNYK-JAVA-COMMONSNET-3153503). These vulnerabilities are only theoretical, since Lucee is a `provided` dependency and not bundled with the extension.
 
 ## [6.0.0] - 2023-07-01
 
@@ -169,31 +191,31 @@ The extension [GitHub Release page](https://github.com/Ortus-Solutions/extension
 
 #### New Repo Layout
 
--   Java source moved to `extension/src/main/java`
--   All java classes are now under the `ortus.extension.orm` package
--   Dropped the java source format-on-push in favor of format-on-save IDE tooling
+* Java source moved to `extension/src/main/java`
+* All java classes are now under the `ortus.extension.orm` package
+* Dropped the java source format-on-push in favor of format-on-save IDE tooling
 
 #### New Test Layout
 
--   Internal tests rewritten to native Testbox specs
--   Cloned all ORM tests from the Lucee repository
--   Updated to TestBox 5.0
+* Internal tests rewritten to native Testbox specs
+* Cloned all ORM tests from the Lucee repository
+* Updated to TestBox 5.0
 
 #### New Build (and .jar file) Layout
 
 We re-architected the build to inline most dependencies. I.e. we no longer copy in extension dependencies as (custom-built) OSGI bundles, but instead as compiled classes.
 
--   This resolves intermittent issues with bundle resolution and/or duplicate bundle collision upon installing the ORM extension into a Lucee server prior to uninstalling the Lucee Hibernate extension.
--   This also removes a number of direct dependencies on custom OSGI bundles, thus it is more reliable and will offer easier dependency upgrades with less pain.
+* This resolves intermittent issues with bundle resolution and/or duplicate bundle collision upon installing the ORM extension into a Lucee server prior to uninstalling the Lucee Hibernate extension.
+* This also removes a number of direct dependencies on custom OSGI bundles, thus it is more reliable and will offer easier dependency upgrades with less pain.
 
 #### Other
 
--   The `"node"` attribute is deprecated in Hibernate 5.x, and is no longer generated on HBM/XML mapping files to avoid Hibernate warning that "Use of DOM4J entity-mode is considered deprecated".
+* The `"node"` attribute is deprecated in Hibernate 5.x, and is no longer generated on HBM/XML mapping files to avoid Hibernate warning that "Use of DOM4J entity-mode is considered deprecated".
 
 ### 🐛Fixed
 
--   The `.fld` definition file for all built-ins was missed during the conversion to a Maven build. (Since [v5.4.29.25](https://github.com/Ortus-Solutions/extension-hibernate/releases/tag/v5.4.29.25)). This caused the `orm*()` and `entity*()` built-in method calls to be picked up by Lucee core before being routed to this extension. No known errors resulted from this mistake, but we feel embarrassed anyway. 😅
--   Clear ORM context data once per ORM reload, not once per ORM entity parsing. This should improve ORM startup/reload time and avoid difficult session or cache manager lifecycle issues.
+* The `.fld` definition file for all built-ins was missed during the conversion to a Maven build. (Since [v5.4.29.25](https://github.com/Ortus-Solutions/extension-hibernate/releases/tag/v5.4.29.25)). This caused the `orm*()` and `entity*()` built-in method calls to be picked up by Lucee core before being routed to this extension. No known errors resulted from this mistake, but we feel embarrassed anyway. 😅
+* Clear ORM context data once per ORM reload, not once per ORM entity parsing. This should improve ORM startup/reload time and avoid difficult session or cache manager lifecycle issues.
 
 ## [5.4.29.28] - 2023-06-07
 
@@ -211,63 +233,63 @@ See [OOE-3](https://ortussolutions.atlassian.net/browse/OOE-3).
 
 ### 🐛 Fixed
 
--   We now set a `javax.xml.bind.context.factory=com.sun.xml.bind.v2.ContextFactory` System property to ensure the JAXB API can find its implementation in CommandBox environments. This may trigger a log message, but shouldn't cause any concern. Vanilla Tomcat installations _may_ need to overwrite or clear this property. [LDEV-4276](https://luceeserver.atlassian.net/browse/)
+* We now set a `javax.xml.bind.context.factory=com.sun.xml.bind.v2.ContextFactory` System property to ensure the JAXB API can find its implementation in CommandBox environments. This may trigger a log message, but shouldn't cause any concern. Vanilla Tomcat installations _may_ need to overwrite or clear this property. [LDEV-4276](https://luceeserver.atlassian.net/browse/)
 
 ## [5.4.29.26] - 2023-05-24
 
 ### ♻️ Changed
 
--   Improved logo for Lucee admin 🤩
+* Improved logo for Lucee admin 🤩
 
 ### 🐛 Fixed
 
--   Entity changes made in `onPreInsert()` and `onPreUpdate()` do not persist [OOE-2](https://ortussolutions.atlassian.net/browse/OOE-2)
+* Entity changes made in `onPreInsert()` and `onPreUpdate()` do not persist [OOE-2](https://ortussolutions.atlassian.net/browse/OOE-2)
 
 ## [5.4.29.25] - 2023-05-23
 
 ### ♻️ Changed
 
--   Switched to Maven for a faster, more stable build process
--   Improved entity event listeners for a much speedier ORM startup ([8924b58a9058d296e2a783ccfabbf90e26dc9c1b](https://github.com/Ortus-Solutions/extension-hibernate/commit/8924b58a9058d296e2a783ccfabbf90e26dc9c1b))
--   New and Improved logo for Lucee admin visibility ([10bdf56a7a78f0221ab1a6e66a5512a92819e5b7](https://github.com/Ortus-Solutions/extension-hibernate/commit/10bdf56a7a78f0221ab1a6e66a5512a92819e5b7))
+* Switched to Maven for a faster, more stable build process
+* Improved entity event listeners for a much speedier ORM startup ([8924b58a9058d296e2a783ccfabbf90e26dc9c1b](https://github.com/Ortus-Solutions/extension-hibernate/commit/8924b58a9058d296e2a783ccfabbf90e26dc9c1b))
+* New and Improved logo for Lucee admin visibility ([10bdf56a7a78f0221ab1a6e66a5512a92819e5b7](https://github.com/Ortus-Solutions/extension-hibernate/commit/10bdf56a7a78f0221ab1a6e66a5512a92819e5b7))
 
 ### 🐛 Fixed
 
--   Entity has no state when listener method (`onPreInsert`, for example) is fired ([014814263b5d31b8bac4c17479c2ca731ceb4e7c](https://github.com/Ortus-Solutions/extension-hibernate/commit/014814263b5d31b8bac4c17479c2ca731ceb4e7c), [OOE-1](https://ortussolutions.atlassian.net/browse/OOE-1))
+* Entity has no state when listener method (`onPreInsert`, for example) is fired ([014814263b5d31b8bac4c17479c2ca731ceb4e7c](https://github.com/Ortus-Solutions/extension-hibernate/commit/014814263b5d31b8bac4c17479c2ca731ceb4e7c), [OOE-1](https://ortussolutions.atlassian.net/browse/OOE-1))
 
 ## [5.4.29.24] - 2023-05-17
 
 ### 🔐 Security
 
--   Upgraded dom4j library from 1.6.1 to 2.1.4. This removes [two potential vulnerabilities](https://mvnrepository.com/artifact/dom4j/dom4j/1.6.1) in dom4j's XML parsing capabilities.
+* Upgraded dom4j library from 1.6.1 to 2.1.4. This removes [two potential vulnerabilities](https://mvnrepository.com/artifact/dom4j/dom4j/1.6.1) in dom4j's XML parsing capabilities.
 
 ## [5.4.29.23] - 2023-05-15
 
 ### 🐛 Fixed
 
--   ORMExecuteQuery ignores `"unique"` argument if `options` struct is passed
+* ORMExecuteQuery ignores `"unique"` argument if `options` struct is passed
 
 ## [5.4.29.22] - 2023-05-11
 
 ### ⭐ Added
 
--   Adds support for `autoGenMap=false` - [LDEV-3525](https://luceeserver.atlassian.net/browse/LDEV-3525)
--   Adds javadocs auto-published to [apidocs.ortussolutions.com](https://apidocs.ortussolutions.com/#/lucee/hibernate-extension/)
+* Adds support for `autoGenMap=false` - [LDEV-3525](https://luceeserver.atlassian.net/browse/LDEV-3525)
+* Adds javadocs auto-published to [apidocs.ortussolutions.com](https://apidocs.ortussolutions.com/#/lucee/hibernate-extension/)
 
 ### 🐛 Fixed
 
--   ORM events not firing ([LDEV-4308](https://luceeserver.atlassian.net/browse/LDEV-4308))
--   Session close on transaction end ([LDEV-4017](https://luceeserver.atlassian.net/browse/LDEV-4017))
--   "length" not used on varchar fields ([LDEV-4150](https://luceeserver.atlassian.net/browse/LDEV-4150))
+* ORM events not firing ([LDEV-4308](https://luceeserver.atlassian.net/browse/LDEV-4308))
+* Session close on transaction end ([LDEV-4017](https://luceeserver.atlassian.net/browse/LDEV-4017))
+* "length" not used on varchar fields ([LDEV-4150](https://luceeserver.atlassian.net/browse/LDEV-4150))
 
 ### ♻️ Changed
 
--   Dramatic improvements in initialization performance
--   Cuts ORM reload time by 60%
--   Better build/test documentation
--   Improved maintenance and build docs
+* Dramatic improvements in initialization performance
+* Cuts ORM reload time by 60%
+* Better build/test documentation
+* Improved maintenance and build docs
 
-[Unreleased]: https://github.com/Ortus-Solutions/extension-hibernate/compare/6.5.4...HEAD
+[Unreleased]: https://github.com/Ortus-Solutions/extension-hibernate/compare/6.5.3...HEAD
 
 [6.5.4]: https://github.com/Ortus-Solutions/extension-hibernate/compare/6.5.3...6.5.4
 
